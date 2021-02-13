@@ -78,7 +78,7 @@ public class InputRecAndPlay : MonoBehaviour
     }
 
 
-    private void Recording()
+    private void Recording() //RECORD PRESENT PRESSED INPUT AS INPUT PRESSED AT 0.0f
     {
         //PRESSES
         if (Input.GetKeyDown(keyToForward))
@@ -138,9 +138,9 @@ public class InputRecAndPlay : MonoBehaviour
     }
     private void Playback()
     {
-        //Play Input presses
         for (int i = 0; i < pressingTimes.Count; i++)
         {
+            //Play Input presses
             if (t >= pressingTimes[i] && !playbackPressed[i])
             {
                 playbackPressed[i] = true;
@@ -164,37 +164,37 @@ public class InputRecAndPlay : MonoBehaviour
                         break;
                 }
             }
-        }
-        //------------------------------------------------
+            //------------------------------------------------
 
-        //Play Input releases
-        for (int i = 0; i < releasingTimes.Count; i++)
-        {
-            if (t >= releasingTimes[i] && !playbackReleased[i])
+            //Play Input releases
+            if (i < releasingTimes.Count)
             {
-                playbackReleased[i] = true;
-
-                switch (releasedKeyCodes[i])
+                if (t >= releasingTimes[i] && !playbackReleased[i])
                 {
-                    case GameInputs.FORWARD:
-                        Forward(false);
-                        break;
-                    case GameInputs.LEFT:
-                        Left(false);
-                        break;
-                    case GameInputs.BACK:
-                        Back(false);
-                        break;
-                    case GameInputs.RIGHT:
-                        Right(false);
-                        break;
-                    case GameInputs.JUMP:
-                        Jump(false);
-                        break;
+                    playbackReleased[i] = true;
+
+                    switch (releasedKeyCodes[i])
+                    {
+                        case GameInputs.FORWARD:
+                            Forward(false);
+                            break;
+                        case GameInputs.LEFT:
+                            Left(false);
+                            break;
+                        case GameInputs.BACK:
+                            Back(false);
+                            break;
+                        case GameInputs.RIGHT:
+                            Right(false);
+                            break;
+                        case GameInputs.JUMP:
+                            Jump(false);
+                            break;
+                    }
                 }
             }
+            //------------------------------------------------
         }
-        //------------------------------------------------
     }
 
 
