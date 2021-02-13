@@ -217,6 +217,8 @@ public class InputRecAndPlay : MonoBehaviour
         pressedKeyCodes.Clear();
         pressingTimes.Clear();
         releasingTimes.Clear();
+        playbackPressed.Clear();
+        playbackReleased.Clear();
     }
 
 
@@ -244,6 +246,6 @@ public class InputRecAndPlay : MonoBehaviour
     private void InputDebugMessage(bool pressed, string name)
     {
         string aux = pressed ? "pressed" : "released";
-        print(name + aux + ": " + (float)Mathf.Round(t * 100f) / 100f);
+        print(name + " " + aux + ": " + (float)Mathf.Round(t * 100f) / 100f);
     }
 }
