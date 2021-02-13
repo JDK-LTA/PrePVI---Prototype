@@ -215,6 +215,7 @@ public class InputRecAndPlay : MonoBehaviour
     private void ClearRecording()
     {
         pressedKeyCodes.Clear();
+        releasedKeyCodes.Clear();
         pressingTimes.Clear();
         releasingTimes.Clear();
         playbackPressed.Clear();
