@@ -22,9 +22,19 @@ public class InputRecAndPlay : MonoBehaviour
     [SerializeField] private KeyCode keyToRight = KeyCode.D;
     [SerializeField] private KeyCode keyToJump = KeyCode.Space;
 
+    [SerializeField] private float timeRecording = 3f;
     private bool record = false, playback = false, canStartRecording = true, canPlayback = false;
     private float t = 0;
-    [SerializeField] private float timeRecording = 3f;
+
+    private bool[] wasdInput = new bool[4];
+
+    public Vector3 originalPos = Vector3.up;
+
+    public delegate void InputBinaries(bool tr);
+    public event InputBinaries I_Forward, I_Back, I_Left, I_Right;
+    public delegate void InputTriggers();
+    public event InputTriggers I_Jump;
+    public event InputTriggers I_Reset;
 
     // Update is called once per frame
     private void Update()
@@ -32,11 +42,15 @@ public class InputRecAndPlay : MonoBehaviour
         if (canStartRecording && Input.GetKeyDown(keyToRecord))
         {
             ClearRecording();
+            InitialRecording();
+            originalPos = transform.position;
             record = true;
             canStartRecording = false;
         }
         if (canPlayback && Input.GetKeyDown(keyToPlayback))
         {
+            transform.position = originalPos;
+            Physics.SyncTransforms();
             playback = true;
             canPlayback = false;
         }
@@ -50,6 +64,76 @@ public class InputRecAndPlay : MonoBehaviour
         {
             PlaybackTimer();
         }
+        else
+        {
+            Inputs();
+        }
+    }
+
+    private void Inputs()
+    {
+        //PRESSES
+        if (Input.GetKeyDown(keyToForward))
+        {
+            Forward();
+            if (!wasdInput[0])
+                wasdInput[0] = true;
+        }
+        if (Input.GetKeyDown(keyToLeft))
+        {
+            Left();
+            if (!wasdInput[1])
+                wasdInput[1] = true;
+        }
+        if (Input.GetKeyDown(keyToBack))
+        {
+            Back();
+            if (!wasdInput[2])
+                wasdInput[2] = true;
+        }
+        if (Input.GetKeyDown(keyToRight))
+        {
+            Right();
+            if (!wasdInput[3])
+                wasdInput[3] = true;
+        }
+        if (Input.GetKeyDown(keyToJump))
+        {
+            Jump();
+        }
+        //------------------------------------------------
+
+        //RELEASES
+        if (Input.GetKeyUp(keyToForward))
+        {
+            Forward(false);
+            if (wasdInput[0])
+                wasdInput[0] = false;
+        }
+        if (Input.GetKeyUp(keyToLeft))
+        {
+            Left(false);
+            if (wasdInput[1])
+                wasdInput[1] = false;
+        }
+        if (Input.GetKeyUp(keyToBack))
+        {
+            Back(false);
+            if (wasdInput[2])
+                wasdInput[2] = false;
+        }
+        if (Input.GetKeyUp(keyToRight))
+        {
+            Right(false);
+            if (wasdInput[3])
+                wasdInput[3] = false;
+        }
+        //if (Input.GetKeyUp(keyToJump))
+        //{
+        //    releasedKeyCodes.Add(GameInputs.JUMP);
+        //    AddTimeAndBool(false);
+        //}
+        //------------------------------------------------
     }
 
     private void RecordTimer()
@@ -74,6 +158,7 @@ public class InputRecAndPlay : MonoBehaviour
             t = 0;
             canStartRecording = true;
             playback = false;
+            I_Reset?.Invoke();
         }
     }
 
@@ -83,58 +168,57 @@ public class InputRecAndPlay : MonoBehaviour
         //PRESSES
         if (Input.GetKeyDown(keyToForward))
         {
-            pressedKeyCodes.Add(GameInputs.FORWARD);
-            AddTimeAndBool(true);
+            RecordKey(true, GameInputs.FORWARD);
         }
         if (Input.GetKeyDown(keyToLeft))
         {
-            pressedKeyCodes.Add(GameInputs.LEFT);
-            AddTimeAndBool(true);
+            RecordKey(true, GameInputs.LEFT);
         }
         if (Input.GetKeyDown(keyToBack))
         {
-            pressedKeyCodes.Add(GameInputs.BACK);
-            AddTimeAndBool(true);
+            RecordKey(true, GameInputs.BACK);
         }
         if (Input.GetKeyDown(keyToRight))
         {
-            pressedKeyCodes.Add(GameInputs.RIGHT);
-            AddTimeAndBool(true);
+            RecordKey(true, GameInputs.RIGHT);
         }
         if (Input.GetKeyDown(keyToJump))
         {
-            pressedKeyCodes.Add(GameInputs.JUMP);
-            AddTimeAndBool(true);
+            RecordKey(true, GameInputs.JUMP);
         }
         //------------------------------------------------
 
         //RELEASES
         if (Input.GetKeyUp(keyToForward))
         {
-            releasedKeyCodes.Add(GameInputs.FORWARD);
-            AddTimeAndBool(false);
+            RecordKey(false, GameInputs.FORWARD);
         }
         if (Input.GetKeyUp(keyToLeft))
         {
-            releasedKeyCodes.Add(GameInputs.LEFT);
-            AddTimeAndBool(false);
+            RecordKey(false, GameInputs.LEFT);
         }
         if (Input.GetKeyUp(keyToBack))
         {
-            releasedKeyCodes.Add(GameInputs.BACK);
-            AddTimeAndBool(false);
+            RecordKey(false, GameInputs.BACK);
         }
         if (Input.GetKeyUp(keyToRight))
         {
-            releasedKeyCodes.Add(GameInputs.RIGHT);
-            AddTimeAndBool(false);
+            RecordKey(false, GameInputs.RIGHT);
         }
         if (Input.GetKeyUp(keyToJump))
         {
-            releasedKeyCodes.Add(GameInputs.JUMP);
-            AddTimeAndBool(false);
+            RecordKey(false, GameInputs.JUMP);
         }
         //------------------------------------------------
+    }
+    private void RecordKey(bool press, GameInputs inp)
+    {
+        if (press)
+            pressedKeyCodes.Add(inp);
+        else
+            releasedKeyCodes.Add(inp);
+
+        AddTimeAndBool(press);
     }
     private void Playback()
     {
@@ -214,6 +298,7 @@ public class InputRecAndPlay : MonoBehaviour
     }
     private void ClearRecording()
     {
+        t = 0;
         pressedKeyCodes.Clear();
         releasedKeyCodes.Clear();
         pressingTimes.Clear();
@@ -221,32 +306,48 @@ public class InputRecAndPlay : MonoBehaviour
         playbackPressed.Clear();
         playbackReleased.Clear();
     }
-
+    private void InitialRecording()
+    {
+        if (wasdInput[0])
+            RecordKey(true, GameInputs.FORWARD);
+        if (wasdInput[1])
+            RecordKey(true, GameInputs.LEFT);
+        if (wasdInput[2])
+            RecordKey(true, GameInputs.BACK);
+        if (wasdInput[3])
+            RecordKey(true, GameInputs.RIGHT);
+    }
 
     private void Forward(bool pressed = true)
     {
         InputDebugMessage(pressed, "Forward");
+        I_Forward?.Invoke(pressed);
     }
     private void Left(bool pressed = true)
     {
         InputDebugMessage(pressed, "Left");
+        I_Left?.Invoke(pressed);
     }
     private void Back(bool pressed = true)
     {
         InputDebugMessage(pressed, "Back");
+        I_Back?.Invoke(pressed);
     }
     private void Right(bool pressed = true)
     {
         InputDebugMessage(pressed, "Right");
+        I_Right?.Invoke(pressed);
     }
     private void Jump(bool pressed = true)
     {
         InputDebugMessage(pressed, "Jump");
+        if (pressed)
+            I_Jump?.Invoke();
     }
 
     private void InputDebugMessage(bool pressed, string name)
     {
         string aux = pressed ? "pressed" : "released";
-        print(name + " " + aux + ": " + (float)Mathf.Round(t * 100f) / 100f);
+        if (ReferencesManager.Instance._DEBUG) print(name + " " + aux + ": " + (float)Mathf.Round(t * 100f) / 100f);
     }
 }
