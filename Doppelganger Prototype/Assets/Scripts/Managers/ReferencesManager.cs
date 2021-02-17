@@ -7,13 +7,15 @@ public class ReferencesManager : Singleton<ReferencesManager>
     [Header("Debug Variables")]
     [SerializeField] private bool DEBUG = false;
 
-    [Header("Player references")]
+    [Header("PLAYER REFERENCES")]
+    [SerializeField] private PlayerCharacter playerCharacter;
+    [SerializeField] private DoppelCharacter doppelCharacter;
+    [Header("__deprecated__")]
     [SerializeField] private InputRecAndPlay inputRecAndPlay;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private DoppelMovement doppelMovement;
-    [SerializeField] private PlayerCharacter playerCharacter;
-    [SerializeField] private DoppelCharacter doppelCharacter;
-   
+    //[Header("___________")]
+
     public bool _DEBUG { get => DEBUG; }
     public InputRecAndPlay InputRecAndPlay { get => inputRecAndPlay; }
     public PlayerMovement PlayerMovement { get => playerMovement; }
