@@ -6,7 +6,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
 
-    public static T Instance
+    public static T I
     {
         get { return instance; }
         set
@@ -25,6 +25,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     public virtual void Awake()
     {
-        Instance = this as T;
+        I = this as T;
     }
 }

@@ -28,12 +28,12 @@ public class InputRecAndPlay : MonoBehaviour
 
     private bool[] wasdInput = new bool[4];
 
-    public Vector3 originalPos = Vector3.up;
-
     public delegate void InputBinaries(bool tr);
     public event InputBinaries I_Forward, I_Back, I_Left, I_Right;
+    public event InputBinaries ID_Forward, ID_Back, ID_Left, ID_Right;
     public delegate void InputTriggers();
     public event InputTriggers I_Jump;
+    public event InputTriggers ID_Jump;
     public event InputTriggers I_Reset;
 
     // Update is called once per frame
@@ -41,18 +41,11 @@ public class InputRecAndPlay : MonoBehaviour
     {
         if (canStartRecording && Input.GetKeyDown(keyToRecord))
         {
-            ClearRecording();
-            InitialRecording();
-            originalPos = transform.position;
-            record = true;
-            canStartRecording = false;
+            StartRecording();
         }
         if (canPlayback && Input.GetKeyDown(keyToPlayback))
         {
-            transform.position = originalPos;
-            Physics.SyncTransforms();
-            playback = true;
-            canPlayback = false;
+            StartPlayback();
         }
 
 
@@ -64,13 +57,40 @@ public class InputRecAndPlay : MonoBehaviour
         {
             PlaybackTimer();
         }
-        else
-        {
-            Inputs();
-        }
+        Inputs(record);
+
     }
 
-    private void Inputs()
+    private void StartRecording()
+    {
+        ReferencesManager.I.DoppelMovement.gameObject.SetActive(true);
+        ReferencesManager.I.DoppelMovement.transform.position = transform.position;
+        ReferencesManager.I.DoppelMovement.transform.rotation = transform.rotation;
+        Physics.SyncTransforms();
+        ReferencesManager.I.PlayerMovement.enabled = false;
+        ReferencesManager.I.DoppelMovement.DoppelSpecialSubscribe(false);
+        ReferencesManager.I.DoppelMovement.InitPlayPos = ReferencesManager.I.DoppelMovement.transform.position;
+        ReferencesManager.I.DoppelMovement.InitPlayRot = ReferencesManager.I.DoppelMovement.transform.eulerAngles;
+        
+        ClearRecording();
+        InitialRecording();
+        
+        record = true;
+        canStartRecording = false;
+    }
+
+    private void StartPlayback()
+    {
+        ReferencesManager.I.DoppelMovement.DoppelSpecialSubscribe(true);
+        ReferencesManager.I.DoppelMovement.transform.position = ReferencesManager.I.DoppelMovement.InitPlayPos;
+        ReferencesManager.I.DoppelMovement.transform.eulerAngles = ReferencesManager.I.DoppelMovement.InitPlayRot;
+        ReferencesManager.I.PlayerMovement.enabled = true;
+        Physics.SyncTransforms();
+        playback = true;
+        //canPlayback = false;
+    }
+
+    private void Inputs(bool recording = false)
     {
         //PRESSES
         if (Input.GetKeyDown(keyToForward))
@@ -128,11 +148,6 @@ public class InputRecAndPlay : MonoBehaviour
             if (wasdInput[3])
                 wasdInput[3] = false;
         }
-        //if (Input.GetKeyUp(keyToJump))
-        //{
-        //    releasedKeyCodes.Add(GameInputs.JUMP);
-        //    AddTimeAndBool(false);
-        //}
         //------------------------------------------------
     }
 
@@ -146,6 +161,7 @@ public class InputRecAndPlay : MonoBehaviour
             t = 0;
             record = false;
             canPlayback = true;
+            StartPlayback();
         }
     }
     private void PlaybackTimer()
@@ -156,6 +172,7 @@ public class InputRecAndPlay : MonoBehaviour
         if (t >= timeRecording) //REMEMBER TO ADD VARIABLE FOR WHEN CUTTING THE DOPPEL SHORT / CANCELLING IT MID-ACTION
         {
             t = 0;
+            ReferencesManager.I.DoppelMovement.gameObject.SetActive(false);
             canStartRecording = true;
             playback = false;
             I_Reset?.Invoke();
@@ -232,19 +249,19 @@ public class InputRecAndPlay : MonoBehaviour
                 switch (pressedKeyCodes[i])
                 {
                     case GameInputs.FORWARD:
-                        Forward();
+                        Forward(true, true);
                         break;
                     case GameInputs.LEFT:
-                        Left();
+                        Left(true, true);
                         break;
                     case GameInputs.BACK:
-                        Back();
+                        Back(true, true);
                         break;
                     case GameInputs.RIGHT:
-                        Right();
+                        Right(true, true);
                         break;
                     case GameInputs.JUMP:
-                        Jump();
+                        Jump(true, true);
                         break;
                 }
             }
@@ -260,19 +277,19 @@ public class InputRecAndPlay : MonoBehaviour
                     switch (releasedKeyCodes[i])
                     {
                         case GameInputs.FORWARD:
-                            Forward(false);
+                            Forward(false, true);
                             break;
                         case GameInputs.LEFT:
-                            Left(false);
+                            Left(false, true);
                             break;
                         case GameInputs.BACK:
-                            Back(false);
+                            Back(false, true);
                             break;
                         case GameInputs.RIGHT:
-                            Right(false);
+                            Right(false, true);
                             break;
                         case GameInputs.JUMP:
-                            Jump(false);
+                            Jump(false, true);
                             break;
                     }
                 }
@@ -309,45 +326,81 @@ public class InputRecAndPlay : MonoBehaviour
     private void InitialRecording()
     {
         if (wasdInput[0])
+        {
             RecordKey(true, GameInputs.FORWARD);
+            I_Forward(true);
+        }
         if (wasdInput[1])
+        {
             RecordKey(true, GameInputs.LEFT);
+            I_Left(true);
+        }
         if (wasdInput[2])
+        {
             RecordKey(true, GameInputs.BACK);
+            I_Back(true);
+        }
         if (wasdInput[3])
+        {
             RecordKey(true, GameInputs.RIGHT);
+            I_Right(true);
+        }
     }
 
-    private void Forward(bool pressed = true)
+    private void Forward(bool pressed = true, bool isPlaybacking = false)
     {
         InputDebugMessage(pressed, "Forward");
-        I_Forward?.Invoke(pressed);
+
+        if (!isPlaybacking)
+            I_Forward?.Invoke(pressed);
+        else
+            ID_Forward?.Invoke(pressed);
     }
-    private void Left(bool pressed = true)
+    private void Left(bool pressed = true, bool isPlaybacking = false)
     {
         InputDebugMessage(pressed, "Left");
-        I_Left?.Invoke(pressed);
+        if (!isPlaybacking)
+            I_Left?.Invoke(pressed);
+        else
+            ID_Left?.Invoke(pressed);
+
     }
-    private void Back(bool pressed = true)
+    private void Back(bool pressed = true, bool isPlaybacking = false)
     {
         InputDebugMessage(pressed, "Back");
-        I_Back?.Invoke(pressed);
+        if (!isPlaybacking)
+            I_Back?.Invoke(pressed);
+        else
+            ID_Back?.Invoke(pressed);
     }
-    private void Right(bool pressed = true)
+    private void Right(bool pressed = true, bool isPlaybacking = false)
     {
         InputDebugMessage(pressed, "Right");
-        I_Right?.Invoke(pressed);
+        if (!isPlaybacking)
+            I_Right?.Invoke(pressed);
+        else
+            ID_Right?.Invoke(pressed);
     }
-    private void Jump(bool pressed = true)
+    private void Jump(bool pressed = true, bool isPlaybacking = false)
     {
         InputDebugMessage(pressed, "Jump");
-        if (pressed)
-            I_Jump?.Invoke();
+        if (!isPlaybacking)
+        {
+            if (pressed)
+                I_Jump?.Invoke();
+        }
+        else
+        {
+            if (pressed)
+                ID_Jump?.Invoke();
+        }
+
+
     }
 
     private void InputDebugMessage(bool pressed, string name)
     {
         string aux = pressed ? "pressed" : "released";
-        if (ReferencesManager.Instance._DEBUG) print(name + " " + aux + ": " + (float)Mathf.Round(t * 100f) / 100f);
+        if (ReferencesManager.I._DEBUG) print(name + " " + aux + ": " + (float)Mathf.Round(t * 100f) / 100f);
     }
 }
