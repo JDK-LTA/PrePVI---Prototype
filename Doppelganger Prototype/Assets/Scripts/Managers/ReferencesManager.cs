@@ -10,6 +10,8 @@ public class ReferencesManager : Singleton<ReferencesManager>
     [Header("PLAYER REFERENCES")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private DoppelCharacter doppelCharacter;
+    [Header("PUZZLE REFERENCES")]
+    [SerializeField] private StepOnButton buttonSystem;
     [Header("__deprecated__")]
     [SerializeField] private InputRecAndPlay inputRecAndPlay;
     [SerializeField] private PlayerMovement playerMovement;
@@ -22,4 +24,5 @@ public class ReferencesManager : Singleton<ReferencesManager>
     public DoppelMovement DoppelMovement { get => doppelMovement; }
     public PlayerCharacter PlayerCharacter { get => playerCharacter; }
     public DoppelCharacter DoppelCharacter { get => doppelCharacter; }
+    public StepOnButton ButtonSystem { get => buttonSystem; }
 }

@@ -32,6 +32,7 @@ public class DoppelCharacter : BaseCharacter
 
         base.Update();
     }
+
     public void StartRecording()
     {
         transform.position = ReferencesManager.I.PlayerCharacter.transform.position;
@@ -45,7 +46,6 @@ public class DoppelCharacter : BaseCharacter
 
         canStartRecording = false;
     }
-
     private void StartPlayback()
     {
         transform.position = ReferencesManager.I.PlayerCharacter.transform.position;
@@ -56,6 +56,7 @@ public class DoppelCharacter : BaseCharacter
 
         playback = true;
     }
+
     private void RecordTimer()
     {
         t += Time.deltaTime;
@@ -63,10 +64,7 @@ public class DoppelCharacter : BaseCharacter
 
         if (t >= timeRecording)
         {
-            t = 0;
-            rec = false;
-            ReferencesManager.I.PlayerCharacter.enabled = true;
-            StartPlayback();
+            FinishRecording();
         }
     }
     private void PlaybackTimer()
@@ -76,13 +74,10 @@ public class DoppelCharacter : BaseCharacter
 
         if (t >= timeRecording) //REMEMBER TO ADD VARIABLE FOR WHEN CUTTING THE DOPPEL SHORT / CANCELLING IT MID-ACTION
         {
-            t = 0;
-            canStartRecording = true;
-            playback = false;
-            gameObject.SetActive(false);
-            ReferencesManager.I.PlayerCharacter.enabled = true;
+            FinishPlayback();
         }
     }
+    
     private void Recording()
     {
         //PRESSES
@@ -140,6 +135,7 @@ public class DoppelCharacter : BaseCharacter
 
         AddTimeAndBool(press);
     }
+
     private void Playback()
     {
         for (int i = 0; i < pressingTimes.Count; i++)
@@ -199,8 +195,23 @@ public class DoppelCharacter : BaseCharacter
             //------------------------------------------------
         }
     }
+    
+    private void FinishRecording()
+    {
+        t = 0;
+        rec = false;
+        ReferencesManager.I.PlayerCharacter.enabled = true;
+        StartPlayback();
+    }
+    private void FinishPlayback()
+    {
+        t = 0;
+        canStartRecording = true;
+        playback = false;
+        gameObject.SetActive(false);
+    }
 
-
+    //AUXILIAR METHODS
     private void AddTimeAndBool(bool press)
     {
         float aux = t;

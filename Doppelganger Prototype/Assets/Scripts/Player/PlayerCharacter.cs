@@ -10,13 +10,15 @@ public class PlayerCharacter : BaseCharacter
         {
             ReferencesManager.I.DoppelCharacter.gameObject.SetActive(true);
             ReferencesManager.I.DoppelCharacter.StartRecording();
+            animator.SetFloat("MoveSpeed", 0);
+            ResetInputActions();
             rec = true;
             enabled = false;
         }
 
         if (!rec)
             Inputs();
-
+        
         base.Update();
     }
 }

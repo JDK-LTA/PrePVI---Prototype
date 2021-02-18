@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class BaseCharacter : MonoBehaviour
 {
     [SerializeField] protected KeyCode keyToRecord = KeyCode.R;
@@ -14,9 +15,13 @@ public class BaseCharacter : MonoBehaviour
 
     [SerializeField] protected float xMoveSpeed = 16f / 3f, zMoveSpeed = 3f;
     [SerializeField] protected float jumpHeight = 1.5f;
+    [SerializeField] protected float groundCheckDistance = 0.12f;
+    [SerializeField] protected float groundCheckForJump = 0.4f;
     [SerializeField] protected float gravity = -9.81f;
 
     protected CharacterController chCont;
+    protected Animator animator;
+
     protected Vector3 velocity;
     protected bool forward, left, back, right;
     protected bool grounded;
@@ -30,6 +35,7 @@ public class BaseCharacter : MonoBehaviour
     protected void Awake()
     {
         chCont = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     protected virtual void Update()
@@ -102,9 +108,17 @@ public class BaseCharacter : MonoBehaviour
     }
     protected void YMove()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, 1.12f);
+        if (velocity.y < 0)
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+            if (!grounded && Physics.Raycast(transform.position, Vector3.down, groundCheckForJump))
+            {
+                if (animator)
+                    animator.SetTrigger("Fall");
+            }
+        }
 
-        if (grounded && velocity.y < 0)
+        if (grounded && velocity.y < -.5f)
         {
             velocity.y = -.5f;
         }
@@ -128,6 +142,9 @@ public class BaseCharacter : MonoBehaviour
         Vector3 move = new Vector3(horInv * xMoveSpeed, 0, vertInv * zMoveSpeed);
         chCont.Move(move * Time.deltaTime);
 
+        if (animator)
+            animator.SetFloat("MoveSpeed", Mathf.Max(Mathf.Abs(horInv), Mathf.Abs(vertInv)));
+
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
@@ -136,7 +153,12 @@ public class BaseCharacter : MonoBehaviour
     protected void Jump()
     {
         if (grounded)
+        {
             velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);
+
+            if (animator)
+                animator.SetTrigger("Jump");
+        }
     }
 
     protected void ResetInputActions() { forward = back = left = right = false; }
@@ -149,4 +171,22 @@ public class BaseCharacter : MonoBehaviour
         right = wasdInput[3];
     }
 
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        ButtonData button = other.GetComponent<ButtonData>();
+
+        if (button)
+        {
+            button.TogglePress(true);
+        }
+    }
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        ButtonData button = other.GetComponent<ButtonData>();
+
+        if (button)
+        {
+            button.TogglePress(false);
+        }
+    }
 }
