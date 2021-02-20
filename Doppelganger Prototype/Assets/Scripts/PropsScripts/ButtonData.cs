@@ -5,7 +5,11 @@ using UnityEngine;
 public class ButtonData : MonoBehaviour
 {
     [SerializeField] private bool onlyPressOnce = false;
-    /*[HideInInspector]*/ public bool hasBeenPressed = false;
+    [SerializeField] private bool hasToBeAttacked = false;
+    private bool hasBeenPressed = false;
+
+    public bool HasToBeAttacked { get => hasToBeAttacked; }
+    public bool HasBeenPressed { get => hasBeenPressed; set => hasBeenPressed = value; }
 
     public void TogglePress(bool press)
     {

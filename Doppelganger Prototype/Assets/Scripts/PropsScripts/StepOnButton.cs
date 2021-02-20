@@ -14,7 +14,7 @@ public class StepOnButton : MonoBehaviour
     {
         for (int i = 0; i < buttons.Length; i++)
         {
-            if (!buttons[i].hasBeenPressed)
+            if (!buttons[i].HasBeenPressed)
                 return false;
         }
         print("yay");

@@ -384,10 +384,10 @@ MonoBehaviour:
   keyToBack: 115
   keyToRight: 100
   keyToJump: 32
-  xMoveSpeed: 5.3333335
+  xMoveSpeed: 3
   zMoveSpeed: 3
   jumpHeight: 1.5
-  groundCheckDistance: 0.12
+  groundCheckDistance: 0.1
   groundCheckForJump: 0.6
   gravity: -9.81
   wasdDebug: 00000000
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   keyToBack: 115
   keyToRight: 100
   keyToJump: 32
-  xMoveSpeed: 5.3333335
+  xMoveSpeed: 3
   zMoveSpeed: 3
   jumpHeight: 1.5
   groundCheckDistance: 0.12
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onlyPressOnce: 0
-  hasBeenPressed: 0
+  hasToBeAttacked: 0
 --- !u!136 &1332340963
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1805,7 +1805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onlyPressOnce: 0
-  hasBeenPressed: 0
+  hasToBeAttacked: 0
 --- !u!136 &1746536768
 CapsuleCollider:
   m_ObjectHideFlags: 0

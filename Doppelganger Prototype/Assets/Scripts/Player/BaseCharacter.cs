@@ -49,68 +49,75 @@ public class BaseCharacter : MonoBehaviour
     protected void Inputs()
     {
         //PRESSES
-        if (Input.GetKeyDown(keyToForward))
+        if (/*Input.GetKeyDown(keyToForward)*/Input.GetAxis("Vertical") > 0.25f)
         {
-            forward = true;
-            if (!wasdInput[0])
-                wasdInput[0] = true;
+            SetInputAxis(ref forward, 0, true);
+            SetInputAxis(ref back, 2, false);
         }
-        if (Input.GetKeyDown(keyToLeft))
+        else if (/*Input.GetKeyDown(keyToBack)*/Input.GetAxis("Vertical") < -0.25f)
         {
-            left = true;
-            if (!wasdInput[1])
-                wasdInput[1] = true;
+            SetInputAxis(ref forward, 0, false);
+            SetInputAxis(ref back, 2, true);
         }
-        if (Input.GetKeyDown(keyToBack))
+        else if (forward || back)
         {
-            back = true;
-            if (!wasdInput[2])
-                wasdInput[2] = true;
+            SetInputAxis(ref forward, 0, false);
+            SetInputAxis(ref back, 2, false);
         }
-        if (Input.GetKeyDown(keyToRight))
+        if (/*Input.GetKeyDown(keyToRight)*/Input.GetAxis("Horizontal") > 0.25f)
         {
-            right = true;
-            if (!wasdInput[3])
-                wasdInput[3] = true;
+            SetInputAxis(ref left, 1, false);
+            SetInputAxis(ref right, 3, true);
         }
-        if (Input.GetKeyDown(keyToJump))
+        else if (/*Input.GetKeyDown(keyToLeft)*/Input.GetAxis("Horizontal") < -0.25f)
+        {
+            SetInputAxis(ref left, 1, true);
+            SetInputAxis(ref right, 3, false);
+        }
+        else if (left || right)
+        {
+            SetInputAxis(ref left, 1, false);
+            SetInputAxis(ref right, 3, false);
+        }
+
+        if (/*Input.GetKeyDown(keyToJump)*/Input.GetButtonDown("Jump"))
         {
             Jump();
         }
         //------------------------------------------------
 
         //RELEASES
-        if (Input.GetKeyUp(keyToForward))
-        {
-            forward = false;
-            if (wasdInput[0])
-                wasdInput[0] = false;
-        }
-        if (Input.GetKeyUp(keyToLeft))
-        {
-            left = false;
-            if (wasdInput[1])
-                wasdInput[1] = false;
-        }
-        if (Input.GetKeyUp(keyToBack))
-        {
-            back = false;
-            if (wasdInput[2])
-                wasdInput[2] = false;
-        }
-        if (Input.GetKeyUp(keyToRight))
-        {
-            right = false;
-            if (wasdInput[3])
-                wasdInput[3] = false;
-        }
+        //if (/*Input.GetKeyUp(keyToForward)*/)
+        //{
+        //    forward = false;
+        //    if (wasdInput[0])
+        //        wasdInput[0] = false;
+        //}
+        //if (/*Input.GetKeyUp(keyToLeft)*/)
+        //{
+        //    left = false;
+        //    if (wasdInput[1])
+        //        wasdInput[1] = false;
+        //}
+        //if (/*Input.GetKeyUp(keyToBack)*/)
+        //{
+        //    back = false;
+        //    if (wasdInput[2])
+        //        wasdInput[2] = false;
+        //}
+        //if (/*Input.GetKeyUp(keyToRight)*/)
+        //{
+        //    right = false;
+        //    if (wasdInput[3])
+        //        wasdInput[3] = false;
+        //}
         //------------------------------------------------
     }
     protected void YMove()
     {
+        grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
         if (velocity.y < 0)
         {
-            grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
             if (!grounded && Physics.Raycast(transform.position, Vector3.down, groundCheckForJump))
             {
                 if (animator)
@@ -161,6 +168,12 @@ public class BaseCharacter : MonoBehaviour
         }
     }
 
+    protected void SetInputAxis(ref bool inp, int wasdIndex, bool setter)
+    {
+        inp = setter;
+        if (wasdInput[wasdIndex] == !setter)
+            wasdInput[wasdIndex] = setter;
+    }
     protected void ResetInputActions() { forward = back = left = right = false; }
     public void ResetAndReinput()
     {
@@ -186,7 +199,8 @@ public class BaseCharacter : MonoBehaviour
 
         if (button)
         {
-            button.TogglePress(false);
+            if (!button.HasToBeAttacked)
+                button.TogglePress(false);
         }
     }
 }
