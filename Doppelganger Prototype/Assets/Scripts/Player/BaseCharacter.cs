@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class BaseCharacter : MonoBehaviour
@@ -21,6 +22,7 @@ public class BaseCharacter : MonoBehaviour
 
     protected CharacterController chCont;
     protected Animator animator;
+    protected InputSystem inputActions;
 
     protected Vector3 velocity;
     protected bool forward, left, back, right;
@@ -36,6 +38,9 @@ public class BaseCharacter : MonoBehaviour
     {
         chCont = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        inputActions = new InputSystem();
+
+        //inputActions.Gameplay.Move.
     }
 
     protected virtual void Update()
@@ -48,45 +53,76 @@ public class BaseCharacter : MonoBehaviour
 
     protected void Inputs()
     {
-        //PRESSES
-        if (/*Input.GetKeyDown(keyToForward)*/Input.GetAxis("Vertical") > 0.25f)
-        {
-            SetInputAxis(ref forward, 0, true);
-            SetInputAxis(ref back, 2, false);
-        }
-        else if (/*Input.GetKeyDown(keyToBack)*/Input.GetAxis("Vertical") < -0.25f)
-        {
-            SetInputAxis(ref forward, 0, false);
-            SetInputAxis(ref back, 2, true);
-        }
-        else if (forward || back)
-        {
-            SetInputAxis(ref forward, 0, false);
-            SetInputAxis(ref back, 2, false);
-        }
-        if (/*Input.GetKeyDown(keyToRight)*/Input.GetAxis("Horizontal") > 0.25f)
-        {
-            SetInputAxis(ref left, 1, false);
-            SetInputAxis(ref right, 3, true);
-        }
-        else if (/*Input.GetKeyDown(keyToLeft)*/Input.GetAxis("Horizontal") < -0.25f)
-        {
-            SetInputAxis(ref left, 1, true);
-            SetInputAxis(ref right, 3, false);
-        }
-        else if (left || right)
-        {
-            SetInputAxis(ref left, 1, false);
-            SetInputAxis(ref right, 3, false);
-        }
 
-        if (/*Input.GetKeyDown(keyToJump)*/Input.GetButtonDown("Jump"))
-        {
-            Jump();
-        }
-        //------------------------------------------------
 
-        //RELEASES
+
+        ///*
+        ////PRESSES
+        //if (/*Input.GetKeyDown(keyToForward)*/Input.GetAxis("Vertical") > 0.25f)
+        //{
+        //    SetInputAxis(ref forward, 0, true);
+        //    SetInputAxis(ref back, 2, false);
+        //}
+        //else if (/*Input.GetKeyDown(keyToBack)*/Input.GetAxis("Vertical") < -0.25f)
+        //{
+        //    SetInputAxis(ref forward, 0, false);
+        //    SetInputAxis(ref back, 2, true);
+        //}
+        //else if (forward || back)
+        //{
+        //    SetInputAxis(ref forward, 0, false);
+        //    SetInputAxis(ref back, 2, false);
+        //}
+        //if (/*Input.GetKeyDown(keyToRight)*/Input.GetAxis("Horizontal") > 0.25f)
+        //{
+        //    SetInputAxis(ref left, 1, false);
+        //    SetInputAxis(ref right, 3, true);
+        //}
+        //else if (/*Input.GetKeyDown(keyToLeft)*/Input.GetAxis("Horizontal") < -0.25f)
+        //{
+        //    SetInputAxis(ref left, 1, true);
+        //    SetInputAxis(ref right, 3, false);
+        //}
+        //else if (left || right)
+        //{
+        //    SetInputAxis(ref left, 1, false);
+        //    SetInputAxis(ref right, 3, false);
+        //}
+
+        //if (/*Input.GetKeyDown(keyToJump)*/Input.GetButtonDown("Jump"))
+        //{
+        //    Jump();
+        //}
+        ////------------------------------------------------
+        //if (Input.GetKeyDown(keyToForward))
+        //{
+        //    forward = true;
+        //    if (!wasdInput[0])
+        //        wasdInput[0] = true;
+        //}
+        //if (Input.GetKeyDown(keyToLeft))
+        //{
+        //    left = true;
+        //    if (!wasdInput[1])
+        //        wasdInput[1] = true;
+        //}
+        //if (Input.GetKeyDown(keyToBack))
+        //{
+        //    back = true;
+        //    if (!wasdInput[2])
+        //        wasdInput[2] = true;
+        //}
+        //if (Input.GetKeyDown(keyToRight))
+        //{
+        //    right = true;
+        //    if (!wasdInput[3])
+        //        wasdInput[3] = true;
+        //}
+        //if (Input.GetKeyDown(keyToJump))
+        //{
+        //    Jump();
+        //}
+        ////RELEASES
         //if (/*Input.GetKeyUp(keyToForward)*/)
         //{
         //    forward = false;
@@ -111,6 +147,7 @@ public class BaseCharacter : MonoBehaviour
         //    if (wasdInput[3])
         //        wasdInput[3] = false;
         //}
+        //*/
         //------------------------------------------------
     }
     protected void YMove()
