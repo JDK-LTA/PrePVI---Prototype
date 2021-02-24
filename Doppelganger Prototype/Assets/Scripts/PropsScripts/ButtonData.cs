@@ -21,6 +21,6 @@ public class ButtonData : MonoBehaviour
         {
             hasBeenPressed = true;
         }
-        ReferencesManager.I.ButtonSystem.CheckIfAllButtons();
+        RefsManager.I.ButtonSystem.CheckIfAllButtons();
     }
 }

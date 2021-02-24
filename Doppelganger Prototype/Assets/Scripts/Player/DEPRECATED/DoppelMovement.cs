@@ -12,7 +12,7 @@ public class DoppelMovement : BaseMovement
     public void DoppelSpecialSubscribe(bool subbing)
     {
         MainInputSubscribing(!subbing);
-        SpecialSubscribe(subbing);
+        //SpecialSubscribe(subbing);
 
         //if (subbing)
         //    transform.parent = null;
@@ -20,26 +20,26 @@ public class DoppelMovement : BaseMovement
         //    transform.parent = ReferencesManager.I.PlayerMovement.transform;
     }
 
-    private void SpecialSubscribe(bool subbing)
-    {
-        if (subbing)
-        {
-            ReferencesManager.I.InputRecAndPlay.ID_Forward += SetForward;
-            ReferencesManager.I.InputRecAndPlay.ID_Back += SetBack;
-            ReferencesManager.I.InputRecAndPlay.ID_Left += SetLeft;
-            ReferencesManager.I.InputRecAndPlay.ID_Right += SetRight;
-            ReferencesManager.I.InputRecAndPlay.ID_Jump += Jump;
-            ReferencesManager.I.InputRecAndPlay.I_Reset += ResetInputActions;
-        }
-        else
-        {
-            ReferencesManager.I.InputRecAndPlay.ID_Forward -= SetForward;
-            ReferencesManager.I.InputRecAndPlay.ID_Back -= SetBack;
-            ReferencesManager.I.InputRecAndPlay.ID_Left -= SetLeft;
-            ReferencesManager.I.InputRecAndPlay.ID_Right -= SetRight;
-            ReferencesManager.I.InputRecAndPlay.ID_Jump -= Jump;
-            ReferencesManager.I.InputRecAndPlay.I_Reset -= ResetInputActions;
-        }
-    }
+    //private void SpecialSubscribe(bool subbing)
+    //{
+    //    if (subbing)
+    //    {
+    //        ReferencesManager.I.InputRecAndPlay.ID_Forward += SetForward;
+    //        ReferencesManager.I.InputRecAndPlay.ID_Back += SetBack;
+    //        ReferencesManager.I.InputRecAndPlay.ID_Left += SetLeft;
+    //        ReferencesManager.I.InputRecAndPlay.ID_Right += SetRight;
+    //        ReferencesManager.I.InputRecAndPlay.ID_Jump += Jump;
+    //        ReferencesManager.I.InputRecAndPlay.I_Reset += ResetInputActions;
+    //    }
+    //    else
+    //    {
+    //        ReferencesManager.I.InputRecAndPlay.ID_Forward -= SetForward;
+    //        ReferencesManager.I.InputRecAndPlay.ID_Back -= SetBack;
+    //        ReferencesManager.I.InputRecAndPlay.ID_Left -= SetLeft;
+    //        ReferencesManager.I.InputRecAndPlay.ID_Right -= SetRight;
+    //        ReferencesManager.I.InputRecAndPlay.ID_Jump -= Jump;
+    //        ReferencesManager.I.InputRecAndPlay.I_Reset -= ResetInputActions;
+    //    }
+    //}
 
 }

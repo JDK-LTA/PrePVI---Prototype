@@ -71,23 +71,23 @@ public class BaseMovement : MonoBehaviour
 
     public void MainInputSubscribing(bool subbing)
     {
-        if (subbing)
-        {
-            ReferencesManager.I.InputRecAndPlay.I_Forward += SetForward;
-            ReferencesManager.I.InputRecAndPlay.I_Back += SetBack;
-            ReferencesManager.I.InputRecAndPlay.I_Left += SetLeft;
-            ReferencesManager.I.InputRecAndPlay.I_Right += SetRight;
-            ReferencesManager.I.InputRecAndPlay.I_Jump += Jump;
-            //ReferencesManager.I.InputRecAndPlay.I_Reset += ResetInputActions;
-        }
-        else
-        {
-            ReferencesManager.I.InputRecAndPlay.I_Forward -= SetForward;
-            ReferencesManager.I.InputRecAndPlay.I_Back -= SetBack;
-            ReferencesManager.I.InputRecAndPlay.I_Left -= SetLeft;
-            ReferencesManager.I.InputRecAndPlay.I_Right -= SetRight;
-            ReferencesManager.I.InputRecAndPlay.I_Jump -= Jump;
-            //ReferencesManager.I.InputRecAndPlay.I_Reset -= ResetInputActions;
-        }
+        //if (subbing)
+        //{
+        //    ReferencesManager.I.InputRecAndPlay.I_Forward += SetForward;
+        //    ReferencesManager.I.InputRecAndPlay.I_Back += SetBack;
+        //    ReferencesManager.I.InputRecAndPlay.I_Left += SetLeft;
+        //    ReferencesManager.I.InputRecAndPlay.I_Right += SetRight;
+        //    ReferencesManager.I.InputRecAndPlay.I_Jump += Jump;
+        //    //ReferencesManager.I.InputRecAndPlay.I_Reset += ResetInputActions;
+        //}
+        //else
+        //{
+        //    ReferencesManager.I.InputRecAndPlay.I_Forward -= SetForward;
+        //    ReferencesManager.I.InputRecAndPlay.I_Back -= SetBack;
+        //    ReferencesManager.I.InputRecAndPlay.I_Left -= SetLeft;
+        //    ReferencesManager.I.InputRecAndPlay.I_Right -= SetRight;
+        //    ReferencesManager.I.InputRecAndPlay.I_Jump -= Jump;
+        //    //ReferencesManager.I.InputRecAndPlay.I_Reset -= ResetInputActions;
+        //}
     }
 }

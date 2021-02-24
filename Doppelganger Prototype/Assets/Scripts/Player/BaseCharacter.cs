@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public enum BinaryInputs { DASH, JUMP, ATTACK1, ATTACK2 }
 [RequireComponent(typeof(CharacterController))]
 public class BaseCharacter : MonoBehaviour
 {
@@ -19,9 +21,21 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] protected float groundCheckForJump = 0.4f;
     [SerializeField] protected float gravity = -9.81f;
 
+    [SerializeField] protected float dashLenght = 0.15f;
+    [SerializeField] protected float dashSpeed = 100f;
+    [SerializeField] protected float dashResetTime = 1f;
+
+    protected Vector3 dashMove;
+    protected float dashing = 0f;
+    protected float dashingTime = 0f;
+    protected bool canDash = true;
+    protected bool dashingNow = false;
+    protected bool dashReset = true;
+
     protected CharacterController chCont;
     protected Animator animator;
 
+    protected Vector2 xzInput;
     protected Vector3 velocity;
     protected bool forward, left, back, right;
     protected bool grounded;
@@ -45,73 +59,30 @@ public class BaseCharacter : MonoBehaviour
         XZMove();
         YMove();
     }
-
-    protected void Inputs()
+    protected void ContinousInput()
+    {
+        xzInput.x = Input.GetAxis("Horizontal");
+        xzInput.y = Input.GetAxis("Vertical");
+    }
+    protected void BinInputs()
     {
         //PRESSES
-        if (/*Input.GetKeyDown(keyToForward)*/Input.GetAxis("Vertical") > 0.25f)
+        if (Input.GetButtonDown("Attack1"))
         {
-            SetInputAxis(ref forward, 0, true);
-            SetInputAxis(ref back, 2, false);
+            print("Attack 1");
         }
-        else if (/*Input.GetKeyDown(keyToBack)*/Input.GetAxis("Vertical") < -0.25f)
+        if (Input.GetButtonDown("Attack2"))
         {
-            SetInputAxis(ref forward, 0, false);
-            SetInputAxis(ref back, 2, true);
+            print("Attack 2");
         }
-        else if (forward || back)
+        if (Input.GetButtonDown("Dash")/* && dashing < dashLenght && dashingTime < dashResetTime && dashReset && canDash*/)
         {
-            SetInputAxis(ref forward, 0, false);
-            SetInputAxis(ref back, 2, false);
+            print("Dash");
         }
-        if (/*Input.GetKeyDown(keyToRight)*/Input.GetAxis("Horizontal") > 0.25f)
-        {
-            SetInputAxis(ref left, 1, false);
-            SetInputAxis(ref right, 3, true);
-        }
-        else if (/*Input.GetKeyDown(keyToLeft)*/Input.GetAxis("Horizontal") < -0.25f)
-        {
-            SetInputAxis(ref left, 1, true);
-            SetInputAxis(ref right, 3, false);
-        }
-        else if (left || right)
-        {
-            SetInputAxis(ref left, 1, false);
-            SetInputAxis(ref right, 3, false);
-        }
-
-        if (/*Input.GetKeyDown(keyToJump)*/Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
-        //------------------------------------------------
-
-        //RELEASES
-        //if (/*Input.GetKeyUp(keyToForward)*/)
-        //{
-        //    forward = false;
-        //    if (wasdInput[0])
-        //        wasdInput[0] = false;
-        //}
-        //if (/*Input.GetKeyUp(keyToLeft)*/)
-        //{
-        //    left = false;
-        //    if (wasdInput[1])
-        //        wasdInput[1] = false;
-        //}
-        //if (/*Input.GetKeyUp(keyToBack)*/)
-        //{
-        //    back = false;
-        //    if (wasdInput[2])
-        //        wasdInput[2] = false;
-        //}
-        //if (/*Input.GetKeyUp(keyToRight)*/)
-        //{
-        //    right = false;
-        //    if (wasdInput[3])
-        //        wasdInput[3] = false;
-        //}
-        //------------------------------------------------
     }
     protected void YMove()
     {
@@ -134,27 +105,30 @@ public class BaseCharacter : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         chCont.Move(velocity * Time.deltaTime);
     }
-    protected void XZMove()
+    protected virtual void XZMove()
     {
-        int vertInv = 0, horInv = 0;
-        if (forward)
-            vertInv = 1;
-        else if (back)
-            vertInv = -1;
-        if (right)
-            horInv = 1;
-        else if (left)
-            horInv = -1;
-
-        Vector3 move = new Vector3(horInv * xMoveSpeed, 0, vertInv * zMoveSpeed);
+        Vector3 move = new Vector3(xzInput.x * xMoveSpeed, 0, xzInput.y * zMoveSpeed);
         chCont.Move(move * Time.deltaTime);
 
         if (animator)
-            animator.SetFloat("MoveSpeed", Mathf.Max(Mathf.Abs(horInv), Mathf.Abs(vertInv)));
+            animator.SetFloat("MoveSpeed", Mathf.Clamp01(Mathf.Abs(xzInput.x + xzInput.y)));
 
         if (move != Vector3.zero)
         {
-            gameObject.transform.forward = move;
+            transform.forward = move;
+        }
+    }
+    protected virtual void XZMove(Vector2 inp)
+    {
+        Vector3 move = new Vector3(inp.x * xMoveSpeed, 0, inp.y * zMoveSpeed);
+        chCont.Move(move * Time.deltaTime);
+
+        if (animator)
+            animator.SetFloat("MoveSpeed", Mathf.Clamp01(Mathf.Abs(inp.x) + Mathf.Abs(inp.y)));
+
+        if (move != Vector3.zero)
+        {
+            transform.forward = move;
         }
     }
     protected void Jump()

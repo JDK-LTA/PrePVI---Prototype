@@ -8,8 +8,10 @@ public class PlayerCharacter : BaseCharacter
     {
         if (canStartRecording && Input.GetKeyDown(keyToRecord))
         {
-            ReferencesManager.I.DoppelCharacter.gameObject.SetActive(true);
-            ReferencesManager.I.DoppelCharacter.StartRecording();
+            RefsManager.I.DoppelCharacter.gameObject.SetActive(true);
+            RefsManager.I.DoppelCharacter.StartRecording();
+            CamerasManager.I.ToggleSingleDoppelCams(true);
+
             animator.SetFloat("MoveSpeed", 0);
             ResetInputActions();
             rec = true;
@@ -17,9 +19,16 @@ public class PlayerCharacter : BaseCharacter
         }
 
         if (!rec)
-            Inputs();
-        
+            BinInputs();
+
         base.Update();
+    }
+    private void FixedUpdate()
+    {
+        if (!rec)
+        {
+            ContinousInput();
+        }
     }
 }
 //TENGO QUE GUARDAR EL INPUT EN TIEMPO REAL EN STATIC PARA PODER COMPARTIRLO BIEN ENTRE EL PERSONAJE Y EL DOPPEL.
