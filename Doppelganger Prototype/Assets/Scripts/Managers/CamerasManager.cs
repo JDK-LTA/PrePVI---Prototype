@@ -5,8 +5,10 @@ using Cinemachine;
 
 public class CamerasManager : Singleton<CamerasManager>
 {
-    public bool isLevelCamActive = false;
-    public bool isDoppel = false;
+    private bool isLevelCamActive = false;
+    private bool isDoppel = false;
+
+    public bool IsLevelCamActive { set => isLevelCamActive = value; }
 
     private void Start()
     {

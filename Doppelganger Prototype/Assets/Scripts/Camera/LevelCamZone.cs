@@ -18,7 +18,7 @@ public class LevelCamZone : MonoBehaviour
         {
             if (type == TypeOfZone.STATIC)
             {
-                CamerasManager.I.isLevelCamActive = true;
+                CamerasManager.I.IsLevelCamActive = true;
                 CamerasManager.I.ChangeActiveCamera(virtualCameraIndex);
             }
             else
@@ -33,7 +33,7 @@ public class LevelCamZone : MonoBehaviour
         {
             if (type == TypeOfZone.STATIC)
             {
-                CamerasManager.I.isLevelCamActive = false;
+                CamerasManager.I.IsLevelCamActive = false;
                 CamerasManager.I.ChangeActiveCamera(RefsManager.I.FollowActiveCamera);
             }
             else
