@@ -7,30 +7,21 @@ public enum BinaryInputs { DASH, JUMP, ATTACK1, ATTACK2 }
 [RequireComponent(typeof(CharacterController))]
 public class BaseCharacter : MonoBehaviour
 {
-    [SerializeField] protected KeyCode keyToRecord = KeyCode.R;
-    [SerializeField] protected KeyCode keyToPlayback = KeyCode.P;
-    [SerializeField] protected KeyCode keyToForward = KeyCode.W;
-    [SerializeField] protected KeyCode keyToLeft = KeyCode.A;
-    [SerializeField] protected KeyCode keyToBack = KeyCode.S;
-    [SerializeField] protected KeyCode keyToRight = KeyCode.D;
-    [SerializeField] protected KeyCode keyToJump = KeyCode.Space;
-
-    [SerializeField] protected float xMoveSpeed = 16f / 3f, zMoveSpeed = 3f;
+    [SerializeField] protected float xMoveSpeed = 16f / 3f, zMoveSpeed = 16f / 3f;
     [SerializeField] protected float jumpHeight = 1.5f;
     [SerializeField] protected float groundCheckDistance = 0.12f;
     [SerializeField] protected float groundCheckForJump = 0.4f;
     [SerializeField] protected float gravity = -9.81f;
 
-    [SerializeField] protected float dashLenght = 0.15f;
-    [SerializeField] protected float dashSpeed = 100f;
+    [SerializeField] protected float dashLenght = 4f;
+    [SerializeField] protected float dashTime = 0.2f;
     [SerializeField] protected float dashResetTime = 1f;
 
-    protected Vector3 dashMove;
-    protected float dashing = 0f;
-    protected float dashingTime = 0f;
+    protected Vector3 dashMove, dashOrPos;
+    protected float dashT = 0f, dashResetT;
     protected bool canDash = true;
     protected bool dashingNow = false;
-    protected bool dashReset = true;
+    protected bool dashReset = false;
 
     protected CharacterController chCont;
     protected Animator animator;
@@ -43,9 +34,7 @@ public class BaseCharacter : MonoBehaviour
     protected static bool rec = false;
     protected static bool canStartRecording = true;
 
-    protected static bool[] wasdInput = new bool[4];
-    public bool[] wasdDebug = new bool[4];
-
+    #region BASIC MONOBEHAVIOUR METHODS
     protected void Awake()
     {
         chCont = GetComponent<CharacterController>();
@@ -54,11 +43,12 @@ public class BaseCharacter : MonoBehaviour
 
     protected virtual void Update()
     {
-        //Inputs();
-        wasdDebug = wasdInput;
         XZMove();
         YMove();
+        DashingMove();
     }
+    #endregion
+    #region INPUT
     protected void ContinousInput()
     {
         xzInput.x = Input.GetAxis("Horizontal");
@@ -75,36 +65,17 @@ public class BaseCharacter : MonoBehaviour
         {
             print("Attack 2");
         }
-        if (Input.GetButtonDown("Dash")/* && dashing < dashLenght && dashingTime < dashResetTime && dashReset && canDash*/)
+        if (Input.GetButtonDown("Dash") && canDash)
         {
-            print("Dash");
+            Dash();
         }
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
     }
-    protected void YMove()
-    {
-        grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
-        if (velocity.y < 0)
-        {
-            if (!grounded && Physics.Raycast(transform.position, Vector3.down, groundCheckForJump))
-            {
-                if (animator)
-                    animator.SetTrigger("Fall");
-            }
-        }
-
-        if (grounded && velocity.y < -.5f)
-        {
-            velocity.y = -.5f;
-        }
-
-
-        velocity.y += gravity * Time.deltaTime;
-        chCont.Move(velocity * Time.deltaTime);
-    }
+    #endregion
+    #region MOVEMENT
     protected virtual void XZMove()
     {
         Vector3 move = new Vector3(xzInput.x * xMoveSpeed, 0, xzInput.y * zMoveSpeed);
@@ -131,6 +102,57 @@ public class BaseCharacter : MonoBehaviour
             transform.forward = move;
         }
     }
+    protected void YMove()
+    {
+        grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+        if (velocity.y < 0)
+        {
+            if (!grounded && Physics.Raycast(transform.position, Vector3.down, groundCheckForJump))
+            {
+                if (animator)
+                    animator.SetTrigger("Fall");
+            }
+        }
+
+        if (grounded && velocity.y < -.5f)
+        {
+            velocity.y = -.5f;
+        }
+
+
+        velocity.y += gravity * Time.deltaTime;
+        chCont.Move(velocity * Time.deltaTime);
+    }
+    protected void DashingMove()
+    {
+        if (dashingNow)
+        {
+            dashT += Time.deltaTime;
+            transform.position = Vector3.Lerp(dashOrPos, dashMove, dashT / dashTime);
+
+            if (dashT >= dashTime)
+            {
+                transform.position = dashMove;
+                dashT = 0;
+                dashingNow = false;
+            }
+
+            Physics.SyncTransforms();
+        }
+        if (dashReset)
+        {
+            dashResetT += Time.deltaTime;
+
+            if (dashResetT >= dashResetTime)
+            {
+                dashResetT = 0;
+                dashReset = false;
+                canDash = true;
+            }
+        }
+    }
+    #endregion
+    #region OTHER INPUT ACTIONS
     protected void Jump()
     {
         if (grounded)
@@ -141,23 +163,16 @@ public class BaseCharacter : MonoBehaviour
                 animator.SetTrigger("Jump");
         }
     }
-
-    protected void SetInputAxis(ref bool inp, int wasdIndex, bool setter)
+    protected void Dash()
     {
-        inp = setter;
-        if (wasdInput[wasdIndex] == !setter)
-            wasdInput[wasdIndex] = setter;
+        canDash = false;
+        dashReset = true;
+        dashingNow = true;
+        dashMove = transform.position + transform.forward * dashLenght;
+        dashOrPos = transform.position;
     }
-    protected void ResetInputActions() { forward = back = left = right = false; }
-    public void ResetAndReinput()
-    {
-        ResetInputActions();
-        forward = wasdInput[0];
-        left = wasdInput[1];
-        back = wasdInput[2];
-        right = wasdInput[3];
-    }
-
+    #endregion
+    #region TRIGGERS
     protected virtual void OnTriggerEnter(Collider other)
     {
         ButtonData button = other.GetComponent<ButtonData>();
@@ -177,4 +192,5 @@ public class BaseCharacter : MonoBehaviour
                 button.TogglePress(false);
         }
     }
+    #endregion
 }

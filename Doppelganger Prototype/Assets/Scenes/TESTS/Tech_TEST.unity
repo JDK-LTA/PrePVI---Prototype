@@ -230,14 +230,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14336960}
-  m_LocalRotation: {x: 0.53729963, y: -0, z: -0, w: 0.8433915}
-  m_LocalPosition: {x: 0, y: 13.960616, z: -5.5543876}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 16.643606, z: -12.835125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1488167117}
   m_Father: {fileID: 1411744482}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!114 &121725847 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3506515956316194286, guid: 2868dfd179ae795498062bd78fd5ab3c, type: 3}
@@ -292,8 +292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff2ae42c3a2ee444b56a17bdc8076cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLevelCamActive: 0
-  isDoppel: 0
 --- !u!1 &179302949
 GameObject:
   m_ObjectHideFlags: 3
@@ -647,7 +645,7 @@ MonoBehaviour:
   groundCheckForJump: 0.4
   gravity: -9.81
   dashLenght: 0.15
-  dashSpeed: 100
+  dashTime: 0.2
   dashResetTime: 1
   wasdDebug: 00000000
 --- !u!4 &501687468
@@ -843,8 +841,8 @@ MonoBehaviour:
   groundCheckDistance: 0.1
   groundCheckForJump: 0.6
   gravity: -9.81
-  dashLenght: 0.15
-  dashSpeed: 100
+  dashLenght: 4
+  dashTime: 0.2
   dashResetTime: 1
   wasdDebug: 00000000
 --- !u!143 &672073017
@@ -1479,14 +1477,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937033106}
-  m_LocalRotation: {x: 0.53729963, y: -0, z: -0, w: 0.8433915}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 0, y: 13.960616, z: -5.5543876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 537385843}
   m_Father: {fileID: 1703975776}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!114 &937033108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1941,8 +1939,8 @@ MonoBehaviour:
   groundCheckDistance: 0.12
   groundCheckForJump: 0.4
   gravity: -9.81
-  dashLenght: 0.15
-  dashSpeed: 100
+  dashLenght: 4
+  dashTime: 0.2
   dashResetTime: 1
   wasdDebug: 00000000
   pressedKeyCodes: 
@@ -2181,14 +2179,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255291415}
-  m_LocalRotation: {x: 0.53729963, y: -0, z: -0, w: 0.8433915}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 0, y: 19.398464, z: -8.090097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 203760944}
   m_Father: {fileID: 1703975776}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!114 &1255291417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2834,7 +2832,7 @@ MonoBehaviour:
   groundCheckForJump: 0.4
   gravity: -9.81
   dashLenght: 0.15
-  dashSpeed: 100
+  dashTime: 0.2
   dashResetTime: 1
   wasdDebug: 00000000
   pressedKeyCodes: 
@@ -3192,14 +3190,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661460704}
-  m_LocalRotation: {x: 0.53729963, y: -0, z: -0, w: 0.8433915}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 0, y: 19.398462, z: -8.090097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1346810327}
   m_Father: {fileID: 1411744482}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &1693083754
 GameObject:
   m_ObjectHideFlags: 0
@@ -3459,7 +3457,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 34.56296
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3484,8 +3482,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726688760}
-  m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
-  m_LocalPosition: {x: 0, y: 13.960616, z: -5.5543876}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 16.643606, z: -12.835125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

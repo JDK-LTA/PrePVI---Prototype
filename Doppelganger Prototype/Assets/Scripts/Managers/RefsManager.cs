@@ -18,13 +18,16 @@ public class RefsManager : Singleton<RefsManager>
     [Header("PLAYER REFERENCES")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private DoppelCharacter doppelCharacter;
+
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
     [SerializeField] private List<CinemachineVirtualCamera> levelVirtualCameras = new List<CinemachineVirtualCamera>();
+
     private CinemachineVirtualCamera activeCamera;
     private CinemachineVirtualCamera followActiveCamera;
     private CinemachineVirtualCamera actualSingleFollowCamera;
     private CinemachineVirtualCamera actualDoppelFollowCamera;
+
     [Header("PUZZLE REFERENCES")]
     [SerializeField] private StepOnButton buttonSystem;
 

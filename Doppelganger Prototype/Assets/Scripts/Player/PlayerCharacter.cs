@@ -6,14 +6,14 @@ public class PlayerCharacter : BaseCharacter
 {
     protected override void Update()
     {
-        if (canStartRecording && Input.GetKeyDown(keyToRecord))
+        if (canStartRecording && Input.GetButtonDown("Doppel"))
         {
             RefsManager.I.DoppelCharacter.gameObject.SetActive(true);
             RefsManager.I.DoppelCharacter.StartRecording();
             CamerasManager.I.ToggleSingleDoppelCams(true);
 
             animator.SetFloat("MoveSpeed", 0);
-            ResetInputActions();
+
             rec = true;
             enabled = false;
         }
@@ -31,5 +31,3 @@ public class PlayerCharacter : BaseCharacter
         }
     }
 }
-//TENGO QUE GUARDAR EL INPUT EN TIEMPO REAL EN STATIC PARA PODER COMPARTIRLO BIEN ENTRE EL PERSONAJE Y EL DOPPEL.
-//LOS BOOLEANOS DE MOVIMIENTO (FORWARD,LEFT,RIGHT,BACK) TIENEN QUE SER ESTÁTICOS PARA RELACIONAR PERSONAJE Y DOPPEL.

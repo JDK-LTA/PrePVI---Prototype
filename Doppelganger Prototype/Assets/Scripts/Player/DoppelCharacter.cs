@@ -5,8 +5,8 @@ using UnityEngine;
 public class DoppelCharacter : BaseCharacter
 {
     [Header("Debug Variables")]
-    [SerializeField] private List<BinaryInputs> pressedKeyCodes = new List<BinaryInputs>();
-    [SerializeField] private List<BinaryInputs> releasedKeyCodes = new List<BinaryInputs>();
+    [SerializeField] private List<BinaryInputs> pressedBinInputs = new List<BinaryInputs>();
+    [SerializeField] private List<BinaryInputs> releasedBinInputs = new List<BinaryInputs>();
     [SerializeField] private List<float> pressingTimes = new List<float>();
     [SerializeField] private List<float> releasingTimes = new List<float>();
     [SerializeField] private List<bool> playbackPressed = new List<bool>();
@@ -22,6 +22,7 @@ public class DoppelCharacter : BaseCharacter
 
     private Vector2 playXzInput = Vector2.zero;
 
+    #region OVERRIDES
     protected override void Update()
     {
         if (rec)
@@ -57,6 +58,8 @@ public class DoppelCharacter : BaseCharacter
             base.XZMove(playXzInput);
         }
     }
+    #endregion
+    #region REC AND PLAY
     public void StartRecording()
     {
         transform.position = RefsManager.I.PlayerCharacter.transform.position;
@@ -66,7 +69,6 @@ public class DoppelCharacter : BaseCharacter
         RefsManager.I.PlayerCharacter.enabled = false;
 
         ClearRecording();
-        InitialRecording();
 
         canStartRecording = false;
     }
@@ -74,32 +76,12 @@ public class DoppelCharacter : BaseCharacter
     {
         transform.position = RefsManager.I.PlayerCharacter.transform.position;
         transform.rotation = RefsManager.I.PlayerCharacter.transform.rotation;
-        RefsManager.I.PlayerCharacter.ResetAndReinput();
-        ResetInputActions();
+
         Physics.SyncTransforms();
 
+        animator.SetTrigger("ResetAll");
+
         playback = true;
-    }
-
-    private void RecordTimer()
-    {
-        t += Time.deltaTime;
-        Recording();
-
-        if (t >= timeRecording)
-        {
-            FinishRecording();
-        }
-    }
-    private void PlaybackTimer()
-    {
-        t += Time.deltaTime;
-        Playback();
-
-        if (t >= timeRecording) //REMEMBER TO ADD VARIABLE FOR WHEN CUTTING THE DOPPEL SHORT / CANCELLING IT MID-ACTION
-        {
-            FinishPlayback();
-        }
     }
 
     private void Recording()
@@ -146,20 +128,12 @@ public class DoppelCharacter : BaseCharacter
         continousInput.Enqueue(xzInput);
         framesRecorded++;
     }
-    private void PlaybackContInput()
-    {
-        if (framesPlayed < framesRecorded)
-        {
-            playXzInput = continousInput.Dequeue();
-            framesPlayed++;
-        }
-    }
     private void RecordKey(bool press, BinaryInputs inp)
     {
         if (press)
-            pressedKeyCodes.Add(inp);
+            pressedBinInputs.Add(inp);
         else
-            releasedKeyCodes.Add(inp);
+            releasedBinInputs.Add(inp);
 
         AddTimeAndBool(press);
     }
@@ -173,10 +147,10 @@ public class DoppelCharacter : BaseCharacter
             {
                 playbackPressed[i] = true;
 
-                switch (pressedKeyCodes[i])
+                switch (pressedBinInputs[i])
                 {
                     case BinaryInputs.DASH:
-                        print("dash");
+                        Dash();
                         break;
                     case BinaryInputs.ATTACK1:
                         print("att1");
@@ -220,6 +194,14 @@ public class DoppelCharacter : BaseCharacter
             //------------------------------------------------
         }
     }
+    private void PlaybackContInput()
+    {
+        if (framesPlayed < framesRecorded)
+        {
+            playXzInput = continousInput.Dequeue();
+            framesPlayed++;
+        }
+    }
 
     private void FinishRecording()
     {
@@ -236,8 +218,18 @@ public class DoppelCharacter : BaseCharacter
         gameObject.SetActive(false);
         CamerasManager.I.ToggleSingleDoppelCams(false);
     }
-
+    
     //AUXILIAR METHODS
+    private void ClearRecording()
+    {
+        t = 0;
+        pressedBinInputs.Clear();
+        releasedBinInputs.Clear();
+        pressingTimes.Clear();
+        releasingTimes.Clear();
+        playbackPressed.Clear();
+        playbackReleased.Clear();
+    }
     private void AddTimeAndBool(bool press)
     {
         float aux = t;
@@ -252,34 +244,27 @@ public class DoppelCharacter : BaseCharacter
             playbackReleased.Add(false);
         }
     }
-    private void ClearRecording()
+    #endregion
+    #region TIMERS
+    private void RecordTimer()
     {
-        t = 0;
-        pressedKeyCodes.Clear();
-        releasedKeyCodes.Clear();
-        pressingTimes.Clear();
-        releasingTimes.Clear();
-        playbackPressed.Clear();
-        playbackReleased.Clear();
+        t += Time.deltaTime;
+        Recording();
+
+        if (t >= timeRecording)
+        {
+            FinishRecording();
+        }
     }
-    private void InitialRecording()
+    private void PlaybackTimer()
     {
-        ResetAndReinput();
-        //if (wasdInput[0])
-        //{
-        //    RecordKey(true, BinaryInputs.FORWARD);
-        //}
-        //if (wasdInput[1])
-        //{
-        //    RecordKey(true, BinaryInputs.LEFT);
-        //}
-        //if (wasdInput[2])
-        //{
-        //    RecordKey(true, BinaryInputs.BACK);
-        //}
-        //if (wasdInput[3])
-        //{
-        //    RecordKey(true, BinaryInputs.RIGHT);
-        //}
+        t += Time.deltaTime;
+        Playback();
+
+        if (t >= timeRecording) //REMEMBER TO ADD VARIABLE FOR WHEN CUTTING THE DOPPEL SHORT / CANCELLING IT MID-ACTION
+        {
+            FinishPlayback();
+        }
     }
+    #endregion
 }
