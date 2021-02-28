@@ -19,7 +19,11 @@ public class RefsManager : Singleton<RefsManager>
     [Header("PLAYER REFERENCES")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private DoppelCharacter doppelCharacter;
+    
+
+    [Header("VFX REFERENCES")]
     [SerializeField] private VisualEffect particleChainGO;
+    [SerializeField] private Animation vfx_Attack1ForwardSimpleEffect;
 
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
@@ -47,4 +51,5 @@ public class RefsManager : Singleton<RefsManager>
     public CinemachineVirtualCamera FollowActiveCamera { get => followActiveCamera; set => followActiveCamera = value; }
     public List<SingleDoppelTuplas> SingleDoppelTuplas { get => singleDoppelTuplas; set => singleDoppelTuplas = value; }
     public VisualEffect ParticleChainGO { get => particleChainGO; set => particleChainGO = value; }
+    public Animation Vfx_Attack1ForwardSimpleEffect { get => vfx_Attack1ForwardSimpleEffect; set => vfx_Attack1ForwardSimpleEffect = value; }
 }

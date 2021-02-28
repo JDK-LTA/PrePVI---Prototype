@@ -192,6 +192,8 @@ public class BaseCharacter : MonoBehaviour
     protected void Attack1()
     {
         //canDoAnythingElse = false;
+
+        RefsManager.I.Vfx_Attack1ForwardSimpleEffect.Play();
         
     }
     protected void StartAttack1()
