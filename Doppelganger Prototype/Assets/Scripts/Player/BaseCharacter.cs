@@ -198,7 +198,6 @@ public class BaseCharacter : MonoBehaviour
     protected virtual void StartAttack()
     {
         RefsManager.I.Vfx_Attack1ForwardSimpleEffect.SetTrigger("Trail");
-
     }
     #endregion
     #region TRIGGERS
