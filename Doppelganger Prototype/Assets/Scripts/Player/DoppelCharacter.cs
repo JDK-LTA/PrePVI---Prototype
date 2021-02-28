@@ -87,19 +87,19 @@ public class DoppelCharacter : BaseCharacter
     private void Recording()
     {
         //PRESSES
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canDoAnythingElse)
         {
             RecordKey(true, BinaryInputs.JUMP);
         }
-        if (Input.GetButtonDown("Dash"))
+        if (Input.GetButtonDown("Dash") && canDoAnythingElse)
         {
             RecordKey(true, BinaryInputs.DASH);
         }
-        if (Input.GetButtonDown("Attack1"))
+        if (Input.GetButtonDown("Attack1") && canDoAnythingElse)
         {
             RecordKey(true, BinaryInputs.ATTACK1);
         }
-        if (Input.GetButtonDown("Attack2"))
+        if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
         {
             RecordKey(true, BinaryInputs.ATTACK2);
         }       //------------------------------------------------
@@ -153,7 +153,7 @@ public class DoppelCharacter : BaseCharacter
                         Dash();
                         break;
                     case BinaryInputs.ATTACK1:
-                        print("att1");
+                        Attack1();
                         break;
                     case BinaryInputs.ATTACK2:
                         print("att2");
@@ -163,35 +163,6 @@ public class DoppelCharacter : BaseCharacter
                         break;
                 }
             }
-            //------------------------------------------------
-
-            //Play Input releases
-            //if (i < releasingTimes.Count)
-            //{
-            //    if (t >= releasingTimes[i] && !playbackReleased[i])
-            //    {
-            //        playbackReleased[i] = true;
-
-            //        switch (releasedKeyCodes[i])
-            //        {
-            //            //case BinaryInputs.FORWARD:
-            //            //    forward = false;
-            //            //    break;
-            //            //case BinaryInputs.LEFT:
-            //            //    left = false;
-            //            //    break;
-            //            //case BinaryInputs.BACK:
-            //            //    back = false;
-            //            //    break;
-            //            //case BinaryInputs.RIGHT:
-            //            //    right = false;
-            //            //    break;
-            //            case BinaryInputs.JUMP:
-            //                break;
-            //        }
-            //    }
-            //}
-            //------------------------------------------------
         }
     }
     private void PlaybackContInput()
@@ -218,7 +189,7 @@ public class DoppelCharacter : BaseCharacter
         gameObject.SetActive(false);
         CamerasManager.I.ToggleSingleDoppelCams(false);
     }
-    
+
     //AUXILIAR METHODS
     private void ClearRecording()
     {

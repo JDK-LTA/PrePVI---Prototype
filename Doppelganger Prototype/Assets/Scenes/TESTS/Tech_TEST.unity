@@ -631,13 +631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05729f4f745bb6d478d9646f6dfa4bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyToRecord: 114
-  keyToPlayback: 112
-  keyToForward: 119
-  keyToLeft: 97
-  keyToBack: 115
-  keyToRight: 100
-  keyToJump: 32
   xMoveSpeed: 5.3333335
   zMoveSpeed: 3
   jumpHeight: 1.5
@@ -647,7 +640,6 @@ MonoBehaviour:
   dashLenght: 0.15
   dashTime: 0.2
   dashResetTime: 1
-  wasdDebug: 00000000
 --- !u!4 &501687468
 Transform:
   m_ObjectHideFlags: 0
@@ -828,15 +820,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05729f4f745bb6d478d9646f6dfa4bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyToRecord: 114
-  keyToPlayback: 112
-  keyToForward: 119
-  keyToLeft: 97
-  keyToBack: 115
-  keyToRight: 100
-  keyToJump: 32
-  xMoveSpeed: 3
-  zMoveSpeed: 3
+  xMoveSpeed: 6
+  zMoveSpeed: 6
   jumpHeight: 1.5
   groundCheckDistance: 0.1
   groundCheckForJump: 0.6
@@ -844,7 +829,6 @@ MonoBehaviour:
   dashLenght: 4
   dashTime: 0.2
   dashResetTime: 1
-  wasdDebug: 00000000
 --- !u!143 &672073017
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1926,30 +1910,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5eaa34d9b41bb48acfe6988c639eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyToRecord: 114
-  keyToPlayback: 112
-  keyToForward: 119
-  keyToLeft: 97
-  keyToBack: 115
-  keyToRight: 100
-  keyToJump: 32
-  xMoveSpeed: 3
-  zMoveSpeed: 3
+  xMoveSpeed: 6
+  zMoveSpeed: 6
   jumpHeight: 1.5
-  groundCheckDistance: 0.12
-  groundCheckForJump: 0.4
+  groundCheckDistance: 0.1
+  groundCheckForJump: 0.6
   gravity: -9.81
   dashLenght: 4
   dashTime: 0.2
   dashResetTime: 1
-  wasdDebug: 00000000
-  pressedKeyCodes: 
-  releasedKeyCodes: 
+  pressedBinInputs: 
+  releasedBinInputs: 
   pressingTimes: []
   releasingTimes: []
   playbackPressed: 
   playbackReleased: 
-  timeRecording: 3
+  timeRecording: 4
 --- !u!143 &1092450719
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2818,13 +2794,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5eaa34d9b41bb48acfe6988c639eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyToRecord: 114
-  keyToPlayback: 112
-  keyToForward: 119
-  keyToLeft: 97
-  keyToBack: 115
-  keyToRight: 100
-  keyToJump: 32
   xMoveSpeed: 5.3333335
   zMoveSpeed: 3
   jumpHeight: 1.5
@@ -2834,9 +2803,8 @@ MonoBehaviour:
   dashLenght: 0.15
   dashTime: 0.2
   dashResetTime: 1
-  wasdDebug: 00000000
-  pressedKeyCodes: 
-  releasedKeyCodes: 
+  pressedBinInputs: 
+  releasedBinInputs: 
   pressingTimes: []
   releasingTimes: []
   playbackPressed: 
@@ -3541,7 +3509,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 1.2
+    m_Time: 1.1
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []

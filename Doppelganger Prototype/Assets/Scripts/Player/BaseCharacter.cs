@@ -7,15 +7,32 @@ public enum BinaryInputs { DASH, JUMP, ATTACK1, ATTACK2 }
 [RequireComponent(typeof(CharacterController))]
 public class BaseCharacter : MonoBehaviour
 {
+    [Header("Basic Movement")]
     [SerializeField] protected float xMoveSpeed = 16f / 3f, zMoveSpeed = 16f / 3f;
     [SerializeField] protected float jumpHeight = 1.5f;
+    
+    [Header("Jump")]
     [SerializeField] protected float groundCheckDistance = 0.12f;
     [SerializeField] protected float groundCheckForJump = 0.4f;
     [SerializeField] protected float gravity = -9.81f;
-
+    
+    [Header("Dash")]
     [SerializeField] protected float dashLenght = 4f;
     [SerializeField] protected float dashTime = 0.2f;
     [SerializeField] protected float dashResetTime = 1f;
+
+    [Header("Attack 1")]
+    [SerializeField] protected float damage = 5f;
+    [SerializeField] protected float timeToReachEnd = 0.5f;
+    [SerializeField] protected float cooldown1 = 0.8f;
+
+    protected CharacterController chCont;
+    protected Animator animator;
+
+    protected Vector2 xzInput;
+    protected Vector3 velocity;
+
+    protected bool grounded;
 
     protected Vector3 dashMove, dashOrPos;
     protected float dashT = 0f, dashResetT;
@@ -23,13 +40,10 @@ public class BaseCharacter : MonoBehaviour
     protected bool dashingNow = false;
     protected bool dashReset = false;
 
-    protected CharacterController chCont;
-    protected Animator animator;
+    protected bool canAttack1 = true;
 
-    protected Vector2 xzInput;
-    protected Vector3 velocity;
-    protected bool forward, left, back, right;
-    protected bool grounded;
+    protected bool canDoAnythingElse = true;
+    protected float generalT = 0;
 
     protected static bool rec = false;
     protected static bool canStartRecording = true;
@@ -51,25 +65,26 @@ public class BaseCharacter : MonoBehaviour
     #region INPUT
     protected void ContinousInput()
     {
-        xzInput.x = Input.GetAxis("Horizontal");
-        xzInput.y = Input.GetAxis("Vertical");
+        int aux = canDoAnythingElse ? 1 : 0;
+        xzInput.x = Input.GetAxis("Horizontal") * aux;
+        xzInput.y = Input.GetAxis("Vertical") * aux;
     }
     protected void BinInputs()
     {
         //PRESSES
-        if (Input.GetButtonDown("Attack1"))
+        if (Input.GetButtonDown("Attack1") && canDoAnythingElse)
         {
-            print("Attack 1");
+            Attack1();
         }
-        if (Input.GetButtonDown("Attack2"))
+        if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
         {
             print("Attack 2");
         }
-        if (Input.GetButtonDown("Dash") && canDash)
+        if (Input.GetButtonDown("Dash") && canDoAnythingElse)
         {
             Dash();
         }
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canDoAnythingElse)
         {
             Jump();
         }
@@ -82,7 +97,7 @@ public class BaseCharacter : MonoBehaviour
         chCont.Move(move * Time.deltaTime);
 
         if (animator)
-            animator.SetFloat("MoveSpeed", Mathf.Clamp01(Mathf.Abs(xzInput.x + xzInput.y)));
+            animator.SetFloat("MoveSpeed", Mathf.Clamp01(Mathf.Abs(xzInput.x) + Mathf.Abs(xzInput.y)));
 
         if (move != Vector3.zero)
         {
@@ -165,11 +180,18 @@ public class BaseCharacter : MonoBehaviour
     }
     protected void Dash()
     {
-        canDash = false;
-        dashReset = true;
-        dashingNow = true;
-        dashMove = transform.position + transform.forward * dashLenght;
-        dashOrPos = transform.position;
+        if (canDash)
+        {
+            canDash = false;
+            dashReset = true;
+            dashingNow = true;
+            dashMove = transform.position + transform.forward * dashLenght;
+            dashOrPos = transform.position;
+        }
+    }
+    protected void Attack1()
+    {
+        canDoAnythingElse = false;
     }
     #endregion
     #region TRIGGERS
