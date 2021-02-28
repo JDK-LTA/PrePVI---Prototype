@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.VFX;
 
 [System.Serializable]
 public struct SingleDoppelTuplas
@@ -18,6 +19,7 @@ public class RefsManager : Singleton<RefsManager>
     [Header("PLAYER REFERENCES")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private DoppelCharacter doppelCharacter;
+    [SerializeField] private VisualEffect particleChainGO;
 
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
@@ -44,5 +46,5 @@ public class RefsManager : Singleton<RefsManager>
     public CinemachineVirtualCamera ActiveCamera { get => activeCamera; set => activeCamera = value; }
     public CinemachineVirtualCamera FollowActiveCamera { get => followActiveCamera; set => followActiveCamera = value; }
     public List<SingleDoppelTuplas> SingleDoppelTuplas { get => singleDoppelTuplas; set => singleDoppelTuplas = value; }
-
+    public VisualEffect ParticleChainGO { get => particleChainGO; set => particleChainGO = value; }
 }

@@ -43,6 +43,8 @@ public class DoppelCharacter : BaseCharacter
         {
             ContinousInput();
             RecordContInput();
+            RefsManager.I.ParticleChainGO.SetVector3(Shader.PropertyToID("DistanceToDoppel"),
+                transform.position - RefsManager.I.PlayerCharacter.transform.position);
         }
         if (playback)
         {
@@ -180,6 +182,7 @@ public class DoppelCharacter : BaseCharacter
         rec = false;
         RefsManager.I.PlayerCharacter.enabled = true;
         StartPlayback();
+        RefsManager.I.ParticleChainGO.gameObject.SetActive(false);
     }
     private void FinishPlayback()
     {

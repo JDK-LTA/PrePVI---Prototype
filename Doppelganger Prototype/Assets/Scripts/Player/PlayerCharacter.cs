@@ -16,6 +16,9 @@ public class PlayerCharacter : BaseCharacter
 
             rec = true;
             enabled = false;
+
+            RefsManager.I.ParticleChainGO.gameObject.SetActive(true);
+            RefsManager.I.ParticleChainGO.playRate = 2;
         }
 
         if (!rec)

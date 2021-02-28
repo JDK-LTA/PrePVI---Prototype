@@ -191,7 +191,12 @@ public class BaseCharacter : MonoBehaviour
     }
     protected void Attack1()
     {
-        canDoAnythingElse = false;
+        //canDoAnythingElse = false;
+        
+    }
+    protected void StartAttack1()
+    {
+
     }
     #endregion
     #region TRIGGERS
