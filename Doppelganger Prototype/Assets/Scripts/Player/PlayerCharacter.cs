@@ -33,4 +33,9 @@ public class PlayerCharacter : BaseCharacter
             ContinousInput();
         }
     }
+
+    protected override void StartAttack()
+    {
+        base.StartAttack();
+    }
 }

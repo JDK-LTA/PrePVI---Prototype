@@ -10,12 +10,12 @@ public class BaseCharacter : MonoBehaviour
     [Header("Basic Movement")]
     [SerializeField] protected float xMoveSpeed = 16f / 3f, zMoveSpeed = 16f / 3f;
     [SerializeField] protected float jumpHeight = 1.5f;
-    
+
     [Header("Jump")]
     [SerializeField] protected float groundCheckDistance = 0.12f;
     [SerializeField] protected float groundCheckForJump = 0.4f;
     [SerializeField] protected float gravity = -9.81f;
-    
+
     [Header("Dash")]
     [SerializeField] protected float dashLenght = 4f;
     [SerializeField] protected float dashTime = 0.2f;
@@ -192,12 +192,12 @@ public class BaseCharacter : MonoBehaviour
     protected void Attack1()
     {
         //canDoAnythingElse = false;
+        animator.SetTrigger("Attack1");
 
-        RefsManager.I.Vfx_Attack1ForwardSimpleEffect.Play();
-        
     }
-    protected void StartAttack1()
+    protected virtual void StartAttack()
     {
+        RefsManager.I.Vfx_Attack1ForwardSimpleEffect.SetTrigger("Trail");
 
     }
     #endregion

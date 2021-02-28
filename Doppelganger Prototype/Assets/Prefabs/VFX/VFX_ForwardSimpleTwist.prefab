@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2918348600489501173
 Transform:
   m_ObjectHideFlags: 0
@@ -150,7 +150,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: a13f7ac2ba3803045acca53c500b4adf, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: a13f7ac2ba3803045acca53c500b4adf, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
