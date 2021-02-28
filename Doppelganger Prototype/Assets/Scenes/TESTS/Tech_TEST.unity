@@ -2830,7 +2830,7 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: 1f3f45fe8b821844fb389925bfaba46e, type: 2}
+  - {fileID: 7400000, guid: a13f7ac2ba3803045acca53c500b4adf, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -3003,7 +3003,7 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.00838089
         value: 1
         inSlope: 0
         outSlope: 0
@@ -3059,7 +3059,7 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
 --- !u!1 &1523060236
 GameObject:
