@@ -87,7 +87,7 @@ public class BaseCharacter : MonoBehaviour
         }
         if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
         {
-            print("Attack 2");
+            Attack2();
         }
         if (Input.GetButtonDown("Dash") && canDoAnythingElse)
         {
