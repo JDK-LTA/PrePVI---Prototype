@@ -24,6 +24,8 @@ public class RefsManager : Singleton<RefsManager>
     [Header("VFX REFERENCES")]
     [SerializeField] private VisualEffect particleChainGO;
     [SerializeField] private Animator vfx_Attack1ForwardSimpleEffect;
+    [SerializeField] private Animator vfx_Attack2ForwardSimpleEffect;
+    [SerializeField] private Animator vfx_Attack22ForwardSimpleEffect;
 
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
@@ -52,4 +54,6 @@ public class RefsManager : Singleton<RefsManager>
     public List<SingleDoppelTuplas> SingleDoppelTuplas { get => singleDoppelTuplas; set => singleDoppelTuplas = value; }
     public VisualEffect ParticleChainGO { get => particleChainGO; set => particleChainGO = value; }
     public Animator Vfx_Attack1ForwardSimpleEffect { get => vfx_Attack1ForwardSimpleEffect; set => vfx_Attack1ForwardSimpleEffect = value; }
+    public Animator Vfx_Attack2ForwardSimpleEffect { get => vfx_Attack2ForwardSimpleEffect; set => vfx_Attack2ForwardSimpleEffect = value; }
+    public Animator Vfx_Attack22ForwardSimpleEffect { get => vfx_Attack22ForwardSimpleEffect; set => vfx_Attack22ForwardSimpleEffect = value; }
 }

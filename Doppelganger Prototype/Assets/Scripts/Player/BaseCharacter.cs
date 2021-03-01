@@ -189,6 +189,12 @@ public class BaseCharacter : MonoBehaviour
             dashOrPos = transform.position;
         }
     }
+    protected void Attack2()
+    {
+        //canDoAnythingElse = false;
+        animator.SetTrigger("Attack2");
+
+    }
     protected void Attack1()
     {
         //canDoAnythingElse = false;
