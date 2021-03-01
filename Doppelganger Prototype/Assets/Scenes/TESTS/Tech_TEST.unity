@@ -231,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14336960}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 16.643606, z: -12.835125}
+  m_LocalPosition: {x: 0, y: 12.0473385, z: -8.9784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1488167117}
@@ -850,6 +850,9 @@ MonoBehaviour:
   damage: 5
   timeToReachEnd: 0.5
   cooldown1: 0.8
+  damage2: 5
+  timeToReachEnd2: 0.5
+  cooldown2: 0.8
 --- !u!4 &501687468
 Transform:
   m_ObjectHideFlags: 0
@@ -1087,6 +1090,9 @@ MonoBehaviour:
   damage: 5
   timeToReachEnd: 0.5
   cooldown1: 0.8
+  damage2: 5
+  timeToReachEnd2: 0.5
+  cooldown2: 0.8
 --- !u!143 &672073017
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2261,6 +2267,9 @@ MonoBehaviour:
   damage: 5
   timeToReachEnd: 0.5
   cooldown1: 0.8
+  damage2: 5
+  timeToReachEnd2: 0.5
+  cooldown2: 0.8
   pressedBinInputs: 
   releasedBinInputs: 
   pressingTimes: []
@@ -2353,7 +2362,7 @@ Animator:
   m_GameObject: {fileID: 1146881977}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0a178fba8b6734b4eb82e37af1b74ecb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 880ecb49030a34641a7b548af2a5c385, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3507,6 +3516,9 @@ MonoBehaviour:
   damage: 5
   timeToReachEnd: 0.5
   cooldown1: 0.8
+  damage2: 5
+  timeToReachEnd2: 0.5
+  cooldown2: 0.8
   pressedBinInputs: 
   releasedBinInputs: 
   pressingTimes: []
@@ -4236,7 +4248,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34.56296
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4262,7 +4274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726688760}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 16.643606, z: -12.835125}
+  m_LocalPosition: {x: 0, y: 12.0473385, z: -8.9784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4888,6 +4900,14 @@ PrefabInstance:
       propertyPath: vfx_Attack1ForwardSimpleEffect
       value: 
       objectReference: {fileID: 414246430}
+    - target: {fileID: 2086942551230180350, guid: 56f41fd180ffd5048af694e806bd217f, type: 3}
+      propertyPath: vfx_Attack2ForwardSimpleEffect
+      value: 
+      objectReference: {fileID: 1400823067}
+    - target: {fileID: 2086942551230180350, guid: 56f41fd180ffd5048af694e806bd217f, type: 3}
+      propertyPath: vfx_Attack22ForwardSimpleEffect
+      value: 
+      objectReference: {fileID: 1146881979}
     - target: {fileID: 2086942551230180350, guid: 56f41fd180ffd5048af694e806bd217f, type: 3}
       propertyPath: doubleTarget.Array.data[0].radius
       value: 6
