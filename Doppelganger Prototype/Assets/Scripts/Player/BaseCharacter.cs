@@ -38,6 +38,7 @@ public class BaseCharacter : MonoBehaviour
     protected Vector3 velocity;
 
     protected bool grounded;
+    protected bool canJump = true;
 
     protected Vector3 dashMove, dashOrPos;
     protected float dashT = 0f, dashResetT;
@@ -52,6 +53,9 @@ public class BaseCharacter : MonoBehaviour
 
     protected static bool rec = false;
     protected static bool canStartRecording = true;
+
+    public Animator Animator { get => animator; set => animator = value; }
+    public bool Grounded { get => grounded; set => grounded = value; }
 
     #region BASIC MONOBEHAVIOUR METHODS
     protected void Awake()
@@ -124,7 +128,7 @@ public class BaseCharacter : MonoBehaviour
     }
     protected void YMove()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+        //grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
         if (velocity.y < 0)
         {
             if (!grounded && Physics.Raycast(transform.position, Vector3.down, groundCheckForJump))
@@ -175,13 +179,17 @@ public class BaseCharacter : MonoBehaviour
     #region OTHER INPUT ACTIONS
     protected void Jump()
     {
-        if (grounded)
+        if (grounded && canJump)
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);
-
+            canJump = false;
             if (animator)
                 animator.SetTrigger("Jump");
         }
+    }
+    protected void EndJump()
+    {
+        canJump = true;
     }
     protected void Dash()
     {

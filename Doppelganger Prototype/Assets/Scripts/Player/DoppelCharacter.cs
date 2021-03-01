@@ -181,6 +181,7 @@ public class DoppelCharacter : BaseCharacter
         t = 0;
         rec = false;
         RefsManager.I.PlayerCharacter.enabled = true;
+        RefsManager.I.PlayerCharacter.Animator.enabled = true;
         StartPlayback();
         RefsManager.I.ParticleChainGO.gameObject.SetActive(false);
     }

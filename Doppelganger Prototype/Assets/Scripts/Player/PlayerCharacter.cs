@@ -13,6 +13,7 @@ public class PlayerCharacter : BaseCharacter
             CamerasManager.I.ToggleSingleDoppelCams(true);
 
             animator.SetFloat("MoveSpeed", 0);
+            animator.enabled = false;
 
             rec = true;
             enabled = false;
