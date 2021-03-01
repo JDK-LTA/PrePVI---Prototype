@@ -26,6 +26,11 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] protected float timeToReachEnd = 0.5f;
     [SerializeField] protected float cooldown1 = 0.8f;
 
+    [Header("Attack 2")]
+    [SerializeField] protected float damage2 = 5f;
+    [SerializeField] protected float timeToReachEnd2 = 0.5f;
+    [SerializeField] protected float cooldown2 = 0.8f;
+
     protected CharacterController chCont;
     protected Animator animator;
 
@@ -204,6 +209,11 @@ public class BaseCharacter : MonoBehaviour
     protected virtual void StartAttack()
     {
         RefsManager.I.Vfx_Attack1ForwardSimpleEffect.SetTrigger("Trail");
+    }
+    protected virtual void StartAttack2()
+    {
+        RefsManager.I.Vfx_Attack2ForwardSimpleEffect.SetTrigger("Trail");
+        RefsManager.I.Vfx_Attack22ForwardSimpleEffect.SetTrigger("Trail");
     }
     #endregion
     #region TRIGGERS
