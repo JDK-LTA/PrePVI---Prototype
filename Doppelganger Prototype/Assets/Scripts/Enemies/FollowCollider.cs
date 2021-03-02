@@ -5,10 +5,7 @@ using UnityEngine;
 public class FollowCollider : MonoBehaviour
 {
   [SerializeField]  EnemyCactus cactus;
-    private void Awake()
-    {
-        //cactus = GetComponentInParent<EnemyCactus>();
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerCharacter>())

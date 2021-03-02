@@ -60,6 +60,15 @@ public class DoppelCharacter : BaseCharacter
             base.XZMove(playXzInput);
         }
     }
+    protected override void StartAttack()
+    {
+        RefsManager.I.Vfx_Attack1ForwardDoppel.SetTrigger("Trail");
+    }
+    protected override void StartAttack2()
+    {
+        RefsManager.I.Vfx_Attack2ForwardDoppel.SetTrigger("Trail");
+        RefsManager.I.Vfx_Attack22ForwardDoppel.SetTrigger("Trail");
+    }
     #endregion
     #region REC AND PLAY
     public void StartRecording()

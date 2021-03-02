@@ -244,73 +244,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Cactus_Fix 1(Clone)
+    - name: Cactus_Fix_V2(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Pinchos
-      parentName: Cactus_Fix 1(Clone)
+      parentName: Cactus_Fix_V2(Clone)
       position: {x: 0.00005624809, y: 0.032946028, z: 0.00057680433}
       rotation: {x: -0.7070904, y: -0.004815304, z: 0.004815304, w: 0.7070904}
       scale: {x: 5.4889116, y: 3.9134974, z: 5.4889116}
-    - name: polySurface1
-      parentName: Pinchos
-      position: {x: -0.0052383756, y: 0.0001535858, z: 0.0045260335}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface2
-      parentName: Pinchos
-      position: {x: -0.00801843, y: 0.00015358502, z: 0.004317151}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface3
-      parentName: Pinchos
-      position: {x: -0.009674317, y: 0.00015358471, z: 0.0022119589}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface4
-      parentName: Pinchos
-      position: {x: -0.0079351105, y: 0.00015358484, z: 0.000301474}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface5
-      parentName: Pinchos
-      position: {x: -0.0024444566, y: 0.00015357994, z: 0.004782946}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface6
-      parentName: Pinchos
-      position: {x: 0.0025100608, y: 0.0001535799, z: 0.0046205404}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface7
-      parentName: Pinchos
-      position: {x: 0.0052558323, y: 0.0001535859, z: 0.0043830965}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface8
-      parentName: Pinchos
-      position: {x: 0.008009829, y: 0.00015358531, z: 0.004035766}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface9
-      parentName: Pinchos
-      position: {x: 0.009654697, y: 0.00015358524, z: 0.0019662}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface10
-      parentName: Pinchos
-      position: {x: 0.007911777, y: 0.0001535851, z: 0.00008562729}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface11
-      parentName: Pinchos
-      position: {x: 0.000040390016, y: 3.8146972e-10, z: -0.000000006866455}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: Character2_Reference
-      parentName: Cactus_Fix 1(Clone)
+      parentName: Cactus_Fix_V2(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -415,7 +360,7 @@ ModelImporter:
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Character2_Ctrl_Reference
-      parentName: Cactus_Fix 1(Clone)
+      parentName: Cactus_Fix_V2(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -447,12 +392,12 @@ ModelImporter:
     - name: Character2_Ctrl_LeftKneeEffector
       parentName: Character2_Ctrl_Reference
       position: {x: -0.007852246, y: 0.012896754, z: 0.0000061642477}
-      rotation: {x: 0.00028595838, y: 0.0000023102873, z: -0.000000021443931, w: 1}
+      rotation: {x: 0.00028595835, y: 0.0000023102873, z: -0.00000002144393, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Character2_Ctrl_RightKneeEffector
       parentName: Character2_Ctrl_Reference
       position: {x: 0.007852231, y: 0.012896754, z: 0.0000063219127}
-      rotation: {x: 0.00027945984, y: -0.0000023680398, z: -0.00000013396611, w: 1}
+      rotation: {x: 0.0002794598, y: -0.0000023680395, z: -0.00000013396611, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Character2_Ctrl_LeftElbowEffector
       parentName: Character2_Ctrl_Reference
@@ -492,12 +437,12 @@ ModelImporter:
     - name: Character2_Ctrl_LeftHipEffector
       parentName: Character2_Ctrl_Reference
       position: {x: -0.007352245, y: 0.02474472, z: -8.106231e-10}
-      rotation: {x: -0.00025889667, y: 0.0000056798176, z: -0.00000011920932, w: 1}
+      rotation: {x: -0.00025889667, y: 0.0000056798167, z: -0.00000011920932, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Character2_Ctrl_RightHipEffector
       parentName: Character2_Ctrl_Reference
       position: {x: 0.0073522343, y: 0.02474472, z: -8.106231e-10}
-      rotation: {x: -0.00025111923, y: -0.000005192357, z: 0.00000023841864, w: 1}
+      rotation: {x: -0.0002511192, y: -0.000005192356, z: 0.0000002384186, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Character2_Ctrl_Hips
       parentName: Character2_Ctrl_Reference
@@ -611,7 +556,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c2566bccb179de64a9e6f0b610be6534, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 3127781f77757bd4b8f3cd2d2236cda5, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

@@ -26,7 +26,9 @@ public class RefsManager : Singleton<RefsManager>
     [SerializeField] private Animator vfx_Attack1ForwardSimpleEffect;
     [SerializeField] private Animator vfx_Attack2ForwardSimpleEffect;
     [SerializeField] private Animator vfx_Attack22ForwardSimpleEffect;
-
+    [SerializeField] private Animator vfx_Attack1ForwardDoppel;
+    [SerializeField] private Animator vfx_Attack2ForwardDoppel;
+    [SerializeField] private Animator vfx_Attack22ForwardDoppel;
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
     [SerializeField] private List<CinemachineVirtualCamera> levelVirtualCameras = new List<CinemachineVirtualCamera>();
@@ -56,4 +58,7 @@ public class RefsManager : Singleton<RefsManager>
     public Animator Vfx_Attack1ForwardSimpleEffect { get => vfx_Attack1ForwardSimpleEffect; set => vfx_Attack1ForwardSimpleEffect = value; }
     public Animator Vfx_Attack2ForwardSimpleEffect { get => vfx_Attack2ForwardSimpleEffect; set => vfx_Attack2ForwardSimpleEffect = value; }
     public Animator Vfx_Attack22ForwardSimpleEffect { get => vfx_Attack22ForwardSimpleEffect; set => vfx_Attack22ForwardSimpleEffect = value; }
+    public Animator Vfx_Attack1ForwardDoppel { get => vfx_Attack1ForwardDoppel; set => vfx_Attack1ForwardDoppel = value; }
+    public Animator Vfx_Attack2ForwardDoppel { get => vfx_Attack2ForwardDoppel; set => vfx_Attack2ForwardDoppel = value; }
+    public Animator Vfx_Attack22ForwardDoppel { get => vfx_Attack22ForwardDoppel; set => vfx_Attack22ForwardDoppel = value; }
 }

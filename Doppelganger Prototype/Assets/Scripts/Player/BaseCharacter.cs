@@ -215,13 +215,13 @@ public class BaseCharacter : MonoBehaviour
     }
     protected void Attack2()
     {
-        //canDoAnythingElse = false;
+        canDoAnythingElse = false;
         animator.SetTrigger("Attack2");
 
     }
     protected void Attack1()
     {
-        //canDoAnythingElse = false;
+        canDoAnythingElse = false;
         animator.SetTrigger("Attack1");
 
     }
@@ -233,6 +233,10 @@ public class BaseCharacter : MonoBehaviour
     {
         RefsManager.I.Vfx_Attack2ForwardSimpleEffect.SetTrigger("Trail");
         RefsManager.I.Vfx_Attack22ForwardSimpleEffect.SetTrigger("Trail");
+    }
+    protected virtual void ResetActions()
+    {
+        canDoAnythingElse = true;
     }
     #endregion
     #region TRIGGERS
