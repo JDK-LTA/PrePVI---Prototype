@@ -13,10 +13,13 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float cooldownToAttack;
 
     protected bool canAttack = true;
+    protected bool readyToAttack = false;
     protected float attT = 0;
     protected Transform target;
     protected bool doppelInRange = false;
     protected bool playerInRange = false;
+
+    protected Animator animator;
 
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
     public bool DoppelInRange { get => doppelInRange; set => doppelInRange = value; }
@@ -24,6 +27,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Start()
     {
         target = RefsManager.I.PlayerCharacter.transform;
+        animator = GetComponent<Animator>();
     }
     protected virtual void Attack() { }
 

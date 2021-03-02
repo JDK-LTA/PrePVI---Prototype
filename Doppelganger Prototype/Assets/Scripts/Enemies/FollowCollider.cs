@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class FollowCollider : MonoBehaviour
 {
-    EnemyCactus cactus;
+  [SerializeField]  EnemyCactus cactus;
     private void Awake()
     {
-        cactus = GetComponentInParent<EnemyCactus>();
+        //cactus = GetComponentInParent<EnemyCactus>();
     }
     private void OnTriggerEnter(Collider other)
     {
