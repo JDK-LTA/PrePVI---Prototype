@@ -198,7 +198,18 @@ public class BaseCharacter : MonoBehaviour
             canDash = false;
             dashReset = true;
             dashingNow = true;
-            dashMove = transform.position + transform.forward * dashLenght;
+
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, dashLenght))
+            {
+                if (Vector3.Distance(hitInfo.point, transform.position) < Vector3.Distance(hitInfo.point, transform.position + transform.forward * .5f))
+                    dashMove = transform.position;
+                else
+                    dashMove = hitInfo.point - transform.forward * 0.5f;
+            }
+            else
+                dashMove = transform.position + transform.forward * dashLenght;
+
             dashOrPos = transform.position;
         }
     }
