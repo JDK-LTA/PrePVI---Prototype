@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Toon_Player_2 1
+  m_Name: Toon_Player_4
   m_Shader: {fileID: 4800000, guid: a185986badd8cfe4da0f5f6f5872cd2f, type: 3}
   m_ShaderKeywords: _USEOCCLUSION_ON _UseAlphaClipping
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 53cafe0329578e34d9e20f8a10141202, type: 3}
+        m_Texture: {fileID: 2800000, guid: 22de52882e958d547b29370b9731e68d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineZOffsetMaskTex:
-        m_Texture: {fileID: 2800000, guid: 54a471d66baf4684f8cb834249bf42b1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -80,19 +80,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AdditionalLightIgnoreCelShade: 0.01
+    - _AdditionalLightIgnoreCelShade: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _CelShadeMidPoint: 0.266
-    - _CelShadeSoftness: 0.24
+    - _CelShadeMidPoint: 0.279
+    - _CelShadeSoftness: 0.103
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
-    - _Cutoff: 0.732
+    - _Cutoff: 0.708
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DirectLightMultiplier: 0.959
+    - _DirectLightMultiplier: 1
     - _DstBlend: 0
     - _EmissionMulByBaseColor: 0.736
     - _EnvironmentReflections: 1
@@ -100,20 +100,20 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _IndirectLightMultiplier: 1
-    - _MainLightIgnoreCelShade: 0
+    - _MainLightIgnoreCelShade: 0.127
     - _Metallic: 0
-    - _OcclusionDirectStrength: 0
-    - _OcclusionIndirectStrength: 0.61
+    - _OcclusionDirectStrength: 0.234
+    - _OcclusionIndirectStrength: 1
     - _OcclusionRemapEnd: 1
-    - _OcclusionRemapStart: 0.247
+    - _OcclusionRemapStart: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 3.93
+    - _OutlineWidth: 0.69
     - _OutlineZOffset: 0
     - _OutlineZOffsetMaskRemapEnd: 1
     - _OutlineZOffsetMaskRemapStart: 0
     - _Parallax: 0.005
     - _QueueOffset: 0
-    - _ReceiveShadowMappingAmount: 0.704
+    - _ReceiveShadowMappingAmount: 0.507
     - _ReceiveShadowMappingPosOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -127,13 +127,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.9810679, b: 0.9481132, a: 1}
+    - _BaseColor: {r: 1.5157166, g: 1.5157166, b: 1.5157166, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.04657265, g: 0.11320752, b: 0.000533999, a: 1}
+    - _EmissionColor: {r: 0.04438101, g: 0.04438101, b: 0.04438101, a: 1}
     - _EmissionMapChannelMask: {r: 1, g: 1, b: 1, a: 0}
     - _IndirectLightMinColor: {r: 0, g: 0, b: 0, a: 1}
     - _OcclusionMapChannelMask: {r: 1, g: 0, b: 0, a: 0}
-    - _OutlineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _OutlineColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3105130810902230969
