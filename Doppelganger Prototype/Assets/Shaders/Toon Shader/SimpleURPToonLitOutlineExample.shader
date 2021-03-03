@@ -1,4 +1,3 @@
-// For more information, visit -> https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample
 
 /*
 This shader is a simple example showing you how to write your first URP custom lit shader with "minimum" shader code.

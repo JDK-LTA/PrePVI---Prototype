@@ -1,6 +1,3 @@
-// https://github.com/ronja-tutorials/ShaderTutorials/blob/master/Assets/047_InverseInterpolationAndRemap/Interpolation.cginc
-// edit float to half for optimization, because we usually use this to process color data(half)
-
 #ifndef Include_NiloInvLerpRemap
 #define Include_NiloInvLerpRemap
 

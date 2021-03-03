@@ -1,4 +1,3 @@
-// For more information, visit -> https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample
 
 #ifndef Include_NiloZOffset
 #define Include_NiloZOffset

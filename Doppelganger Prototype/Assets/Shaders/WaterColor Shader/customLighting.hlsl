@@ -47,4 +47,4 @@ void MainLightShadows_float (float3 WorldPos, out float3 Direction, out float3 C
 #endif
 }
 
-#endif // CUSTOM_LIGHTING_INCLUDED
+#endif 

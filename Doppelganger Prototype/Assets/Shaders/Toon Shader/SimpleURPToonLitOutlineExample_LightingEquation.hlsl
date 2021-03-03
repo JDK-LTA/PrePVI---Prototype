@@ -1,4 +1,4 @@
-// For more information, visit -> https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample
+
 
 // This file is intented for you to edit and experiment with different lighting equation.
 // Add or edit whatever code you want here

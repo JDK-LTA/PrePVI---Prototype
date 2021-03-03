@@ -1,4 +1,3 @@
-// For more information, visit -> https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample
 
 // #ifndef XXX + #define XXX + #endif is a safe guard best practice in almost every .hlsl, 
 // doing this can make sure your .hlsl's user can include this .hlsl anywhere anytime without producing any multi include conflict
