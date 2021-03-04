@@ -32,6 +32,7 @@ public class RefsManager : Singleton<RefsManager>
     [SerializeField] private VisualEffect vfx_Attack1ParticlesUp;
     [SerializeField] private VisualEffect vfx_Attack2ParticlesUp;
     [SerializeField] private VisualEffect vfx_Attack22ParticlesUp;
+    [SerializeField] private VisualEffect[] vfx_HoloParticles;
 
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
@@ -68,4 +69,5 @@ public class RefsManager : Singleton<RefsManager>
     public VisualEffect Vfx_Attack1ParticlesUp { get => vfx_Attack1ParticlesUp; set => vfx_Attack1ParticlesUp = value; }
     public VisualEffect Vfx_Attack2ParticlesUp { get => vfx_Attack2ParticlesUp; set => vfx_Attack2ParticlesUp = value; }
     public VisualEffect Vfx_Attack22ParticlesUp { get => vfx_Attack22ParticlesUp; set => vfx_Attack22ParticlesUp = value; }
+    public VisualEffect[] Vfx_HoloParticles { get => vfx_HoloParticles; set => vfx_HoloParticles = value; }
 }
