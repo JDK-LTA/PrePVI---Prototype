@@ -81,9 +81,13 @@ public class BaseCharacter : MonoBehaviour
     protected void BinInputs()
     {
         //PRESSES
-        if (Input.GetButtonDown("Attack1") && canDoAnythingElse)
+        if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity == Vector3.zero)
         {
             Attack1();
+        }
+        else if(Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity.magnitude > 0.1f)
+        {
+            Attack1OnMove();
         }
         if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
         {
@@ -219,13 +223,20 @@ public class BaseCharacter : MonoBehaviour
         animator.SetTrigger("Attack2");
 
     }
+
     protected void Attack1()
     {
         canDoAnythingElse = false;
         animator.SetTrigger("Attack1");
 
     }
-    
+
+    protected void Attack1OnMove()
+    {
+        //canDoAnythingElse = false;
+        animator.SetTrigger("Attack1OnMove");
+    }
+
     protected virtual void ResetActions()
     {
         canDoAnythingElse = true;
