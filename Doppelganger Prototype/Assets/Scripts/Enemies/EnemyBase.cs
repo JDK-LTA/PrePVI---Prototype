@@ -26,6 +26,9 @@ public class EnemyBase : MonoBehaviour
 
     protected Animator animator;
 
+    protected float anticT = 0f;
+    protected bool anticipating = false;
+
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
     public bool DoppelInRange { get => doppelInRange; set => doppelInRange = value; }
 
@@ -45,6 +48,19 @@ public class EnemyBase : MonoBehaviour
         if (doppelInRange)
         {
             target = RefsManager.I.DoppelCharacter.transform;
+        }
+    }
+    protected virtual void AttackAnticipation()
+    {
+        if (anticipating)
+        {
+            anticT += Time.deltaTime;
+            if (anticT >= attackAnticipationTime)
+            {
+                animator.SetTrigger("FinishAttack");
+                anticT = 0;
+                anticipating = false;
+            }
         }
     }
 }

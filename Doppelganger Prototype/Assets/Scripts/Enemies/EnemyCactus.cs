@@ -10,8 +10,7 @@ public class EnemyCactus : EnemyBase
 
     private float animSpeed = 0;
 
-    private float anticT = 0f;
-    private bool anticipating = false;
+
 
     private bool followTarget = false, canMove = true;
     private Vector3 initialPos = Vector3.zero, initialRot;
@@ -93,19 +92,7 @@ public class EnemyCactus : EnemyBase
         }
     }
 
-    private void AttackAnticipation()
-    {
-        if (anticipating)
-        {
-            anticT += Time.deltaTime;
-            if (anticT >= attackAnticipationTime)
-            {
-                animator.SetTrigger("FinishAttack");
-                anticT = 0;
-                anticipating = false;
-            }
-        }
-    }
+
 
     public override void UpdateTarget()
     {
