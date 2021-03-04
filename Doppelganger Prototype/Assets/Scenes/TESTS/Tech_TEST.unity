@@ -231,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14336960}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 12.0473385, z: -8.9784}
+  m_LocalPosition: {x: 0, y: 16.643606, z: -12.835125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1488167117}
@@ -1096,12 +1096,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 29e9cebaa8d702b4f967a48b6954bbe8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed03b98426f4f25449a79e1777d97d6a, type: 3}
---- !u!1 &666995319
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &672073014 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 72c457bcace8d6c45b414500b36b2f3b, type: 3}
@@ -1904,6 +1898,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1ab66082592264d8a203efc9ffda6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!2083052967 &881465436 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 567122231432243909, guid: 2a2eb3b2061b69340b3ebf618a6d042d, type: 3}
+  m_PrefabInstance: {fileID: 7034831066828776900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &931112083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5983562811619113771, guid: 6d1a6099fabb4a84aa2fa8ae9f2c0232, type: 3}
@@ -4836,7 +4835,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 34.56296
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4862,7 +4861,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726688760}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 12.0473385, z: -8.9784}
+  m_LocalPosition: {x: 0, y: 16.643606, z: -12.835125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5744,7 +5743,7 @@ PrefabInstance:
     - target: {fileID: 2086942551230180350, guid: 56f41fd180ffd5048af694e806bd217f, type: 3}
       propertyPath: vfx_Attack2ParticlesUp
       value: 
-      objectReference: {fileID: 616097614}
+      objectReference: {fileID: 881465436}
     - target: {fileID: 2086942551230180350, guid: 56f41fd180ffd5048af694e806bd217f, type: 3}
       propertyPath: doubleTarget.Array.size
       value: 2
