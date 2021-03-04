@@ -5,11 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyCactus : EnemyBase
 {
-    [SerializeField] private float radiusToStartAttack = 1.2f;
-    [SerializeField] private float radiusToKeepAttacking = 1.6f;
-    [SerializeField] private float slowRadius = 3f;
-    [SerializeField] private float distanceToBack = 15f;
-    [SerializeField] protected float attackAnticipationTime = 0.8f;
+    [Header("ANIMATION SETTINGS")]
+    [SerializeField] protected float interpolationSpeed = 3f;
+
+    private float animSpeed = 0;
 
     private float anticT = 0f;
     private bool anticipating = false;
@@ -33,8 +32,33 @@ public class EnemyCactus : EnemyBase
         base.Start();
         initialPos = transform.position;
         initialRot = transform.rotation.eulerAngles;
+        agent.speed = speed;
     }
     private void Update()
+    {
+        FollowAndAttack();
+        AttackAnticipation();
+        MoveAnimBlend();
+
+        if (!canAttack)
+        {
+            attT += Time.deltaTime;
+            if (attT >= cooldownToAttack)
+            {
+                attT = 0;
+                canAttack = true;
+            }
+        }
+    }
+
+    private void MoveAnimBlend()
+    {
+        float agentSpeed = agent.velocity.magnitude;
+        animSpeed = Mathf.MoveTowards(animSpeed, agentSpeed, interpolationSpeed * Time.deltaTime);
+        animator.SetFloat("Blend", animSpeed);
+    }
+
+    private void FollowAndAttack()
     {
         if (followTarget)
         {
@@ -45,11 +69,13 @@ public class EnemyCactus : EnemyBase
             }
             else
             {
-                if (!readyToAttack)
+                if (!readyToAttack && canAttack)
                 {
                     readyToAttack = true;
                     canMove = false;
                     agent.isStopped = true;
+                    anticipating = true;
+                    canAttack = false;
                     animator.SetTrigger("Attack");
                 }
             }
@@ -65,13 +91,18 @@ public class EnemyCactus : EnemyBase
                 transform.eulerAngles = initialRot;
             }
         }
+    }
 
+    private void AttackAnticipation()
+    {
         if (anticipating)
         {
             anticT += Time.deltaTime;
             if (anticT >= attackAnticipationTime)
             {
                 animator.SetTrigger("FinishAttack");
+                anticT = 0;
+                anticipating = false;
             }
         }
     }

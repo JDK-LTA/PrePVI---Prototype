@@ -26,6 +26,13 @@ public class RefsManager : Singleton<RefsManager>
     [SerializeField] private Animator vfx_Attack1ForwardSimpleEffect;
     [SerializeField] private Animator vfx_Attack2ForwardSimpleEffect;
     [SerializeField] private Animator vfx_Attack22ForwardSimpleEffect;
+    [SerializeField] private Animator vfx_Attack1ForwardDoppel;
+    [SerializeField] private Animator vfx_Attack2ForwardDoppel;
+    [SerializeField] private Animator vfx_Attack22ForwardDoppel;
+    [SerializeField] private VisualEffect vfx_Attack1ParticlesUp;
+    [SerializeField] private VisualEffect vfx_Attack2ParticlesUp;
+    [SerializeField] private VisualEffect vfx_Attack22ParticlesUp;
+    [SerializeField] private VisualEffect[] vfx_HoloParticles;
 
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
@@ -56,4 +63,11 @@ public class RefsManager : Singleton<RefsManager>
     public Animator Vfx_Attack1ForwardSimpleEffect { get => vfx_Attack1ForwardSimpleEffect; set => vfx_Attack1ForwardSimpleEffect = value; }
     public Animator Vfx_Attack2ForwardSimpleEffect { get => vfx_Attack2ForwardSimpleEffect; set => vfx_Attack2ForwardSimpleEffect = value; }
     public Animator Vfx_Attack22ForwardSimpleEffect { get => vfx_Attack22ForwardSimpleEffect; set => vfx_Attack22ForwardSimpleEffect = value; }
+    public Animator Vfx_Attack1ForwardDoppel { get => vfx_Attack1ForwardDoppel; set => vfx_Attack1ForwardDoppel = value; }
+    public Animator Vfx_Attack2ForwardDoppel { get => vfx_Attack2ForwardDoppel; set => vfx_Attack2ForwardDoppel = value; }
+    public Animator Vfx_Attack22ForwardDoppel { get => vfx_Attack22ForwardDoppel; set => vfx_Attack22ForwardDoppel = value; }
+    public VisualEffect Vfx_Attack1ParticlesUp { get => vfx_Attack1ParticlesUp; set => vfx_Attack1ParticlesUp = value; }
+    public VisualEffect Vfx_Attack2ParticlesUp { get => vfx_Attack2ParticlesUp; set => vfx_Attack2ParticlesUp = value; }
+    public VisualEffect Vfx_Attack22ParticlesUp { get => vfx_Attack22ParticlesUp; set => vfx_Attack22ParticlesUp = value; }
+    public VisualEffect[] Vfx_HoloParticles { get => vfx_HoloParticles; set => vfx_HoloParticles = value; }
 }

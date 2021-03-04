@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
+    [Header("HEALTH")]
     [SerializeField] protected float health;
     [SerializeField] protected bool canRegenerate = false;
     [SerializeField] protected float regenerationRate;
-    [SerializeField] protected float timeIdleToStartRegen = 4f;    
+    [SerializeField] protected float timeIdleToStartRegen = 4f;
+    [Header("BASE MOVEMENT")]
     [SerializeField] protected float speed;
+    [Header("BASE ATTACKING")]
     [SerializeField] protected float baseDamage;
     [SerializeField] protected float cooldownToAttack;
+    [SerializeField] protected float radiusToStartAttack = 1.2f;
+    [SerializeField] protected float attackAnticipationTime = 0.8f;
 
     protected bool canAttack = true;
     protected bool readyToAttack = false;

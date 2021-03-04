@@ -20,6 +20,12 @@ public class PlayerCharacter : BaseCharacter
 
             RefsManager.I.ParticleChainGO.gameObject.SetActive(true);
             RefsManager.I.ParticleChainGO.playRate = 2;
+
+            //VFX Hologram Activate call
+            for(int i=0;i< RefsManager.I.Vfx_HoloParticles.Length; i++)
+            {
+                RefsManager.I.Vfx_HoloParticles[i].enabled = true;
+            }
         }
 
         if (!rec)
@@ -32,6 +38,11 @@ public class PlayerCharacter : BaseCharacter
         if (!rec)
         {
             ContinousInput();
+            //VFX Hologram Deactivate call
+            for (int i = 0; i < RefsManager.I.Vfx_HoloParticles.Length; i++)
+            {
+                RefsManager.I.Vfx_HoloParticles[i].enabled = false;
+            }
         }
     }
 }
