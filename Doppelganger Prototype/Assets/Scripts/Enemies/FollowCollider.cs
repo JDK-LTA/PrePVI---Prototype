@@ -14,7 +14,7 @@ public class FollowCollider : MonoBehaviour
             cactus.PlayerInRange = true;
             cactus.UpdateTarget();
         }
-        else if (other.GetComponent<DoppelCharacter>())
+        else if (other.GetComponent<DoppelCharacter>() && other.GetComponent<DoppelCharacter>().IsFree)
         {
             cactus.FollowTarget = true;
             cactus.DoppelInRange = true;

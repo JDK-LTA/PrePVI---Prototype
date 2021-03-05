@@ -7,10 +7,9 @@ public class EnemyCactus : EnemyBase
 {
     [Header("ANIMATION SETTINGS")]
     [SerializeField] protected float interpolationSpeed = 3f;
+    [SerializeField] protected float radiusToCheckHome = 0.5f;
 
     private float animSpeed = 0;
-
-
 
     private bool followTarget = false, canMove = true;
     private Vector3 initialPos = Vector3.zero, initialRot;
@@ -33,8 +32,10 @@ public class EnemyCactus : EnemyBase
         initialRot = transform.rotation.eulerAngles;
         agent.speed = speed;
     }
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         FollowAndAttack();
         AttackAnticipation();
         MoveAnimBlend();
@@ -61,6 +62,7 @@ public class EnemyCactus : EnemyBase
     {
         if (followTarget)
         {
+            if (isIdle){ isIdle = false; }
             if (canMove && Vector3.Distance(transform.position, target.position) > radiusToStartAttack)
             {
                 agent.isStopped = !canMove;
@@ -82,12 +84,14 @@ public class EnemyCactus : EnemyBase
         }
         else
         {
-            if (Vector3.Distance(transform.position, initialPos) > radiusToStartAttack)
+            if (agent.isStopped && !readyToAttack) agent.isStopped = false;
+            if (Vector3.Distance(transform.position, initialPos) > radiusToCheckHome)
                 agent.SetDestination(initialPos);
             else
             {
                 transform.position = initialPos;
                 transform.eulerAngles = initialRot;
+                isIdle = true;
             }
         }
     }

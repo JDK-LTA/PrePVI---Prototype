@@ -17,6 +17,10 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float radiusToStartAttack = 1.2f;
     [SerializeField] protected float attackAnticipationTime = 0.8f;
 
+    protected float currentHp;
+    protected bool isIdle = false;
+    protected float regenT = 0;
+
     protected bool canAttack = true;
     protected bool readyToAttack = false;
     protected float attT = 0;
@@ -31,11 +35,21 @@ public class EnemyBase : MonoBehaviour
 
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
     public bool DoppelInRange { get => doppelInRange; set => doppelInRange = value; }
+    public bool CanAttack { get => canAttack; }
+    public Transform Target { get => target; set => target = value; }
 
     protected virtual void Start()
     {
         target = RefsManager.I.PlayerCharacter.transform;
         animator = GetComponent<Animator>();
+        currentHp = health;
+    }
+    protected virtual void Update()
+    {
+        if (canRegenerate)
+        {
+            RegenTimer();
+        }
     }
     protected virtual void Attack() { }
 
@@ -60,6 +74,36 @@ public class EnemyBase : MonoBehaviour
                 animator.SetTrigger("FinishAttack");
                 anticT = 0;
                 anticipating = false;
+            }
+        }
+    }
+    public virtual void ReceiveDamage(float amount)
+    {
+        currentHp -= amount;
+        UpdateHpUI();
+
+        if (currentHp <= 0)
+        {
+            Die();
+        }
+    }
+    protected virtual void Die()
+    {
+
+    }
+    protected virtual void UpdateHpUI()
+    {
+
+    }
+    protected virtual void RegenTimer()
+    {
+        if (isIdle)
+        {
+            if (regenT < timeIdleToStartRegen)
+                regenT += Time.deltaTime;
+            else
+            {
+                health += regenerationRate * Time.deltaTime;
             }
         }
     }

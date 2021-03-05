@@ -12,8 +12,10 @@ public class EnemyCarnivore : EnemyBase
     private bool isDug = false;
     private float dugT = 0;
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         AttackAnticipation();
         DigOutTimer();
     }
@@ -21,10 +23,18 @@ public class EnemyCarnivore : EnemyBase
     protected override void Attack()
     {
         transform.LookAt(target);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        Physics.SyncTransforms();
+
         animator.SetTrigger("Attack");
         anticipating = true;
+        canAttack = false;
     }
+    public void PublicAttack()
+    {
+        Attack();
+    }
+
 
     private void DigOutTimer()
     {
@@ -41,6 +51,9 @@ public class EnemyCarnivore : EnemyBase
     }
 
     //Call on Animation Event
+    private void Dig() { isDug = true; }
+    private void CanAttackAgain() { canAttack = true; }
+    //__________________________
     private void ChangePlace()
     {
         Vector3 spawnPos;
@@ -49,7 +62,8 @@ public class EnemyCarnivore : EnemyBase
         {
             Vector2 ran = Random.insideUnitCircle;
             spawnPos = centerOfSpawnCircle + new Vector3(ran.x, 0, ran.y) * Random.Range(0f, radiusOfSpawnCircle);
-            canSpawn = Physics.OverlapSphere(spawnPos + Vector3.up, 0).Length == 0;
+            canSpawn = Physics.OverlapSphere(spawnPos + Vector3.up, 1).Length == 0;
+            //spawnPos.y = transform.position.y;
         } while (Vector3.Distance(target.position, spawnPos) < minDistanceFromPlayerToSpawn && !canSpawn);
 
         transform.position = spawnPos;

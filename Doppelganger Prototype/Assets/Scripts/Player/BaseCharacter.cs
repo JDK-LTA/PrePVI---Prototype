@@ -183,7 +183,7 @@ public class BaseCharacter : MonoBehaviour
     #region OTHER INPUT ACTIONS
     protected void Jump()
     {
-        if (grounded && canJump)
+        if (/*grounded && */canJump)
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);
             canJump = false;
