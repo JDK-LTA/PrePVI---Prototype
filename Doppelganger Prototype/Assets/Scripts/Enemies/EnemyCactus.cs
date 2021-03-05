@@ -8,6 +8,10 @@ public class EnemyCactus : EnemyBase
     [Header("ANIMATION SETTINGS")]
     [SerializeField] protected float interpolationSpeed = 3f;
 
+    [Header("Enemy Stats")]
+    [SerializeField] protected float currentEnemyLife = 100.0f;
+    [SerializeField] protected float maxEnemyLife = 100.0f;
+
     private float animSpeed = 0;
 
 
@@ -124,5 +128,27 @@ public class EnemyCactus : EnemyBase
         attackTrigger2.enabled = true;
     }
 
+    public void ApplyDamage(float damage)
+    {
+        currentEnemyLife -= damage;
 
+        if (currentEnemyLife <= 0)
+        {
+            currentEnemyLife = 0;
+            UpdateHealthBar();
+            OnEnemyDead();
+        }
+
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        RefsManager.I.Enemy_LifeBar.fillAmount = currentEnemyLife / maxEnemyLife;
+    }
+
+    private void OnEnemyDead()
+    {
+        //Kill Enemy or recycle
+    }
 }

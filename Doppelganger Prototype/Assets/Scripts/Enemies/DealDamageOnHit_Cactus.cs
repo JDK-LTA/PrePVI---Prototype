@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DealDamageOnHit:MonoBehaviour
+public class DealDamageOnHit_Cactus:MonoBehaviour
 {
     [SerializeField] private float enemyDamage=5.0f;
 
