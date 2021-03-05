@@ -7,8 +7,12 @@ public class PlayerCharacter : BaseCharacter
     [Header("Player Stats")]
     [SerializeField] private float currentLife = 100.0f;
     [SerializeField] private float maxLife = 100.0f;
+    [SerializeField] private float timeKnockbacking = 0.4f;
+    [SerializeField] private float knockbackDistance = 0.5f;
 
-    
+    private bool knockbacking = false;
+    private float kbT = 0;
+    private Vector3 kbOrPos, kbMove;
 
     protected override void Update()
     {
@@ -37,6 +41,8 @@ public class PlayerCharacter : BaseCharacter
         if (!rec)
             BinInputs();
 
+        
+
         base.Update();
     }
     
@@ -53,7 +59,31 @@ public class PlayerCharacter : BaseCharacter
 
         UpdateHealthBar();
     }
+    private void Knockback()
+    {
+        if (knockbacking)
+        {
+            kbT += Time.deltaTime;
 
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, -transform.forward, out hitInfo, dashLenght))
+            {
+                if (Vector3.Distance(hitInfo.point, transform.position) < Vector3.Distance(hitInfo.point, transform.position + transform.forward * .5f))
+                    kbMove = transform.position;
+                else
+                    kbMove = hitInfo.point - transform.forward * 0.5f;
+            }
+            else
+                dashMove = transform.position + transform.forward * dashLenght;
+
+            dashOrPos = transform.position;
+
+            if (kbT >= timeKnockbacking)
+            {
+                kbT = 0;
+            }
+        }
+    }
     private void UpdateHealthBar()
     {
         RefsManager.I.Player_LifeBar.fillAmount = currentLife / maxLife;

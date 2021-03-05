@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [Header("HEALTH")]
-    [SerializeField] protected float health;
+    [SerializeField] protected float currentEnemyLife = 100.0f;
+    [SerializeField] protected float maxEnemyLife = 100.0f;
     [SerializeField] protected bool canRegenerate = false;
     [SerializeField] protected float regenerationRate;
     [SerializeField] protected float timeIdleToStartRegen = 4f;
@@ -17,7 +18,6 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float radiusToStartAttack = 1.2f;
     [SerializeField] protected float attackAnticipationTime = 0.8f;
 
-    protected float currentHp;
     protected bool isIdle = false;
     protected float regenT = 0;
 
@@ -42,7 +42,6 @@ public class EnemyBase : MonoBehaviour
     {
         target = RefsManager.I.PlayerCharacter.transform;
         animator = GetComponent<Animator>();
-        currentHp = health;
     }
     protected virtual void Update()
     {
@@ -77,34 +76,43 @@ public class EnemyBase : MonoBehaviour
             }
         }
     }
-    public virtual void ReceiveDamage(float amount)
-    {
-        currentHp -= amount;
-        UpdateHpUI();
 
-        if (currentHp <= 0)
-        {
-            Die();
-        }
-    }
-    protected virtual void Die()
-    {
-
-    }
-    protected virtual void UpdateHpUI()
-    {
-
-    }
     protected virtual void RegenTimer()
     {
         if (isIdle)
         {
             if (regenT < timeIdleToStartRegen)
                 regenT += Time.deltaTime;
-            else
+            else if(currentEnemyLife < maxEnemyLife)
             {
-                health += regenerationRate * Time.deltaTime;
+                currentEnemyLife += regenerationRate * Time.deltaTime;
+                if (currentEnemyLife > maxEnemyLife)
+                {
+                    currentEnemyLife = maxEnemyLife;
+                }
             }
         }
+    }
+    public void ApplyDamage(float damage)
+    {
+        currentEnemyLife -= damage;
+        currentEnemyLife = Mathf.Clamp(currentEnemyLife, 0, maxEnemyLife);
+        UpdateHealthBar();
+
+        if (currentEnemyLife == 0)
+        {
+            OnEnemyDead();
+        }
+
+    }
+
+    protected void UpdateHealthBar()
+    {
+        RefsManager.I.Enemy_LifeBar.fillAmount = currentEnemyLife / maxEnemyLife;
+    }
+
+    protected void OnEnemyDead()
+    {
+        //Kill Enemy or recycle
     }
 }

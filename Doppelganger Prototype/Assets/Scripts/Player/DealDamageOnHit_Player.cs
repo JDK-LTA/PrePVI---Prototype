@@ -8,9 +8,10 @@ public class DealDamageOnHit_Player:MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<EnemyCactus>())
+        EnemyBase enemy = other.GetComponent<EnemyBase>();
+        if (enemy)
         {
-            RefsManager.I.EnemyCactus.ApplyDamage(playerDamage);
+            enemy.ApplyDamage(playerDamage);
         }
     }
 }
