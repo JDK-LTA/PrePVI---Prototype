@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.VFX;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct SingleDoppelTuplas
@@ -33,6 +34,9 @@ public class RefsManager : Singleton<RefsManager>
     [SerializeField] private VisualEffect vfx_Attack2ParticlesUp;
     [SerializeField] private VisualEffect vfx_Attack22ParticlesUp;
     [SerializeField] private VisualEffect[] vfx_HoloParticles;
+
+    [Header("UI REFERENCES")]
+    [SerializeField] private Image player_LifeBar;
 
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
@@ -70,4 +74,5 @@ public class RefsManager : Singleton<RefsManager>
     public VisualEffect Vfx_Attack2ParticlesUp { get => vfx_Attack2ParticlesUp; set => vfx_Attack2ParticlesUp = value; }
     public VisualEffect Vfx_Attack22ParticlesUp { get => vfx_Attack22ParticlesUp; set => vfx_Attack22ParticlesUp = value; }
     public VisualEffect[] Vfx_HoloParticles { get => vfx_HoloParticles; set => vfx_HoloParticles = value; }
+    public Image Player_LifeBar { get => player_LifeBar; set => player_LifeBar = value; }
 }

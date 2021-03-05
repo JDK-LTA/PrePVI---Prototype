@@ -58,7 +58,7 @@ public class BaseCharacter : MonoBehaviour
     public bool Grounded { get => grounded; set => grounded = value; }
 
     #region BASIC MONOBEHAVIOUR METHODS
-    protected void Awake()
+    protected virtual void Awake()
     {
         chCont = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();

@@ -15,7 +15,8 @@ public class EnemyCactus : EnemyBase
     private bool followTarget = false, canMove = true;
     private Vector3 initialPos = Vector3.zero, initialRot;
     
-    private SphereCollider attackTrigger;
+    [SerializeField] private SphereCollider attackTrigger1;
+    [SerializeField] private SphereCollider attackTrigger2;
 
     private NavMeshAgent agent;
 
@@ -24,7 +25,6 @@ public class EnemyCactus : EnemyBase
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        attackTrigger = GetComponentInChildren<SphereCollider>();
     }
     protected override void Start()
     {
@@ -107,12 +107,22 @@ public class EnemyCactus : EnemyBase
         canMove = true;
         readyToAttack = false;
     }
-    private void AE_DeactivateAttackTrigger()
+    private void AE_DeactivateAttackTrigger1()
     {
-        attackTrigger.gameObject.SetActive(false);
+        attackTrigger1.enabled=false;
     }
-    private void AE_ActivateAttackTrigger()
+    private void AE_ActivateAttackTrigger1()
     {
-        attackTrigger.gameObject.SetActive(true);
+        attackTrigger1.enabled = true;
     }
+    private void AE_DeactivateAttackTrigger2()
+    {
+        attackTrigger2.enabled = false;
+    }
+    private void AE_ActivateAttackTrigger2()
+    {
+        attackTrigger2.enabled = true;
+    }
+
+
 }
