@@ -9,12 +9,17 @@ public class EnemyCactus : EnemyBase
     [SerializeField] protected float interpolationSpeed = 3f;
     [SerializeField] protected float radiusToCheckHome = 0.5f;
 
+    [Header("Enemy Stats")]
+    [SerializeField] protected float currentEnemyLife = 100.0f;
+    [SerializeField] protected float maxEnemyLife = 100.0f;
+
     private float animSpeed = 0;
 
     private bool followTarget = false, canMove = true;
     private Vector3 initialPos = Vector3.zero, initialRot;
     
-    private SphereCollider attackTrigger;
+    [SerializeField] private SphereCollider attackTrigger1;
+    [SerializeField] private SphereCollider attackTrigger2;
 
     private NavMeshAgent agent;
 
@@ -23,7 +28,6 @@ public class EnemyCactus : EnemyBase
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        attackTrigger = GetComponentInChildren<SphereCollider>();
     }
     protected override void Start()
     {
@@ -111,12 +115,44 @@ public class EnemyCactus : EnemyBase
         canMove = true;
         readyToAttack = false;
     }
-    private void AE_DeactivateAttackTrigger()
+    private void AE_DeactivateAttackTrigger1()
     {
-        attackTrigger.gameObject.SetActive(false);
+        attackTrigger1.enabled=false;
     }
-    private void AE_ActivateAttackTrigger()
+    private void AE_ActivateAttackTrigger1()
     {
-        attackTrigger.gameObject.SetActive(true);
+        attackTrigger1.enabled = true;
+    }
+    private void AE_DeactivateAttackTrigger2()
+    {
+        attackTrigger2.enabled = false;
+    }
+    private void AE_ActivateAttackTrigger2()
+    {
+        attackTrigger2.enabled = true;
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        currentEnemyLife -= damage;
+
+        if (currentEnemyLife <= 0)
+        {
+            currentEnemyLife = 0;
+            UpdateHealthBar();
+            OnEnemyDead();
+        }
+
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        RefsManager.I.Enemy_LifeBar.fillAmount = currentEnemyLife / maxEnemyLife;
+    }
+
+    private void OnEnemyDead()
+    {
+        //Kill Enemy or recycle
     }
 }

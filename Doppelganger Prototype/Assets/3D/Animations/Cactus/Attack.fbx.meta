@@ -65,7 +65,35 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.89417964
+      - time: 0
+        functionName: AE_ActivateAttackTrigger1
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.008833924
+        functionName: AE_ActivateAttackTrigger2
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8837106
+        functionName: AE_DeactivateAttackTrigger2
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8886929
+        functionName: AE_DeactivateAttackTrigger1
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8971338
         functionName: AE_EndAttack
         data: 
         objectReferenceParameter: {instanceID: 0}

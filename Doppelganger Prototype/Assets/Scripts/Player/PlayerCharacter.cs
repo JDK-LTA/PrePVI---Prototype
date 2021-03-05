@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerCharacter : BaseCharacter
 {
+    [Header("Player Stats")]
+    [SerializeField] private float currentLife = 100.0f;
+    [SerializeField] private float maxLife = 100.0f;
+
+    
+
     protected override void Update()
     {
         if (canStartRecording && Input.GetButtonDown("Doppel"))
@@ -33,6 +39,31 @@ public class PlayerCharacter : BaseCharacter
 
         base.Update();
     }
+    
+    public void ApplyDamage(float damage)
+    {
+        currentLife -= damage;
+        
+        if (currentLife <= 0)
+        {
+            currentLife = 0;
+            UpdateHealthBar();
+            OnPlayerDead();
+        }
+
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        RefsManager.I.Player_LifeBar.fillAmount = currentLife / maxLife;
+    }
+
+    private void OnPlayerDead()
+    {
+        //Reload Level
+    }
+
     private void FixedUpdate()
     {
         if (!rec)

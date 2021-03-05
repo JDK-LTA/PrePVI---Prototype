@@ -6744,6 +6744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b0864467184bd48af5e27d518a1ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actualParent: {fileID: 0}
 --- !u!1 &7034831066262572511
 GameObject:
   m_ObjectHideFlags: 0
@@ -6888,7 +6889,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7034831066617063591}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   m_Radius: 0.2
   m_Height: 0.2
@@ -8113,6 +8114,8 @@ MonoBehaviour:
   damage2: 5
   timeToReachEnd2: 0.5
   cooldown2: 0.8
+  currentLife: 100
+  maxLife: 100
 --- !u!1 &7895611080637987952
 GameObject:
   m_ObjectHideFlags: 0
