@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 181a93a7395c0294fb1c5abc1964796e
+guid: 4e554931623d0284e983e444a0c80d4d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -3843359059123697815
-    second: GoOutPlant
+      74: 8042215101972332980
+    second: AnticipationIdleAttackPlant
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -54,7 +54,7 @@ ModelImporter:
     weldVertices: 1
     bakeAxisConversion: 0
     preserveHierarchy: 0
-    skinWeightsMode: 0
+    skinWeightsMode: 1
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     meshOptimizationFlags: -1
@@ -89,15 +89,15 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: joint1
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: d8e2b6ce7b1afee48b19d4fa6faae186, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
