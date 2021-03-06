@@ -33,7 +33,8 @@ public class EnemyCarnivore : EnemyBase
     }
     public void PublicAttack()
     {
-        Attack();
+        if (canAttack)
+            Attack();
     }
 
 

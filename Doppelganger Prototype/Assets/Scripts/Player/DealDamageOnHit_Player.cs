@@ -11,7 +11,7 @@ public class DealDamageOnHit_Player : MonoBehaviour
 
     private void Awake()
     {
-        playerCh = GetComponent<PlayerCharacter>();
+        playerCh = transform.root.GetComponentInParent<PlayerCharacter>();
         dmg = quickTrueCircleFalse ? playerCh.Damage : playerCh.Damage2;
     }
     private void OnTriggerEnter(Collider other)

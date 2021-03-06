@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 277107502370445051}
   - component: {fileID: 277107502370445050}
   - component: {fileID: 277107502370445045}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}

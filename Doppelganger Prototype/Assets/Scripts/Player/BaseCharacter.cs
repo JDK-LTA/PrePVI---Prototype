@@ -21,6 +21,13 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] protected float dashTime = 0.2f;
     [SerializeField] protected float dashResetTime = 1f;
 
+    [Header("Knockback")]
+    [SerializeField] protected float timeKnockbacking = 0.4f;
+    [SerializeField] protected float knockbackDistance = 0.5f;
+    [SerializeField] protected float attackKbTime = 0.2f;
+    [SerializeField] protected float attackKbDistance = 0.5f;
+
+
     [Header("Attack 1")]
     [SerializeField] protected float damage = 5f;
     [SerializeField] protected float timeToReachEnd = 0.5f;
@@ -45,6 +52,17 @@ public class BaseCharacter : MonoBehaviour
     protected bool canDash = true;
     protected bool dashingNow = false;
     protected bool dashReset = false;
+
+    protected bool knockbacking = false, canKb = true;
+    protected float kbT = 0;
+    protected Vector3 kbOrPos, kbMove, kbDir;
+
+    protected bool attKbing = false, canAttKb = true;
+    protected float attKbT = 0;
+    protected Vector3 attKbOrPos, attKbMove, attKbDir;
+    
+    protected bool recuperating = false;
+    protected float recupT = 0;
 
     protected bool canAttack1 = true;
 
@@ -71,6 +89,7 @@ public class BaseCharacter : MonoBehaviour
         XZMove();
         YMove();
         DashingMove();
+        AttackKnockback();
     }
     #endregion
     #region INPUT
@@ -134,7 +153,6 @@ public class BaseCharacter : MonoBehaviour
     }
     protected void YMove()
     {
-        //grounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
         if (velocity.y < 0)
         {
             if (!grounded && Physics.Raycast(transform.position, Vector3.down, groundCheckForJump))
@@ -179,6 +197,95 @@ public class BaseCharacter : MonoBehaviour
                 dashReset = false;
                 canDash = true;
             }
+        }
+    }
+    protected void StartKnockback(Vector3 posToKbFrom)
+    {
+        if (canKb)
+        {
+            canDoAnythingElse = false;
+
+            canKb = false;
+            knockbacking = true;
+            recuperating = true;
+
+            kbDir = new Vector3(transform.position.x - posToKbFrom.x, 0, transform.position.z - posToKbFrom.z).normalized;
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, kbDir, out hitInfo, knockbackDistance))
+            {
+                if (Vector3.Distance(hitInfo.point, transform.position) < Vector3.Distance(hitInfo.point, transform.position + transform.forward * .5f))
+                    kbMove = transform.position;
+                else
+                    kbMove = hitInfo.point - transform.forward * 0.5f;
+            }
+            else
+                kbMove = transform.position + kbDir * knockbackDistance;
+
+            kbOrPos = transform.position;
+        }
+    }
+    protected void Knockback()
+    {
+        if (knockbacking)
+        {
+            kbT += Time.deltaTime;
+
+            transform.position = Vector3.Lerp(kbOrPos, kbMove, kbT / timeKnockbacking);
+
+            if (kbT >= timeKnockbacking)
+            {
+                transform.position = kbMove;
+                kbT = 0;
+                knockbacking = false;
+                canKb = true;
+            }
+
+            Physics.SyncTransforms();
+        }
+    }
+    protected void StartAttackKnockback()
+    {
+        if (canAttKb)
+        {
+            canDoAnythingElse = false;
+
+            canAttKb = false;
+            attKbing = true;
+
+            attKbDir = -transform.forward;
+
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, attKbDir, out hitInfo, attackKbDistance))
+            {
+                if (Vector3.Distance(hitInfo.point, transform.position) < Vector3.Distance(hitInfo.point, transform.position + transform.forward * .5f))
+                    attKbMove = transform.position;
+                else
+                    attKbMove = hitInfo.point - transform.forward * 0.5f;
+            }
+            else
+                attKbMove = transform.position + attKbDir * attackKbDistance;
+
+            attKbOrPos = transform.position;
+        }
+    }
+    protected void AttackKnockback()
+    {
+        if (attKbing)
+        {
+            attKbT += Time.deltaTime;
+
+            transform.position = Vector3.Lerp(attKbOrPos, attKbMove, attKbT / attackKbTime);
+
+            if (attKbT >= attackKbTime)
+            {
+                transform.position = attKbMove;
+                attKbT = 0;
+                attKbing = false;
+                canAttKb = true;
+                canDoAnythingElse = true;
+            }
+
+            Physics.SyncTransforms();
         }
     }
     #endregion
@@ -237,6 +344,7 @@ public class BaseCharacter : MonoBehaviour
     {
         //canDoAnythingElse = false;
         animator.SetTrigger("Attack1OnMove");
+        StartAttackKnockback();
     }
 
     protected virtual void ResetActions()

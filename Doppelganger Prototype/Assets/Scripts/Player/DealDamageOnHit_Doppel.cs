@@ -11,7 +11,7 @@ public class DealDamageOnHit_Doppel : MonoBehaviour
 
     private void Awake()
     {
-        doppelCh = GetComponent<DoppelCharacter>();
+        doppelCh = transform.root.GetComponent<DoppelCharacter>();
         dmg = quickTrueCircleFalse ? doppelCh.Damage : doppelCh.Damage2;
     }
 
