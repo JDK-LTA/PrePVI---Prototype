@@ -56,6 +56,8 @@ public class BaseCharacter : MonoBehaviour
 
     public Animator Animator { get => animator; set => animator = value; }
     public bool Grounded { get => grounded; set => grounded = value; }
+    public float Damage { get => damage; set => damage = value; }
+    public float Damage2 { get => damage2; set => damage2 = value; }
 
     #region BASIC MONOBEHAVIOUR METHODS
     protected virtual void Awake()
