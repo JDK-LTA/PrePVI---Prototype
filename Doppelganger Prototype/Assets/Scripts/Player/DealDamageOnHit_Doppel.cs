@@ -18,9 +18,16 @@ public class DealDamageOnHit_Doppel : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         EnemyBase enemy = other.GetComponent<EnemyBase>();
+        ButtonData button = other.GetComponent<ButtonData>();
+
         if (enemy && doppelCh.IsFree)
         {
             enemy.ApplyDamage(dmg);
+        }
+        else if (button)
+        {
+            button.TogglePress(true);
+            button.Invoke("SetToFalse", 1f);
         }
     }
 }

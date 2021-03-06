@@ -11,6 +11,13 @@ public class ButtonData : MonoBehaviour
     public bool HasToBeAttacked { get => hasToBeAttacked; }
     public bool HasBeenPressed { get => hasBeenPressed; set => hasBeenPressed = value; }
 
+    private StepOnButton buttonParent;
+
+    private void Awake()
+    {
+        buttonParent = GetComponentInParent<StepOnButton>();
+    }
+
     public void TogglePress(bool press)
     {
         if(!onlyPressOnce)
@@ -21,6 +28,11 @@ public class ButtonData : MonoBehaviour
         {
             hasBeenPressed = true;
         }
-        RefsManager.I.ButtonSystem.CheckIfAllButtons();
+        buttonParent.CheckIfAllButtons();
+    }
+
+    public void SetToFalse()
+    {
+        hasBeenPressed = false;
     }
 }

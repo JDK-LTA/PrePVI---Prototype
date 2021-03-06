@@ -371,7 +371,8 @@ public class BaseCharacter : MonoBehaviour
 
         if (button)
         {
-            button.TogglePress(true);
+            if (!button.HasToBeAttacked)
+                button.TogglePress(true);
         }
     }
     protected virtual void OnTriggerExit(Collider other)

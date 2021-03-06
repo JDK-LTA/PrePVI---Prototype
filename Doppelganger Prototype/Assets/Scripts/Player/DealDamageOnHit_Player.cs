@@ -17,9 +17,16 @@ public class DealDamageOnHit_Player : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         EnemyBase enemy = other.GetComponent<EnemyBase>();
+        ButtonData button = other.GetComponent<ButtonData>();
+      
         if (enemy)
         {
             enemy.ApplyDamage(dmg);
+        }
+        else if (button)
+        {
+            button.TogglePress(true);
+            button.Invoke("SetToFalse", 1f);
         }
     }
 }
