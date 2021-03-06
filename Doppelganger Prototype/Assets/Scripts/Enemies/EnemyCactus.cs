@@ -7,16 +7,17 @@ public class EnemyCactus : EnemyBase
 {
     [Header("ANIMATION SETTINGS")]
     [SerializeField] protected float interpolationSpeed = 3f;
+    [SerializeField] protected float radiusToCheckHome = 0.5f;
+
+
 
     private float animSpeed = 0;
-
-    private float anticT = 0f;
-    private bool anticipating = false;
 
     private bool followTarget = false, canMove = true;
     private Vector3 initialPos = Vector3.zero, initialRot;
     
-    private SphereCollider attackTrigger;
+    [SerializeField] private SphereCollider attackTrigger1;
+    [SerializeField] private SphereCollider attackTrigger2;
 
     private NavMeshAgent agent;
 
@@ -25,7 +26,6 @@ public class EnemyCactus : EnemyBase
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        attackTrigger = GetComponentInChildren<SphereCollider>();
     }
     protected override void Start()
     {
@@ -34,8 +34,10 @@ public class EnemyCactus : EnemyBase
         initialRot = transform.rotation.eulerAngles;
         agent.speed = speed;
     }
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         FollowAndAttack();
         AttackAnticipation();
         MoveAnimBlend();
@@ -62,6 +64,7 @@ public class EnemyCactus : EnemyBase
     {
         if (followTarget)
         {
+            if (isIdle){ isIdle = false; }
             if (canMove && Vector3.Distance(transform.position, target.position) > radiusToStartAttack)
             {
                 agent.isStopped = !canMove;
@@ -83,29 +86,19 @@ public class EnemyCactus : EnemyBase
         }
         else
         {
-            if (Vector3.Distance(transform.position, initialPos) > radiusToStartAttack)
+            if (agent.isStopped && !readyToAttack) agent.isStopped = false;
+            if (Vector3.Distance(transform.position, initialPos) > radiusToCheckHome)
                 agent.SetDestination(initialPos);
             else
             {
                 transform.position = initialPos;
                 transform.eulerAngles = initialRot;
+                isIdle = true;
             }
         }
     }
 
-    private void AttackAnticipation()
-    {
-        if (anticipating)
-        {
-            anticT += Time.deltaTime;
-            if (anticT >= attackAnticipationTime)
-            {
-                animator.SetTrigger("FinishAttack");
-                anticT = 0;
-                anticipating = false;
-            }
-        }
-    }
+
 
     public override void UpdateTarget()
     {
@@ -120,12 +113,22 @@ public class EnemyCactus : EnemyBase
         canMove = true;
         readyToAttack = false;
     }
-    private void AE_DeactivateAttackTrigger()
+    private void AE_DeactivateAttackTrigger1()
     {
-        attackTrigger.gameObject.SetActive(false);
+        attackTrigger1.enabled=false;
     }
-    private void AE_ActivateAttackTrigger()
+    private void AE_ActivateAttackTrigger1()
     {
-        attackTrigger.gameObject.SetActive(true);
+        attackTrigger1.enabled = true;
     }
+    private void AE_DeactivateAttackTrigger2()
+    {
+        attackTrigger2.enabled = false;
+    }
+    private void AE_ActivateAttackTrigger2()
+    {
+        attackTrigger2.enabled = true;
+    }
+
+
 }

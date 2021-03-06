@@ -58,7 +58,7 @@ public class BaseCharacter : MonoBehaviour
     public bool Grounded { get => grounded; set => grounded = value; }
 
     #region BASIC MONOBEHAVIOUR METHODS
-    protected void Awake()
+    protected virtual void Awake()
     {
         chCont = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
@@ -81,9 +81,13 @@ public class BaseCharacter : MonoBehaviour
     protected void BinInputs()
     {
         //PRESSES
-        if (Input.GetButtonDown("Attack1") && canDoAnythingElse)
+        if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity == Vector3.zero)
         {
             Attack1();
+        }
+        else if(Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity.magnitude > 0.1f)
+        {
+            Attack1OnMove();
         }
         if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
         {
@@ -179,7 +183,7 @@ public class BaseCharacter : MonoBehaviour
     #region OTHER INPUT ACTIONS
     protected void Jump()
     {
-        if (grounded && canJump)
+        if (/*grounded && */canJump)
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);
             canJump = false;
@@ -219,13 +223,20 @@ public class BaseCharacter : MonoBehaviour
         animator.SetTrigger("Attack2");
 
     }
+
     protected void Attack1()
     {
         canDoAnythingElse = false;
         animator.SetTrigger("Attack1");
 
     }
-    
+
+    protected void Attack1OnMove()
+    {
+        //canDoAnythingElse = false;
+        animator.SetTrigger("Attack1OnMove");
+    }
+
     protected virtual void ResetActions()
     {
         canDoAnythingElse = true;
@@ -242,39 +253,6 @@ public class BaseCharacter : MonoBehaviour
         RefsManager.I.Vfx_Attack2ForwardSimpleEffect.SetTrigger("Trail");
         RefsManager.I.Vfx_Attack22ForwardSimpleEffect.SetTrigger("Trail");
     }
-
-    //protected virtual void StartAttack1Particles()
-    //{
-    //    RefsManager.I.Vfx_Attack1ParticlesUp.enabled=true;
-    //    RefsManager.I.Vfx_Attack1ParticlesUp.Play();
-    //}
-
-    //protected virtual void EndAttack1Particles()
-    //{
-    //    RefsManager.I.Vfx_Attack1ParticlesUp.Stop();
-    //}
-
-    //protected virtual void StartAttack2Particles()
-    //{
-    //    RefsManager.I.Vfx_Attack2ParticlesUp.enabled = true;
-    //    RefsManager.I.Vfx_Attack2ParticlesUp.Play();
-    //}
-
-    //protected virtual void EndAttack2Particles()
-    //{
-    //    RefsManager.I.Vfx_Attack2ParticlesUp.Stop();
-    //}
-
-    //protected virtual void StartAttack22Particles()
-    //{
-    //    RefsManager.I.Vfx_Attack22ParticlesUp.enabled = true;
-    //    RefsManager.I.Vfx_Attack22ParticlesUp.Play();
-    //}
-
-    //protected virtual void EndAttack22Particles()
-    //{
-    //    RefsManager.I.Vfx_Attack22ParticlesUp.Stop();
-    //}
     #endregion
     #region TRIGGERS
     protected virtual void OnTriggerEnter(Collider other)
