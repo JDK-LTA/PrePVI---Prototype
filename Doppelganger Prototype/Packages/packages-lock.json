@@ -9,6 +9,12 @@
       },
       "hash": "98db55426896b143e8ff6a1700baa31a6c6a39f2"
     },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.cinemachine": {
       "version": "2.6.3",
       "depth": 0,
@@ -162,6 +168,13 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
+    },
+    "com.unity.vfx-toolbox": {
+      "version": "https://github.com/Unity-Technologies/VFXToolbox.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3acce249e918d4acba155d6f2d178934602f455d"
     },
     "com.unity.visualeffectgraph": {
       "version": "10.2.2",
