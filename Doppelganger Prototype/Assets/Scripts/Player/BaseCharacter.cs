@@ -355,7 +355,7 @@ public class BaseCharacter : MonoBehaviour
     #region VFX ANIM EVENTS
     protected virtual void StartAttack()
     {
-        RefsManager.I.Vfx_Attack1ForwardSimpleEffect.SetTrigger("Trail");
+        RefsManager.I.Vfx_Attack1ForwardSimpleEffect.SetTrigger("Attack");
     }
 
     protected virtual void StartAttack2()

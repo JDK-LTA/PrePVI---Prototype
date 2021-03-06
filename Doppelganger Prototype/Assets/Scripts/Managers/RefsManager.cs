@@ -33,6 +33,10 @@ public class RefsManager : Singleton<RefsManager>
     [SerializeField] private VisualEffect vfx_Attack2ParticlesUp;
     [SerializeField] private VisualEffect vfx_Attack22ParticlesUp;
     [SerializeField] private VisualEffect[] vfx_HoloParticles;
+    [SerializeField] private ParticleSystem[] vfx_chargeAttack;
+    [SerializeField] private ParticleSystem[] vfx_projectile;
+    [SerializeField] private ParticleSystem[] vfx_releaseAttack;
+    [SerializeField] private ParticleSystem[] vfx_impact;
 
     [Header("UI REFERENCES")]
     [SerializeField] private Image player_LifeBar;
@@ -74,4 +78,8 @@ public class RefsManager : Singleton<RefsManager>
     public VisualEffect Vfx_Attack22ParticlesUp { get => vfx_Attack22ParticlesUp; set => vfx_Attack22ParticlesUp = value; }
     public VisualEffect[] Vfx_HoloParticles { get => vfx_HoloParticles; set => vfx_HoloParticles = value; }
     public Image Player_LifeBar { get => player_LifeBar; set => player_LifeBar = value; }
+    public ParticleSystem[] Vfx_chargeAttack { get => vfx_chargeAttack; set => vfx_chargeAttack = value; }
+    public ParticleSystem[] Vfx_projectile { get => vfx_projectile; set => vfx_projectile = value; }
+    public ParticleSystem[] Vfx_releaseAttack { get => vfx_releaseAttack; set => vfx_releaseAttack = value; }
+    public ParticleSystem[] Vfx_impact { get => vfx_impact; set => vfx_impact = value; }
 }
