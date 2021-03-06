@@ -5,6 +5,7 @@ using UnityEngine;
 public class CarnivoreAttackChecker : MonoBehaviour
 {
     [SerializeField] private EnemyCarnivore carnivore;
+    private bool shouldAttack = true;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,6 +29,17 @@ public class CarnivoreAttackChecker : MonoBehaviour
         {
             carnivore.DoppelInRange = false;
             carnivore.UpdateTarget();
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (carnivore.CanAttack)
+        {
+            if (other.GetComponent<PlayerCharacter>() || other.GetComponent<DoppelCharacter>())
+            {
+                carnivore.Target = other.transform;
+                carnivore.PublicAttack();
+            }
         }
     }
 }

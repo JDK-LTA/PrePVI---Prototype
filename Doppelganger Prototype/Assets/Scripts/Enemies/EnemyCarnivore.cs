@@ -8,6 +8,7 @@ public class EnemyCarnivore : EnemyBase
     [SerializeField] private float radiusOfSpawnCircle = 16f;
     [SerializeField] private float minDistanceFromPlayerToSpawn = 8f;
     [SerializeField] private float timeFromDigToOut = 0.8f;
+    [SerializeField] private Collider attackCol;
 
     private bool isDug = false;
     private float dugT = 0;
@@ -32,7 +33,8 @@ public class EnemyCarnivore : EnemyBase
     }
     public void PublicAttack()
     {
-        Attack();
+        if (canAttack)
+            Attack();
     }
 
 
@@ -53,6 +55,8 @@ public class EnemyCarnivore : EnemyBase
     //Call on Animation Event
     private void Dig() { isDug = true; }
     private void CanAttackAgain() { canAttack = true; }
+    private void DeactivateAttackTrigger() { attackCol.enabled = false; }
+    private void ReactivateAttackTrigger() { attackCol.enabled = true; }
     //__________________________
     private void ChangePlace()
     {

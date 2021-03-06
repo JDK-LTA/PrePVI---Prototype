@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float cooldownToAttack;
     [SerializeField] protected float radiusToStartAttack = 1.2f;
     [SerializeField] protected float attackAnticipationTime = 0.8f;
+    [Header("UI REFERENCES")]
+    [SerializeField] protected Image healthBar;
 
     protected bool isIdle = false;
     protected float regenT = 0;
@@ -109,7 +112,7 @@ public class EnemyBase : MonoBehaviour
 
     protected void UpdateHealthBar()
     {
-        RefsManager.I.Enemy_LifeBar.fillAmount = currentEnemyLife / maxEnemyLife;
+        healthBar.fillAmount = currentEnemyLife / maxEnemyLife;
     }
 
     protected void OnEnemyDead()

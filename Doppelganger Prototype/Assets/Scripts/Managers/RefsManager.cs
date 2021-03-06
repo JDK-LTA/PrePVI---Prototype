@@ -21,9 +21,6 @@ public class RefsManager : Singleton<RefsManager>
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private DoppelCharacter doppelCharacter;
 
-    [Header("ENEMY REFERENCES")]
-    [SerializeField] private EnemyCactus enemyCactus;
-
     [Header("VFX REFERENCES")]
     [SerializeField] private VisualEffect particleChainGO;
     [SerializeField] private Animator vfx_Attack1ForwardSimpleEffect;
@@ -39,7 +36,6 @@ public class RefsManager : Singleton<RefsManager>
 
     [Header("UI REFERENCES")]
     [SerializeField] private Image player_LifeBar;
-    [SerializeField] private Image enemy_LifeBar;
 
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
@@ -78,6 +74,4 @@ public class RefsManager : Singleton<RefsManager>
     public VisualEffect Vfx_Attack22ParticlesUp { get => vfx_Attack22ParticlesUp; set => vfx_Attack22ParticlesUp = value; }
     public VisualEffect[] Vfx_HoloParticles { get => vfx_HoloParticles; set => vfx_HoloParticles = value; }
     public Image Player_LifeBar { get => player_LifeBar; set => player_LifeBar = value; }
-    public Image Enemy_LifeBar { get => enemy_LifeBar; set => enemy_LifeBar = value; }
-    public EnemyCactus EnemyCactus { get => enemyCactus; set => enemyCactus = value; }
 }

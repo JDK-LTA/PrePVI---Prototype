@@ -7,12 +7,7 @@ public class PlayerCharacter : BaseCharacter
     [Header("Player Stats")]
     [SerializeField] private float currentLife = 100.0f;
     [SerializeField] private float maxLife = 100.0f;
-    [SerializeField] private float timeKnockbacking = 0.4f;
-    [SerializeField] private float knockbackDistance = 0.5f;
-
-    private bool knockbacking = false, canKb = true;
-    private float kbT = 0;
-    private Vector3 kbOrPos, kbMove, kbDir;
+    [SerializeField] private float timeToRecuperateAfterHit = 0.8f;
 
     protected override void Update()
     {
@@ -41,7 +36,8 @@ public class PlayerCharacter : BaseCharacter
         if (!rec)
             BinInputs();
 
-
+        Knockback();
+        Recuperate();
 
         base.Update();
     }
@@ -62,48 +58,17 @@ public class PlayerCharacter : BaseCharacter
         UpdateHealthBar();
     }
 
-    private void StartKnockback(Vector3 enemyPos)
+    private void Recuperate()
     {
-        if (canKb)
+        if (recuperating)
         {
-            canDoAnythingElse = false;
-
-            canKb = false;
-            knockbacking = true;
-            kbDir = (transform.position - enemyPos).normalized;
-            RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, kbDir, out hitInfo, knockbackDistance))
+            recupT += Time.deltaTime;
+            if (recupT >= timeToRecuperateAfterHit)
             {
-                if (Vector3.Distance(hitInfo.point, transform.position) < Vector3.Distance(hitInfo.point, transform.position + transform.forward * .5f))
-                    kbMove = transform.position;
-                else
-                    kbMove = hitInfo.point - transform.forward * 0.5f;
-            }
-            else
-                kbMove = transform.position + kbDir * knockbackDistance;
-
-            kbOrPos = transform.position;
-        }
-    }
-
-    private void Knockback()
-    {
-        if (knockbacking)
-        {
-            kbT += Time.deltaTime;
-
-            transform.position = Vector3.Lerp(kbOrPos, kbMove, kbT / timeKnockbacking);
-
-            if (kbT >= timeKnockbacking)
-            {
-                transform.position = kbMove;
-                kbT = 0;
-                knockbacking = false;
-                canKb = true;
                 canDoAnythingElse = true;
+                recupT = 0;
+                recuperating = false;
             }
-
-            Physics.SyncTransforms();
         }
     }
     private void UpdateHealthBar()
