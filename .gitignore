@@ -9,6 +9,7 @@
 /Doppelganger Prototype/[Bb]uilds/
 /Doppelganger Prototype/[Ll]ogs/
 /Doppelganger Prototype/[Mm]emoryCaptures/
+/Doppelganger Prototype/[Uu]serSettings/
 
 # Never ignore Asset meta data
 !/Doppelganger Prototype/[Aa]ssets/**/*.meta

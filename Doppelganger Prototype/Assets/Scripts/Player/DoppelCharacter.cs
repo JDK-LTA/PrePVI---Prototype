@@ -22,6 +22,11 @@ public class DoppelCharacter : BaseCharacter
 
     private Vector2 playXzInput = Vector2.zero;
 
+    private bool isFree = false;
+
+    public bool IsFree { get => isFree; }
+
+
     #region OVERRIDES
     protected override void Update()
     {
@@ -34,6 +39,7 @@ public class DoppelCharacter : BaseCharacter
         {
             PlaybackTimer();
         }
+        isFree = playback;
 
         base.Update();
     }
@@ -189,11 +195,14 @@ public class DoppelCharacter : BaseCharacter
     {
         t = 0;
         rec = false;
+
+        ResetDashStuff();
         RefsManager.I.PlayerCharacter.enabled = true;
         RefsManager.I.PlayerCharacter.Animator.enabled = true;
         StartPlayback();
         RefsManager.I.ParticleChainGO.gameObject.SetActive(false);
     }
+
     private void FinishPlayback()
     {
         t = 0;
@@ -201,6 +210,9 @@ public class DoppelCharacter : BaseCharacter
         playback = false;
         gameObject.SetActive(false);
         CamerasManager.I.ToggleSingleDoppelCams(false);
+        EnemyCactus cactus = FindObjectOfType<EnemyCactus>();
+        cactus.DoppelInRange = false;
+        cactus.UpdateTarget();
     }
 
     //AUXILIAR METHODS
@@ -226,6 +238,17 @@ public class DoppelCharacter : BaseCharacter
         {
             releasingTimes.Add(aux);
             playbackReleased.Add(false);
+        }
+    }
+    private void ResetDashStuff()
+    {
+        if (!canDash)
+        {
+            canDash = true;
+            dashReset = false;
+            dashingNow = false;
+            dashResetT = 0;
+            dashT = 0;
         }
     }
     #endregion
