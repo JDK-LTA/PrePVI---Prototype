@@ -37,6 +37,7 @@ public class EnemyBase : MonoBehaviour
     public bool DoppelInRange { get => doppelInRange; set => doppelInRange = value; }
     public bool CanAttack { get => canAttack; }
     public Transform Target { get => target; set => target = value; }
+    public float BaseDamage { get => baseDamage; set => baseDamage = value; }
 
     protected virtual void Start()
     {
