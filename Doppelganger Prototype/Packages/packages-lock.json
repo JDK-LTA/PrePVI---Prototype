@@ -1,12 +1,13 @@
 {
   "dependencies": {
     "com.samdriver.driven-decals": {
-      "version": "file:C:/Users/Diego/Desktop/driven-decals-master",
+      "version": "https://github.com/Anatta336/driven-decals.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.render-pipelines.universal": "7.3.1"
-      }
+      },
+      "hash": "98db55426896b143e8ff6a1700baa31a6c6a39f2"
     },
     "com.unity.cinemachine": {
       "version": "2.6.3",
