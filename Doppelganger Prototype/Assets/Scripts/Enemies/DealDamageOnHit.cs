@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DealDamageOnHit_Cactus : MonoBehaviour
+public class DealDamageOnHit : MonoBehaviour
 {
-    [SerializeField] private EnemyCactus cactus;
+    [SerializeField] private EnemyBase enemy;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerCharacter>())
         {
-            RefsManager.I.PlayerCharacter.ApplyDamage(cactus.BaseDamage, transform.position);
+            RefsManager.I.PlayerCharacter.ApplyDamage(enemy.BaseDamage, transform.position);
         }
     }
 }

@@ -9,9 +9,10 @@ public class PlayerCharacter : BaseCharacter
     [SerializeField] private float maxLife = 100.0f;
     [SerializeField] private float timeKnockbacking = 0.4f;
     [SerializeField] private float knockbackDistance = 0.5f;
+    [SerializeField] private float timeToRecuperateAfterHit = 0.8f;
 
-    private bool knockbacking = false, canKb = true;
-    private float kbT = 0;
+    private bool knockbacking = false, canKb = true, recuperating = false;
+    private float kbT = 0, recupT = 0;
     private Vector3 kbOrPos, kbMove, kbDir;
 
     protected override void Update()
@@ -41,7 +42,8 @@ public class PlayerCharacter : BaseCharacter
         if (!rec)
             BinInputs();
 
-
+        Knockback();
+        Recuperate();
 
         base.Update();
     }
@@ -70,7 +72,9 @@ public class PlayerCharacter : BaseCharacter
 
             canKb = false;
             knockbacking = true;
-            kbDir = (transform.position - enemyPos).normalized;
+            recuperating = true;
+
+            kbDir = new Vector3(transform.position.x - enemyPos.x, 0, transform.position.z - enemyPos.z).normalized;
             RaycastHit hitInfo;
             if (Physics.Raycast(transform.position, kbDir, out hitInfo, knockbackDistance))
             {
@@ -100,10 +104,22 @@ public class PlayerCharacter : BaseCharacter
                 kbT = 0;
                 knockbacking = false;
                 canKb = true;
-                canDoAnythingElse = true;
             }
 
             Physics.SyncTransforms();
+        }
+    }
+    private void Recuperate()
+    {
+        if (recuperating)
+        {
+            recupT += Time.deltaTime;
+            if (recupT >= timeToRecuperateAfterHit)
+            {
+                canDoAnythingElse = true;
+                recupT = 0;
+                recuperating = false;
+            }
         }
     }
     private void UpdateHealthBar()
