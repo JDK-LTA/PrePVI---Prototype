@@ -51,6 +51,7 @@ public class EnemyCactus : EnemyBase
                 canAttack = true;
             }
         }
+        OnCactusDead();
     }
 
     private void MoveAnimBlend()
@@ -130,5 +131,17 @@ public class EnemyCactus : EnemyBase
         attackTrigger2.enabled = true;
     }
 
-
+    private void OnCactusDead()
+    {
+        if (currentEnemyLife <= 0)
+        {
+            RefsManager.I.Vfx_enemyCactusDeath.Play();
+            Invoke("DelayDead", 1.0f);
+        }
+    }
+    
+    public void DelayDead()
+    {
+        GameObject.Destroy(gameObject);
+    }
 }
