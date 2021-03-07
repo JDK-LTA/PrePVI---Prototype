@@ -40,6 +40,7 @@ public class RefsManager : Singleton<RefsManager>
 
     [Header("UI REFERENCES")]
     [SerializeField] private Image player_LifeBar;
+    [SerializeField] private GameObject pauseMenu, mainMenu;
 
     [Header("CAMERA REFERENCES")]
     [SerializeField] private List<SingleDoppelTuplas> singleDoppelTuplas;
@@ -50,16 +51,10 @@ public class RefsManager : Singleton<RefsManager>
     private CinemachineVirtualCamera actualSingleFollowCamera;
     private CinemachineVirtualCamera actualDoppelFollowCamera;
 
-    [Header("PUZZLE REFERENCES")]
-    [SerializeField] private StepOnButton buttonSystem;
-
-    //[Header("___________")]
-
     public bool _DEBUG { get => DEBUG; }
 
     public PlayerCharacter PlayerCharacter { get => playerCharacter; }
     public DoppelCharacter DoppelCharacter { get => doppelCharacter; }
-    public StepOnButton ButtonSystem { get => buttonSystem; }
     public List<CinemachineVirtualCamera> LevelVirtualCameras { get => levelVirtualCameras; set => levelVirtualCameras = value; }
     public CinemachineVirtualCamera ActualSingleFollowCamera { get => actualSingleFollowCamera; set => actualSingleFollowCamera = value; }
     public CinemachineVirtualCamera ActualDoppelFollowCamera { get => actualDoppelFollowCamera; set => actualDoppelFollowCamera = value; }
@@ -82,4 +77,6 @@ public class RefsManager : Singleton<RefsManager>
     public ParticleSystem[] Vfx_projectile { get => vfx_projectile; set => vfx_projectile = value; }
     public ParticleSystem[] Vfx_releaseAttack { get => vfx_releaseAttack; set => vfx_releaseAttack = value; }
     public ParticleSystem[] Vfx_impact { get => vfx_impact; set => vfx_impact = value; }
+    public GameObject PauseMenu { get => pauseMenu; }
+    public GameObject MainMenu { get => mainMenu; }
 }
