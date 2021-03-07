@@ -31,7 +31,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d4c867f6b72b714dbb5fd1780afe208, type: 3}
-  m_Name: EnemyDeathExplosion
+  m_Name: playerDeathExplosion
   m_EditorClassIdentifier: 
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 0}
@@ -51,8 +51,8 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_UIInfos: {fileID: 114340500867371532}
   m_ParameterInfo:
-  - name: EnemyCactusPosition
-    path: EnemyCactusPosition
+  - name: playerPosition
+    path: playerPosition
     tooltip: 
     sheetType: m_Vector3f
     realType: Vector3
@@ -77,7 +77,7 @@ VisualEffectResource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyDeathExplosion
+  m_Name: playerDeathExplosion
   m_Graph: {fileID: 114350483966674976}
   m_Infos:
     m_RendererSettings:
@@ -2043,7 +2043,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614626}
-  m_ExposedName: EnemyCactusPosition
+  m_ExposedName: playerPosition
   m_Exposed: 1
   m_Order: 0
   m_Category: 

@@ -19,6 +19,7 @@ public class EnemyCarnivore : EnemyBase
 
         AttackAnticipation();
         DigOutTimer();
+        OnCarnivoreDead();
     }
 
     protected override void Attack()
@@ -74,5 +75,19 @@ public class EnemyCarnivore : EnemyBase
         Physics.SyncTransforms();
 
         animator.SetTrigger("GoOut");
+    }
+
+    private void OnCarnivoreDead()
+    {
+        if (currentEnemyLife <= 0)
+        {
+            RefsManager.I.Vfx_enemyCarnivoreDeath.Play();
+            Invoke("DelayDead", 1.0f);
+        }
+    }
+
+    public void DelayDead()
+    {
+        GameObject.Destroy(gameObject);
     }
 }

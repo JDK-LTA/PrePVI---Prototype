@@ -39,6 +39,13 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
+
+    public void RestartMenuStartGame()
+    {
+        mainMenuStart = true;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
     public void ExitGame()
     {
         Application.Quit();

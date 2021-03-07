@@ -78,7 +78,11 @@ public class PlayerCharacter : BaseCharacter
 
     private void OnPlayerDead()
     {
-        //Reload Level
+        if (currentLife <= 0)
+        {
+            RefsManager.I.Vfx_playerDeath.Play();
+            Invoke("DelayReloadScene", 1.0f);
+        }
     }
 
     private void FixedUpdate()
@@ -92,5 +96,10 @@ public class PlayerCharacter : BaseCharacter
                 RefsManager.I.Vfx_HoloParticles[i].enabled = false;
             }
         }
+    }
+
+    public void DelayReloadScene()
+    {
+        GameManager.I.RestartMenuStartGame();
     }
 }

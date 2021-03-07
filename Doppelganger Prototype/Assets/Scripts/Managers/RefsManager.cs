@@ -38,6 +38,8 @@ public class RefsManager : Singleton<RefsManager>
     [SerializeField] private ParticleSystem[] vfx_releaseAttack;
     [SerializeField] private ParticleSystem[] vfx_impact;
     [SerializeField] private VisualEffect vfx_enemyCactusDeath;
+    [SerializeField] private VisualEffect vfx_enemyCarnivoreDeath;
+    [SerializeField] private VisualEffect vfx_playerDeath;
 
 
     [Header("UI REFERENCES")]
@@ -82,4 +84,6 @@ public class RefsManager : Singleton<RefsManager>
     public GameObject PauseMenu { get => pauseMenu; }
     public GameObject MainMenu { get => mainMenu; }
     public VisualEffect Vfx_enemyCactusDeath { get => vfx_enemyCactusDeath; set => vfx_enemyCactusDeath = value; }
+    public VisualEffect Vfx_enemyCarnivoreDeath { get => vfx_enemyCarnivoreDeath; set => vfx_enemyCarnivoreDeath = value; }
+    public VisualEffect Vfx_playerDeath { get => vfx_playerDeath; set => vfx_playerDeath = value; }
 }

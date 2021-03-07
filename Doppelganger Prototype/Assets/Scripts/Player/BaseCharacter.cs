@@ -357,6 +357,8 @@ public class BaseCharacter : MonoBehaviour
     {
         canDoAnythingElse = true;
     }
+
+    
     #endregion
     #region VFX ANIM EVENTS
     protected virtual void StartAttack()
