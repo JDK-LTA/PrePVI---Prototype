@@ -112,32 +112,40 @@ public class DoppelCharacter : BaseCharacter
         {
             RecordKey(true, BinaryInputs.DASH);
         }
-        if (Input.GetButtonDown("Attack1") && canDoAnythingElse)
+        if (canAttack)
         {
-            RecordKey(true, BinaryInputs.ATTACK1);
+            if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity == Vector3.zero)
+            {
+                RecordKey(true, BinaryInputs.ATTACK1_STATIC);
+            }
+            else if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity.magnitude > 0.1f)
+            {
+                RecordKey(true, BinaryInputs.ATTACK1_MOVE);
+            }
+            if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
+            {
+                RecordKey(true, BinaryInputs.ATTACK2);
+            }
         }
-        if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
-        {
-            RecordKey(true, BinaryInputs.ATTACK2);
-        }       //------------------------------------------------
+        //------------------------------------------------
 
         //RELEASES
-        if (Input.GetButtonUp("Jump"))
-        {
-            RecordKey(false, BinaryInputs.JUMP);
-        }
-        if (Input.GetButtonUp("Dash"))
-        {
-            RecordKey(false, BinaryInputs.DASH);
-        }
-        if (Input.GetButtonUp("Attack1"))
-        {
-            RecordKey(false, BinaryInputs.ATTACK1);
-        }
-        if (Input.GetButtonUp("Attack2"))
-        {
-            RecordKey(false, BinaryInputs.ATTACK2);
-        }
+        //if (Input.GetButtonUp("Jump"))
+        //{
+        //    RecordKey(false, BinaryInputs.JUMP);
+        //}
+        //if (Input.GetButtonUp("Dash"))
+        //{
+        //    RecordKey(false, BinaryInputs.DASH);
+        //}
+        //if (Input.GetButtonUp("Attack1"))
+        //{
+        //    RecordKey(false, BinaryInputs.ATTACK1);
+        //}
+        //if (Input.GetButtonUp("Attack2"))
+        //{
+        //    RecordKey(false, BinaryInputs.ATTACK2);
+        //}
         //------------------------------------------------
     }
     private void RecordContInput()
@@ -169,11 +177,14 @@ public class DoppelCharacter : BaseCharacter
                     case BinaryInputs.DASH:
                         Dash();
                         break;
-                    case BinaryInputs.ATTACK1:
+                    case BinaryInputs.ATTACK1_STATIC:
                         Attack1();
                         break;
+                    case BinaryInputs.ATTACK1_MOVE:
+                        Attack1OnMove();
+                        break;
                     case BinaryInputs.ATTACK2:
-                        print("att2");
+                        Attack2();
                         break;
                     case BinaryInputs.JUMP:
                         Jump();

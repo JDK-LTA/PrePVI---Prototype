@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public enum BinaryInputs { DASH, JUMP, ATTACK1, ATTACK2 }
+public enum BinaryInputs { DASH, JUMP, ATTACK1_STATIC, ATTACK1_MOVE, ATTACK2 }
 [RequireComponent(typeof(CharacterController))]
 public class BaseCharacter : MonoBehaviour
 {
@@ -65,7 +65,7 @@ public class BaseCharacter : MonoBehaviour
     protected bool recuperating = false;
     protected float recupT = 0;
 
-    protected bool canAttack1 = true;
+    protected bool canAttack = true;
 
     protected bool canDoAnythingElse = true;
     protected float generalT = 0;
@@ -104,17 +104,20 @@ public class BaseCharacter : MonoBehaviour
     protected void BinInputs()
     {
         //PRESSES
-        if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity == Vector3.zero)
+        if (canAttack)
         {
-            Attack1();
-        }
-        else if(Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity.magnitude > 0.1f)
-        {
-            Attack1OnMove();
-        }
-        if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
-        {
-            Attack2();
+            if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity == Vector3.zero)
+            {
+                Attack1();
+            }
+            else if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity.magnitude > 0.1f)
+            {
+                Attack1OnMove();
+            }
+            if (Input.GetButtonDown("Attack2") && canDoAnythingElse)
+            {
+                Attack2();
+            }
         }
         if (Input.GetButtonDown("Dash") && canDoAnythingElse)
         {
@@ -218,7 +221,7 @@ public class BaseCharacter : MonoBehaviour
                 if (Vector3.Distance(hitInfo.point, transform.position) < Vector3.Distance(hitInfo.point, transform.position + transform.forward * .5f))
                     kbMove = transform.position;
                 else
-                    kbMove = hitInfo.point - transform.forward * 0.5f;
+                    kbMove = hitInfo.point + transform.forward * 0.5f;
             }
             else
                 kbMove = transform.position + kbDir * knockbackDistance;
@@ -257,12 +260,12 @@ public class BaseCharacter : MonoBehaviour
             attKbDir = -transform.forward;
 
             RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, attKbDir, out hitInfo, attackKbDistance))
+            if (Physics.Raycast(transform.position + Vector3.up, attKbDir, out hitInfo, attackKbDistance))
             {
-                if (Vector3.Distance(hitInfo.point, transform.position) < Vector3.Distance(hitInfo.point, transform.position + transform.forward * .5f))
+                if (Vector3.Distance(hitInfo.point - Vector3.up, transform.position) < Vector3.Distance(hitInfo.point - Vector3.up, transform.position - transform.forward * .5f))
                     attKbMove = transform.position;
                 else
-                    attKbMove = hitInfo.point - transform.forward * 0.5f;
+                    attKbMove = hitInfo.point - Vector3.up + transform.forward * 0.5f;
             }
             else
                 attKbMove = transform.position + attKbDir * attackKbDistance;
@@ -296,6 +299,7 @@ public class BaseCharacter : MonoBehaviour
     {
         if (/*grounded && */canJump)
         {
+            canAttack = false;
             velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);
             canJump = false;
             if (animator)
@@ -305,6 +309,7 @@ public class BaseCharacter : MonoBehaviour
     protected void EndJump()
     {
         canJump = true;
+        canAttack = true;
     }
     protected void Dash()
     {
@@ -346,7 +351,6 @@ public class BaseCharacter : MonoBehaviour
     {
         canDoAnythingElse = false;
         animator.SetTrigger("Attack1OnMove");
-        //StartAttackKnockback();
     }
 
     protected virtual void ResetActions()
@@ -369,7 +373,6 @@ public class BaseCharacter : MonoBehaviour
         for (int i = 0; i < RefsManager.I.Vfx_projectile.Length; i++)
         {
             RefsManager.I.Vfx_projectile[i].Play();
-
         }
     }
 
@@ -392,35 +395,41 @@ public class BaseCharacter : MonoBehaviour
 
     [SerializeField] private Transform oldParentProjectile;
     [SerializeField] private Transform oldParentImpact;
-    [SerializeField] private Transform newParentProjectile;
-    [SerializeField] private Transform newParentImpact;
     [SerializeField] private Transform projectileTransform;
     [SerializeField] private Transform impactTransform;
 
+    private Transform projectileOrLocal, impactOrLocal;
+    private Vector3 proLocalPos, proLocalRot, impLocalPos, impLocalRot;
+
     protected virtual void UnparentAnimEvent()
     {
-        newParentProjectile.position = projectileTransform.position;
-        newParentProjectile.rotation = projectileTransform.rotation;
-
-        newParentImpact.position = impactTransform.position;
-        newParentImpact.rotation = impactTransform.rotation;
-
-        projectileTransform.SetParent(newParentProjectile, false);
-        impactTransform.SetParent(newParentImpact, false);
+        proLocalPos = projectileTransform.localPosition;
+        proLocalRot = projectileTransform.localEulerAngles;
+        impLocalPos = impactTransform.localPosition;
+        impLocalRot = impactTransform.localEulerAngles;
+        projectileTransform.SetParent(null);
+        impactTransform.SetParent(null);
     }
 
     protected virtual void ParentAnimEvent()
     {
         projectileTransform.gameObject.SetActive(false);
         impactTransform.gameObject.SetActive(false);
-        projectileTransform.SetParent(oldParentProjectile, false);
-        impactTransform.SetParent(oldParentImpact, false);
+        projectileTransform.SetParent(oldParentProjectile);
+        impactTransform.SetParent(oldParentImpact);
+
+        projectileTransform.localPosition = proLocalPos;
+        projectileTransform.localEulerAngles = proLocalRot;
+        impactTransform.localPosition = impLocalPos;
+        impactTransform.localEulerAngles = impLocalRot;
     }
 
     protected virtual void ReactivateVFX()
     {
         projectileTransform.gameObject.SetActive(true);
         impactTransform.gameObject.SetActive(true);
+        //projectileTransform = projectileOrLocal;
+        //impactTransform = impactOrLocal;
     }
 
     protected virtual void ActivateAttack1Collider()

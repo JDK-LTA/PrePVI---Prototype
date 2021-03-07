@@ -94,6 +94,7 @@ public class EnemyBase : MonoBehaviour
                 {
                     currentEnemyLife = maxEnemyLife;
                 }
+                UpdateHealthBar();
             }
         }
     }
