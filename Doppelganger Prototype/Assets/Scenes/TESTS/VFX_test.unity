@@ -1082,8 +1082,6 @@ MonoBehaviour:
   cooldown2: 0.8
   oldParentProjectile: {fileID: 0}
   oldParentImpact: {fileID: 0}
-  newParentProjectile: {fileID: 0}
-  newParentImpact: {fileID: 0}
   projectileTransform: {fileID: 0}
   impactTransform: {fileID: 0}
   currentLife: 0
@@ -1361,8 +1359,6 @@ MonoBehaviour:
   cooldown2: 0.8
   oldParentProjectile: {fileID: 0}
   oldParentImpact: {fileID: 0}
-  newParentProjectile: {fileID: 0}
-  newParentImpact: {fileID: 0}
   projectileTransform: {fileID: 0}
   impactTransform: {fileID: 0}
   currentLife: 0
@@ -2877,8 +2873,6 @@ MonoBehaviour:
   cooldown2: 0.8
   oldParentProjectile: {fileID: 0}
   oldParentImpact: {fileID: 0}
-  newParentProjectile: {fileID: 0}
-  newParentImpact: {fileID: 0}
   projectileTransform: {fileID: 0}
   impactTransform: {fileID: 0}
   pressedBinInputs: 
@@ -4615,8 +4609,6 @@ MonoBehaviour:
   cooldown2: 0.8
   oldParentProjectile: {fileID: 0}
   oldParentImpact: {fileID: 0}
-  newParentProjectile: {fileID: 0}
-  newParentImpact: {fileID: 0}
   projectileTransform: {fileID: 0}
   impactTransform: {fileID: 0}
   pressedBinInputs: 
@@ -8214,6 +8206,14 @@ PrefabInstance:
     - target: {fileID: 6897253477031099874, guid: 2a2eb3b2061b69340b3ebf618a6d042d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034831065825501256, guid: 2a2eb3b2061b69340b3ebf618a6d042d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034831066347848367, guid: 2a2eb3b2061b69340b3ebf618a6d042d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 7034831066669578989, guid: 2a2eb3b2061b69340b3ebf618a6d042d, type: 3}
       propertyPath: newParentImpact
