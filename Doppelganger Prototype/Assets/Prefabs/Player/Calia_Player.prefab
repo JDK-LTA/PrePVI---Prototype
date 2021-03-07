@@ -7804,16 +7804,24 @@ MonoBehaviour:
   dashLenght: 4
   dashTime: 0.2
   dashResetTime: 1
+  timeKnockbacking: 0.15
+  knockbackDistance: 2
+  attackKbTime: 0.2
+  attackKbDistance: 4
   damage: 5
   timeToReachEnd: 0.5
   cooldown1: 0.8
   damage2: 5
   timeToReachEnd2: 0.5
   cooldown2: 0.8
+  oldParentProjectile: {fileID: 0}
+  oldParentImpact: {fileID: 0}
+  newParentProjectile: {fileID: 0}
+  newParentImpact: {fileID: 0}
+  projectileTransform: {fileID: 0}
+  impactTransform: {fileID: 0}
   currentLife: 100
   maxLife: 100
-  timeKnockbacking: 0.15
-  knockbackDistance: 2
   timeToRecuperateAfterHit: 0.8
 --- !u!1 &7895611080637987952
 GameObject:

@@ -32,6 +32,7 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] protected float damage = 5f;
     [SerializeField] protected float timeToReachEnd = 0.5f;
     [SerializeField] protected float cooldown1 = 0.8f;
+    [SerializeField] protected Collider attack1Collider;
 
     [Header("Attack 2")]
     [SerializeField] protected float damage2 = 5f;
@@ -93,9 +94,10 @@ public class BaseCharacter : MonoBehaviour
     }
     #endregion
     #region INPUT
+    private int aux;
     protected void ContinousInput()
     {
-        int aux = canDoAnythingElse ? 1 : 0;
+        aux = canDoAnythingElse ? 1 : 0;
         xzInput.x = Input.GetAxis("Horizontal") * aux;
         xzInput.y = Input.GetAxis("Vertical") * aux;
     }
@@ -342,9 +344,9 @@ public class BaseCharacter : MonoBehaviour
 
     protected void Attack1OnMove()
     {
-        //canDoAnythingElse = false;
+        canDoAnythingElse = false;
         animator.SetTrigger("Attack1OnMove");
-        StartAttackKnockback();
+        //StartAttackKnockback();
     }
 
     protected virtual void ResetActions()
@@ -355,7 +357,29 @@ public class BaseCharacter : MonoBehaviour
     #region VFX ANIM EVENTS
     protected virtual void StartAttack()
     {
-        RefsManager.I.Vfx_Attack1ForwardSimpleEffect.SetTrigger("Attack");
+        for(int i =0;i< RefsManager.I.Vfx_chargeAttack.Length; i++)
+        {
+            RefsManager.I.Vfx_chargeAttack[i].Play();
+
+        }
+    }
+
+    protected virtual void MidAttack()
+    {
+        for (int i = 0; i < RefsManager.I.Vfx_projectile.Length; i++)
+        {
+            RefsManager.I.Vfx_projectile[i].Play();
+
+        }
+    }
+
+    protected virtual void EndAttack()
+    {
+        for (int i = 0; i < RefsManager.I.Vfx_releaseAttack.Length; i++)
+        {
+            RefsManager.I.Vfx_releaseAttack[i].Play();
+            RefsManager.I.Vfx_impact[i].Play();
+        }
     }
 
     protected virtual void StartAttack2()
@@ -363,6 +387,52 @@ public class BaseCharacter : MonoBehaviour
         RefsManager.I.Vfx_Attack2ForwardSimpleEffect.SetTrigger("Trail");
         RefsManager.I.Vfx_Attack22ForwardSimpleEffect.SetTrigger("Trail");
     }
+    
+    [Header("VFX_POINTER REFS")]
+
+    [SerializeField] private Transform oldParentProjectile;
+    [SerializeField] private Transform oldParentImpact;
+    [SerializeField] private Transform newParentProjectile;
+    [SerializeField] private Transform newParentImpact;
+    [SerializeField] private Transform projectileTransform;
+    [SerializeField] private Transform impactTransform;
+
+    protected virtual void UnparentAnimEvent()
+    {
+        newParentProjectile.position = projectileTransform.position;
+        newParentProjectile.rotation = projectileTransform.rotation;
+
+        newParentImpact.position = impactTransform.position;
+        newParentImpact.rotation = impactTransform.rotation;
+
+        projectileTransform.SetParent(newParentProjectile, false);
+        impactTransform.SetParent(newParentImpact, false);
+    }
+
+    protected virtual void ParentAnimEvent()
+    {
+        projectileTransform.gameObject.SetActive(false);
+        impactTransform.gameObject.SetActive(false);
+        projectileTransform.SetParent(oldParentProjectile, false);
+        impactTransform.SetParent(oldParentImpact, false);
+    }
+
+    protected virtual void ReactivateVFX()
+    {
+        projectileTransform.gameObject.SetActive(true);
+        impactTransform.gameObject.SetActive(true);
+    }
+
+    protected virtual void ActivateAttack1Collider()
+    {
+        attack1Collider.enabled = true;
+    }
+
+    protected virtual void DeactivateAttack1Collider()
+    {
+        attack1Collider.enabled = false;
+    }
+
     #endregion
     #region TRIGGERS
     protected virtual void OnTriggerEnter(Collider other)
