@@ -38,7 +38,10 @@ public class LevelCamZone : MonoBehaviour
             }
             else
             {
-                CamerasManager.I.ChangeCamTupla(0);
+                if (CamerasManager.I.ActualTuplaIndex == virtualCameraIndex)
+                {
+                    CamerasManager.I.ChangeCamTupla(0);
+                }
             }
         }
     }

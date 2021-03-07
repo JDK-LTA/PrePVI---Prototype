@@ -61,7 +61,7 @@ public class BaseCharacter : MonoBehaviour
     protected bool attKbing = false, canAttKb = true;
     protected float attKbT = 0;
     protected Vector3 attKbOrPos, attKbMove, attKbDir;
-    
+
     protected bool recuperating = false;
     protected float recupT = 0;
 
@@ -320,15 +320,24 @@ public class BaseCharacter : MonoBehaviour
             dashingNow = true;
 
             RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, transform.forward, out hitInfo, dashLenght))
+            if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hitInfo, dashLenght))
             {
-                if (Vector3.Distance(hitInfo.point, transform.position) < Vector3.Distance(hitInfo.point, transform.position + transform.forward * .5f))
+                if (Vector3.Distance(hitInfo.point, transform.position + Vector3.up) < Vector3.Distance(hitInfo.point, transform.position + Vector3.up + transform.forward * .5f))
                     dashMove = transform.position;
                 else
-                    dashMove = hitInfo.point - transform.forward * 0.5f;
+                    dashMove = hitInfo.point - Vector3.up - transform.forward * 0.5f;
             }
             else
                 dashMove = transform.position + transform.forward * dashLenght;
+
+            RaycastHit hitInfo2;
+            if (!Physics.Raycast(dashMove + Vector3.up, Vector3.down, 1.25f))
+            {
+                if (Physics.Raycast(dashMove + Vector3.down * 0.25f, -transform.forward, out hitInfo2, dashLenght))
+                {
+                    dashMove = hitInfo2.point + Vector3.up * 0.25f;
+                }
+            }
 
             dashOrPos = transform.position;
         }
@@ -363,7 +372,7 @@ public class BaseCharacter : MonoBehaviour
     #region VFX ANIM EVENTS
     protected virtual void StartAttack()
     {
-        for(int i =0;i< RefsManager.I.Vfx_chargeAttack.Length; i++)
+        for (int i = 0; i < RefsManager.I.Vfx_chargeAttack.Length; i++)
         {
             RefsManager.I.Vfx_chargeAttack[i].Play();
 
@@ -392,7 +401,7 @@ public class BaseCharacter : MonoBehaviour
         RefsManager.I.Vfx_Attack2ForwardSimpleEffect.SetTrigger("Trail");
         RefsManager.I.Vfx_Attack22ForwardSimpleEffect.SetTrigger("Trail");
     }
-    
+
     [Header("VFX_POINTER REFS")]
 
     [SerializeField] private Transform oldParentProjectile;
@@ -448,7 +457,7 @@ public class BaseCharacter : MonoBehaviour
     #region TRIGGERS
     protected virtual void OnTriggerEnter(Collider other)
     {
-        ButtonData button = other.GetComponent<ButtonData>();
+        IndividualButton button = other.GetComponent<IndividualButton>();
 
         if (button)
         {
@@ -458,7 +467,7 @@ public class BaseCharacter : MonoBehaviour
     }
     protected virtual void OnTriggerExit(Collider other)
     {
-        ButtonData button = other.GetComponent<ButtonData>();
+        IndividualButton button = other.GetComponent<IndividualButton>();
 
         if (button)
         {

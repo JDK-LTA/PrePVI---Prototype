@@ -2,25 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonData : MonoBehaviour
+public class IndividualButton : MonoBehaviour
 {
     [SerializeField] private bool onlyPressOnce = false;
     [SerializeField] private bool hasToBeAttacked = false;
+    [SerializeField] private Material pressedMat;
+
+    private Material orMat;
+    private MeshRenderer meshRenderer;
+
     private bool hasBeenPressed = false;
 
     public bool HasToBeAttacked { get => hasToBeAttacked; }
     public bool HasBeenPressed { get => hasBeenPressed; set => hasBeenPressed = value; }
 
-    private StepOnButton buttonParent;
+    private ButtonsFunctionality buttonParent;
 
     private void Awake()
     {
-        buttonParent = GetComponentInParent<StepOnButton>();
+        buttonParent = GetComponentInParent<ButtonsFunctionality>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        orMat = meshRenderer.materials[0];
     }
 
     public void TogglePress(bool press)
     {
-        if(!onlyPressOnce)
+        if (!onlyPressOnce)
         {
             hasBeenPressed = press;
         }
@@ -28,11 +35,20 @@ public class ButtonData : MonoBehaviour
         {
             hasBeenPressed = true;
         }
+
+        UpdateMat();
+
         buttonParent.CheckIfAllButtons();
+    }
+
+    private void UpdateMat()
+    {
+        meshRenderer.materials[0] = hasBeenPressed ? pressedMat : orMat;
     }
 
     public void SetToFalse()
     {
         hasBeenPressed = false;
+        UpdateMat();
     }
 }

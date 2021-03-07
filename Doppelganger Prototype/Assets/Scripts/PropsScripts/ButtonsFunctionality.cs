@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StepOnButton : MonoBehaviour
+public class ButtonsFunctionality : MonoBehaviour
 {
-    private ButtonData[] buttons;
+    private IndividualButton[] buttons;
     private void Start()
     {
-        buttons = GetComponentsInChildren<ButtonData>();
+        buttons = GetComponentsInChildren<IndividualButton>();
     }
 
     public bool CheckIfAllButtons()
@@ -17,7 +17,9 @@ public class StepOnButton : MonoBehaviour
             if (!buttons[i].HasBeenPressed)
                 return false;
         }
-        print("yay");
+        Action();
         return true;
     }
+
+    protected virtual void Action() { }
 }

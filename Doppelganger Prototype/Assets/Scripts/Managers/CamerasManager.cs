@@ -7,8 +7,9 @@ public class CamerasManager : Singleton<CamerasManager>
 {
     private bool isLevelCamActive = false;
     private bool isDoppel = false;
-
+    private int actualTuplaIndex = 0;
     public bool IsLevelCamActive { set => isLevelCamActive = value; }
+    public int ActualTuplaIndex { get => actualTuplaIndex; }
 
     private void Start()
     {
@@ -47,6 +48,7 @@ public class CamerasManager : Singleton<CamerasManager>
     {
         RefsManager.I.ActualSingleFollowCamera = RefsManager.I.SingleDoppelTuplas[index].singleFollowCam; 
         RefsManager.I.ActualDoppelFollowCamera = RefsManager.I.SingleDoppelTuplas[index].doppelFollowCam;
+        actualTuplaIndex = index;
         ToggleSingleDoppelCams(isDoppel);
     }
 }
