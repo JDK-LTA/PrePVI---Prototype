@@ -352,7 +352,7 @@ MonoBehaviour:
   baseDamage: 20
   cooldownToAttack: 0
   radiusToStartAttack: 1.2
-  attackAnticipationTime: 0.2
+  attackAnticipationTime: 0.5
   healthBar: {fileID: 421849631201726656}
   centerOfSpawnCircle: {x: 40.55, y: 0, z: 14.11}
   radiusOfSpawnCircle: 12.5

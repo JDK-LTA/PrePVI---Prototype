@@ -45,7 +45,7 @@ public class IndividualButton : MonoBehaviour
 
     private void UpdateMat()
     {
-        meshRenderer.materials[0] = hasBeenPressed ? pressedMat : orMat;
+        meshRenderer.material = hasBeenPressed ? pressedMat : orMat;
     }
 
     public void SetToFalse()

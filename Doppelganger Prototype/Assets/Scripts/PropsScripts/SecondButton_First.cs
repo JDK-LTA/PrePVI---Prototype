@@ -22,7 +22,7 @@ public class SecondButton_First : MonoBehaviour
         if (bc)
         {
             door.opening = true;
-            meshRenderer.materials[0] = pressedMat;
+            meshRenderer.material = pressedMat;
 
             if (bc is PlayerCharacter)
             {
@@ -51,7 +51,7 @@ public class SecondButton_First : MonoBehaviour
             if (!playerOn && !doppelOn)
             {
                 door.opening = false;
-                meshRenderer.materials[0] = orMat;
+                meshRenderer.material = orMat;
             }
         }
     }

@@ -226,6 +226,15 @@ public class BaseCharacter : MonoBehaviour
             else
                 kbMove = transform.position + kbDir * knockbackDistance;
 
+            RaycastHit hitInfo2;
+            if (!Physics.Raycast(kbMove + Vector3.up, Vector3.down, 1.25f))
+            {
+                if (Physics.Raycast(kbMove + Vector3.down * 0.25f, -(new Vector3(transform.position.x - posToKbFrom.x, 0, transform.position.z - posToKbFrom.z).normalized), out hitInfo2, knockbackDistance))
+                {
+                    kbMove = hitInfo2.point + Vector3.up * 0.25f;
+                }
+            }
+
             kbOrPos = transform.position;
         }
     }
@@ -269,6 +278,15 @@ public class BaseCharacter : MonoBehaviour
             }
             else
                 attKbMove = transform.position + attKbDir * attackKbDistance;
+
+            RaycastHit hitInfo2;
+            if (!Physics.Raycast(attKbMove + Vector3.up, Vector3.down, 1.25f))
+            {
+                if (Physics.Raycast(attKbMove + Vector3.down * 0.25f, transform.forward, out hitInfo2, attackKbDistance))
+                {
+                    attKbMove = hitInfo2.point + Vector3.up * 0.25f;
+                }
+            }
 
             attKbOrPos = transform.position;
         }

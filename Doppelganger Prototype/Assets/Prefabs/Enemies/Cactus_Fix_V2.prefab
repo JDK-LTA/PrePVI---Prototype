@@ -446,11 +446,11 @@ MonoBehaviour:
   canRegenerate: 1
   regenerationRate: 5
   timeIdleToStartRegen: 5
-  speed: 3
-  baseDamage: 5
+  speed: 3.5
+  baseDamage: 8.5
   cooldownToAttack: 0
-  radiusToStartAttack: 3
-  attackAnticipationTime: 2
+  radiusToStartAttack: 4
+  attackAnticipationTime: 1
   healthBar: {fileID: 1977562283}
   interpolationSpeed: 3
   radiusToCheckHome: 0.5
