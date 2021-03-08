@@ -127,7 +127,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.9810679, b: 0.9481132, a: 1}
+    - _BaseColor: {r: 0.36470556, g: 0, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0.04657265, g: 0.11320752, b: 0.000533999, a: 1}
     - _EmissionMapChannelMask: {r: 1, g: 1, b: 1, a: 0}
