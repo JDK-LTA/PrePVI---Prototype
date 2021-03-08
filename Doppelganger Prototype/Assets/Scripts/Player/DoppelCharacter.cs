@@ -251,8 +251,11 @@ public class DoppelCharacter : BaseCharacter
         gameObject.SetActive(false);
         CamerasManager.I.ToggleSingleDoppelCams(false);
         EnemyCactus cactus = FindObjectOfType<EnemyCactus>();
-        cactus.DoppelInRange = false;
-        cactus.UpdateTarget();
+        if (cactus)
+        {
+            cactus.DoppelInRange = false;
+            cactus.UpdateTarget();
+        }
     }
 
     //AUXILIAR METHODS

@@ -1417,23 +1417,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1578977127527952917, guid: 2a2eb3b2061b69340b3ebf618a6d042d, type: 3}
   m_PrefabInstance: {fileID: 7034831066828776900}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &650237277 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2523104436133849410, guid: 5491be8a19f59ac4f99e328259283780, type: 3}
-  m_PrefabInstance: {fileID: 1528209172652657582}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &650237282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650237277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef4659fc6662afe47ba1d0d0da79bade, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &654933649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2371,23 +2354,6 @@ VisualEffect:
   m_CorrespondingSourceObject: {fileID: 567122231432243909, guid: 2a2eb3b2061b69340b3ebf618a6d042d, type: 3}
   m_PrefabInstance: {fileID: 7034831066828776900}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &881568253 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1608646798078439605, guid: 5e2e9f306af4fc241b5aedd6f41065a8, type: 3}
-  m_PrefabInstance: {fileID: 1076828009}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &881568258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881568253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef4659fc6662afe47ba1d0d0da79bade, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &895357640
 GameObject:
   m_ObjectHideFlags: 0
@@ -3717,6 +3683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onlyPressOnce: 0
   hasToBeAttacked: 0
+  pressedMat: {fileID: 0}
 --- !u!136 &1332340963
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5836,6 +5803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onlyPressOnce: 0
   hasToBeAttacked: 0
+  pressedMat: {fileID: 0}
 --- !u!136 &1746536768
 CapsuleCollider:
   m_ObjectHideFlags: 0
