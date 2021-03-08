@@ -25,6 +25,7 @@ public class DoppelCharacter : BaseCharacter
     private bool isFree = false;
 
     public bool IsFree { get => isFree; }
+    public float TimeRecording { get => timeRecording; set => timeRecording = value; }
 
 
     #region OVERRIDES

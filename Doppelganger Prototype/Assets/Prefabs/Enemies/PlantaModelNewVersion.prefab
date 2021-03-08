@@ -285,6 +285,8 @@ GameObject:
   - component: {fileID: 311525399456534039}
   - component: {fileID: 5959087386341381229}
   - component: {fileID: 277107503869259008}
+  - component: {fileID: 4825663223034342633}
+  - component: {fileID: 2191536745823442404}
   m_Layer: 0
   m_Name: PlantaModelNewVersion
   m_TagString: Untagged
@@ -301,7 +303,7 @@ Transform:
   m_GameObject: {fileID: 1087920713092699309}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 10.28, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.2, y: 2.2, z: 1.8}
   m_Children:
   - {fileID: 8691335219916943258}
   - {fileID: 21235896113669850}
@@ -309,7 +311,7 @@ Transform:
   - {fileID: 6462286796506729916}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5959087386341381229
 Animator:
   serializedVersion: 3
@@ -352,11 +354,39 @@ MonoBehaviour:
   radiusToStartAttack: 1.2
   attackAnticipationTime: 0.2
   healthBar: {fileID: 421849631201726656}
-  centerOfSpawnCircle: {x: 0, y: 0, z: 0}
-  radiusOfSpawnCircle: 16
+  centerOfSpawnCircle: {x: 40.55, y: 0, z: 14.11}
+  radiusOfSpawnCircle: 12.5
   minDistanceFromPlayerToSpawn: 8
   timeFromDigToOut: 1.2
   attackCol: {fileID: 9183086503181548638}
+--- !u!136 &4825663223034342633
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087920713092699309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!136 &2191536745823442404
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087920713092699309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.1
+  m_Direction: 2
+  m_Center: {x: 0, y: 1.25, z: 1.26}
 --- !u!1 &1175074954396272055
 GameObject:
   m_ObjectHideFlags: 0

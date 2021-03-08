@@ -4,15 +4,55 @@ using UnityEngine;
 
 public class SecondButton_First : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Door door;
+    [SerializeField] private Material pressedMat;
+    private Material orMat;
+    private MeshRenderer meshRenderer;
+    private bool playerOn = false, doppelOn = false;
+
+    private void Start()
     {
-        
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+        orMat = meshRenderer.materials[0];
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        BaseCharacter bc = other.GetComponent<BaseCharacter>();
+        if (bc)
+        {
+            door.opening = true;
+            meshRenderer.materials[0] = pressedMat;
+
+            if (bc is PlayerCharacter)
+            {
+                playerOn = true;
+            }
+            else
+            {
+                doppelOn = true;
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        BaseCharacter bc = other.GetComponent<BaseCharacter>();
+        if (bc)
+        {
+            if (bc is PlayerCharacter)
+            {
+                playerOn = false;
+            }
+            else
+            {
+                doppelOn = false;
+            }
+
+            if (!playerOn && !doppelOn)
+            {
+                door.opening = false;
+                meshRenderer.materials[0] = orMat;
+            }
+        }
     }
 }
