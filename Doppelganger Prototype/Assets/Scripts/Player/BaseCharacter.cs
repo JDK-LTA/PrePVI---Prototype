@@ -234,7 +234,7 @@ public class BaseCharacter : MonoBehaviour
                     kbMove = hitInfo2.point + Vector3.up * 0.25f;
                 }
             }
-
+            kbMove += Vector3.up * 0.15f;
             kbOrPos = transform.position;
         }
     }
@@ -287,7 +287,7 @@ public class BaseCharacter : MonoBehaviour
                     attKbMove = hitInfo2.point + Vector3.up * 0.25f;
                 }
             }
-
+            attKbMove+=Vector3.up*0.15f
             attKbOrPos = transform.position;
         }
     }
@@ -356,7 +356,7 @@ public class BaseCharacter : MonoBehaviour
                     dashMove = hitInfo2.point + Vector3.up * 0.25f;
                 }
             }
-
+            dashMove += Vector3.up * 0.15f;
             dashOrPos = transform.position;
         }
     }

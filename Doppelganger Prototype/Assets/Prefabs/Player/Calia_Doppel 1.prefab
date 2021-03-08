@@ -3103,6 +3103,8 @@ MonoBehaviour:
   releasingTimes: []
   playbackPressed: 
   playbackReleased: 
+  VFX1: {fileID: 4568156227474832170}
+  VFX2: {fileID: 4568156227192485301}
   timeRecording: 2
 --- !u!1 &3840529016080976163
 GameObject:
@@ -4093,6 +4095,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDoppel: 0
+  oldParentProjectile: {fileID: 0}
+  newParent: {fileID: 0}
 --- !u!1 &4568156227474832169
 GameObject:
   m_ObjectHideFlags: 0
@@ -4267,6 +4271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDoppel: 0
+  oldParentProjectile: {fileID: 0}
+  newParent: {fileID: 0}
 --- !u!1 &4568156227509967514
 GameObject:
   m_ObjectHideFlags: 0
@@ -4656,6 +4662,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDoppel: 0
+  oldParentProjectile: {fileID: 0}
+  newParent: {fileID: 0}
 --- !u!114 &6291363566673248955
 MonoBehaviour:
   m_ObjectHideFlags: 0

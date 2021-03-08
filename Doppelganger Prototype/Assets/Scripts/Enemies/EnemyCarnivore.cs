@@ -88,6 +88,7 @@ public class EnemyCarnivore : EnemyBase
 
     public void DelayDead()
     {
+        GameManager.I.RestartMenuStartGame();
         GameObject.Destroy(gameObject);
     }
 }
