@@ -73,4 +73,25 @@ public class VFX_ParticleAnimEvents : MonoBehaviour
             RefsManager.I.Vfx_Attack22ParticlesUpDoppel.Stop();
         }
     }
+
+
+    [SerializeField] private Transform oldParentProjectile;
+    [SerializeField] private Transform newParent;
+
+    private Vector3 proLocalPos, proLocalRot, impLocalPos, impLocalRot;
+
+    protected virtual void UnparentAnimEvent()
+    {
+        proLocalPos = transform.localPosition;
+        proLocalRot = transform.localEulerAngles;
+        transform.SetParent(newParent);
+    }
+
+    protected virtual void ParentAnimEvent()
+    {
+        transform.SetParent(oldParentProjectile);
+
+        transform.localPosition = proLocalPos;
+        transform.localEulerAngles = proLocalRot;
+    }
 }

@@ -106,7 +106,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 43262639638382286}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.2
   m_Height: 0.2
   m_Direction: 0
@@ -1076,7 +1076,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 874157120050071101}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.2
   m_Height: 0.2
   m_Direction: 0
@@ -6507,6 +6507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDoppel: 0
+  oldParentProjectile: {fileID: 0}
+  pointerTransform: {fileID: 0}
 --- !u!114 &687517625685323910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6903,6 +6905,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDoppel: 0
+  oldParentProjectile: {fileID: 7034831065825501256}
+  pointerTransform: {fileID: 0}
 --- !u!1 &7034831066940835725
 GameObject:
   m_ObjectHideFlags: 0
@@ -7077,6 +7081,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDoppel: 0
+  oldParentProjectile: {fileID: 0}
+  pointerTransform: {fileID: 0}
 --- !u!1 &7034831067482914478
 GameObject:
   m_ObjectHideFlags: 0

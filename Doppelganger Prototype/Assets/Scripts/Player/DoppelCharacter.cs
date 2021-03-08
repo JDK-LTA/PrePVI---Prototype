@@ -12,6 +12,7 @@ public class DoppelCharacter : BaseCharacter
     [SerializeField] private List<bool> playbackPressed = new List<bool>();
     [SerializeField] private List<bool> playbackReleased = new List<bool>();
     [SerializeField] private Queue<Vector2> continousInput = new Queue<Vector2>();
+    [SerializeField] private TrailRenderer VFX1, VFX2;
 
     [Header("Settings")]
     [SerializeField] private float timeRecording = 3f;
@@ -111,6 +112,8 @@ public class DoppelCharacter : BaseCharacter
         ClearRecording();
 
         canStartRecording = false;
+        VFX1.enabled = false;
+        VFX2.enabled = false;
     }
     private void StartPlayback()
     {
@@ -256,6 +259,8 @@ public class DoppelCharacter : BaseCharacter
             cactus.DoppelInRange = false;
             cactus.UpdateTarget();
         }
+
+        
     }
 
     //AUXILIAR METHODS
