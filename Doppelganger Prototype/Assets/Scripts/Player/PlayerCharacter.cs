@@ -23,8 +23,8 @@ public class PlayerCharacter : BaseCharacter
             rec = true;
             enabled = false;
 
-            RefsManager.I.ParticleChainGO.gameObject.SetActive(true);
-            RefsManager.I.ParticleChainGO.playRate = 2;
+            RefsManager.I.Vfx_ParticleChain.gameObject.SetActive(true);
+            RefsManager.I.Vfx_ParticleChain.playRate = 2;
 
             //VFX Hologram Activate call
             for (int i = 0; i < RefsManager.I.Vfx_HoloParticles.Length; i++)

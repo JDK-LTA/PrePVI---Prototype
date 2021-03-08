@@ -346,7 +346,6 @@ public class BaseCharacter : MonoBehaviour
     {
         canDoAnythingElse = false;
         animator.SetTrigger("Attack2");
-
     }
 
     protected void Attack1()
@@ -367,7 +366,7 @@ public class BaseCharacter : MonoBehaviour
         canDoAnythingElse = true;
     }
 
-    
+
     #endregion
     #region VFX ANIM EVENTS
     protected virtual void StartAttack()
@@ -375,7 +374,6 @@ public class BaseCharacter : MonoBehaviour
         for (int i = 0; i < RefsManager.I.Vfx_chargeAttack.Length; i++)
         {
             RefsManager.I.Vfx_chargeAttack[i].Play();
-
         }
     }
 
@@ -409,7 +407,6 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] private Transform projectileTransform;
     [SerializeField] private Transform impactTransform;
 
-    private Transform projectileOrLocal, impactOrLocal;
     private Vector3 proLocalPos, proLocalRot, impLocalPos, impLocalRot;
 
     protected virtual void UnparentAnimEvent()
@@ -439,8 +436,6 @@ public class BaseCharacter : MonoBehaviour
     {
         projectileTransform.gameObject.SetActive(true);
         impactTransform.gameObject.SetActive(true);
-        //projectileTransform = projectileOrLocal;
-        //impactTransform = impactOrLocal;
     }
 
     protected virtual void ActivateAttack1Collider()

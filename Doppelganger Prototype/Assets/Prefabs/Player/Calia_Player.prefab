@@ -6506,6 +6506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff66e17ac8e2814ab871ccb9b7cd412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDoppel: 0
 --- !u!114 &687517625685323910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6901,6 +6902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff66e17ac8e2814ab871ccb9b7cd412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDoppel: 0
 --- !u!1 &7034831066940835725
 GameObject:
   m_ObjectHideFlags: 0
@@ -7074,6 +7076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff66e17ac8e2814ab871ccb9b7cd412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDoppel: 0
 --- !u!1 &7034831067482914478
 GameObject:
   m_ObjectHideFlags: 0
@@ -7940,7 +7943,7 @@ MonoBehaviour:
   groundCheckDistance: 0.1
   groundCheckForJump: 0.6
   gravity: -9.81
-  dashLenght: 4
+  dashLenght: 5.5
   dashTime: 0.2
   dashResetTime: 1
   timeKnockbacking: 0.15

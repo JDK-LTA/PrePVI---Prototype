@@ -32,8 +32,8 @@ public class DoppelCharacter : BaseCharacter
     {
         if (rec)
         {
-            BinInputs();
             RecordTimer();
+            BinInputs();
         }
         if (playback)
         {
@@ -49,7 +49,7 @@ public class DoppelCharacter : BaseCharacter
         {
             ContinousInput();
             RecordContInput();
-            RefsManager.I.ParticleChainGO.SetVector3(Shader.PropertyToID("DistanceToDoppel"),
+            RefsManager.I.Vfx_ParticleChain.SetVector3(Shader.PropertyToID("DistanceToDoppel"),
                 transform.position - RefsManager.I.PlayerCharacter.transform.position);
         }
         if (playback)
@@ -68,12 +68,34 @@ public class DoppelCharacter : BaseCharacter
     }
     protected override void StartAttack()
     {
-        RefsManager.I.Vfx_Attack1ForwardDoppel.SetTrigger("Trail");
+        for (int i = 0; i < RefsManager.I.Vfx_chargeAttack.Length; i++)
+        {
+            RefsManager.I.Vfx_chargeAttackDoppel[i].Play();
+
+        }
+    }
+    protected override void MidAttack()
+    {
+        for (int i = 0; i < RefsManager.I.Vfx_projectile.Length; i++)
+        {
+            RefsManager.I.Vfx_projectileDoppel[i].Play();
+        }
+    }
+    protected override void EndAttack()
+    {
+        for (int i = 0; i < RefsManager.I.Vfx_releaseAttack.Length; i++)
+        {
+            RefsManager.I.Vfx_releaseAttackDoppel[i].Play();
+            RefsManager.I.Vfx_impactDoppel[i].Play();
+        }
     }
     protected override void StartAttack2()
     {
-        RefsManager.I.Vfx_Attack2ForwardDoppel.SetTrigger("Trail");
-        RefsManager.I.Vfx_Attack22ForwardDoppel.SetTrigger("Trail");
+        if (isFree)
+        {
+            RefsManager.I.Vfx_Attack2ForwardDoppel.SetTrigger("Trail");
+            RefsManager.I.Vfx_Attack22ForwardDoppel.SetTrigger("Trail");
+        }
     }
     #endregion
     #region REC AND PLAY
@@ -118,7 +140,7 @@ public class DoppelCharacter : BaseCharacter
             {
                 RecordKey(true, BinaryInputs.ATTACK1_STATIC);
             }
-            else if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity.magnitude > 0.1f)
+            else if (Input.GetButtonDown("Attack1") && canDoAnythingElse && velocity.magnitude > 0f)
             {
                 RecordKey(true, BinaryInputs.ATTACK1_MOVE);
             }
@@ -208,10 +230,12 @@ public class DoppelCharacter : BaseCharacter
         rec = false;
 
         ResetDashStuff();
+        canDoAnythingElse = true;
+        canAttack = true;
         RefsManager.I.PlayerCharacter.enabled = true;
         RefsManager.I.PlayerCharacter.Animator.enabled = true;
         StartPlayback();
-        RefsManager.I.ParticleChainGO.gameObject.SetActive(false);
+        RefsManager.I.Vfx_ParticleChain.gameObject.SetActive(false);
     }
 
     private void FinishPlayback()
@@ -219,6 +243,10 @@ public class DoppelCharacter : BaseCharacter
         t = 0;
         canStartRecording = true;
         playback = false;
+        canDoAnythingElse = true;
+        canAttack = true;
+        ResetDashStuff();
+
         gameObject.SetActive(false);
         CamerasManager.I.ToggleSingleDoppelCams(false);
         EnemyCactus cactus = FindObjectOfType<EnemyCactus>();

@@ -22,6 +22,8 @@ public class IndividualButton : MonoBehaviour
     {
         buttonParent = GetComponentInParent<ButtonsFunctionality>();
         meshRenderer = GetComponent<MeshRenderer>();
+        if (!meshRenderer)
+            meshRenderer = GetComponentInChildren<MeshRenderer>();
         orMat = meshRenderer.materials[0];
     }
 
